@@ -1,0 +1,51 @@
+div .user-box {
+  border-radius: 5px;
+  background: linear-gradient(#6c88f3, #78ece6);
+  height: 70px;
+  width: 100%;
+  margin-top: 1px;
+}
+
+.user-box:hover {
+  background: #62CFC1;
+}
+
+#user-list {
+  background-color: white;
+  height: 353px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+div #chat-with-user {
+  height: 353px;
+  background-color: white;
+  border: #4b4848 solid 1px;
+}
+
+div #content-mess-body {
+  height: 300px;
+
+}
+
+
+.content-mess:focus {
+  border: none;
+}
+
+
+.mess-user {
+  height: 70px;
+  width: 100%;
+  color: black;
+  font-size: 24px;
+}
+
+.delete-user {
+  background: linear-gradient(#6d90f2, #70a4f0);
+  border: none;
+  z-index: 100;
+  float: right;
+  margin-right: 3px;
+  margin-top: -70px;
+}

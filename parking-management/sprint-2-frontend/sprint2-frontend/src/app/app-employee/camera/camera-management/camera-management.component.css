@@ -1,0 +1,127 @@
+#background{
+  background-color: black;
+  width: 450px;
+  height: 300px;
+}
+#main{
+  position: absolute;
+  top: 80%;
+  left: 40%;
+}
+#image{
+  position: absolute;
+  bottom: 161px;
+  height: 192px;
+  right: 29px;
+  width: 398px;
+}
+#formFileLg {
+  background:black;
+  font-size:14px;
+  font-weight:bold;
+  width: 273px;
+  bottom: 86px;
+  position: relative;
+  right: 89px;
+  /*-webkit-animation: my 700ms infinite;*/
+  /*-moz-animation: my 700ms infinite;*/
+  /*-o-animation: my 700ms infinite;*/
+  /*animation: my 700ms infinite;*/
+  display: block;
+}
+
+#formFileLg::-webkit-file-upload-button{
+  color: orange;
+  -webkit-animation: glowing 1500ms infinite;
+  -moz-animation: glowing 1500ms infinite;
+  -o-animation: glowing 1500ms infinite;
+  animation: glowing 1500ms infinite;
+  background-color: black;
+  border-color: darkred;
+}
+
+#label {
+  position: absolute;
+  right: 133px;
+  bottom: 112px;
+  width: 181px;
+  font-size:14px;
+  font-weight:bold;
+  -webkit-animation: glowing 1500ms infinite;
+  -moz-animation: glowing 1500ms infinite;
+  -o-animation: glowing 1500ms infinite;
+  animation: glowing 1500ms infinite;
+}
+
+#message {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  bottom: 231px;
+  left: -119px;
+  background: black;
+  font-size: 37px;
+  font-weight:bold;
+  -webkit-animation: glowing 1500ms infinite;
+  -moz-animation: glowing 1500ms infinite;
+  -o-animation: glowing 1500ms infinite;
+  animation: glowing 1500ms infinite;
+}
+
+.input {
+  height: 50%;
+  width: 350px;
+  color: black;
+  background:black;
+  font-size:7px;
+  font-weight:bold;
+  -webkit-animation: my 700ms infinite;
+  -moz-animation: my 700ms infinite;
+  -o-animation: my 700ms infinite;
+  animation: my 700ms infinite;
+}
+
+@-webkit-keyframes my {
+  0% { color: #F8CD0A; }
+  50% { color: #fff;  }
+  100% { color: #F8CD0A;  }
+}
+@-moz-keyframes my {
+  0% { color: #F8CD0A;  }
+  50% { color: #fff;  }
+  100% { color: #F8CD0A;  }
+}
+@-o-keyframes my {
+  0% { color: #F8CD0A; }
+  50% { color: #fff; }
+  100% { color: #F8CD0A;  }
+}
+@keyframes my {
+  0% { color: #F8CD0A;  }
+  50% { color: #fff;  }
+  100% { color: #F8CD0A;  }
+}
+
+@-webkit-keyframes glowing {
+  0% { color: #660000; }
+  50% { color: #ff0000; }
+  100% { color: #660000;  }
+}
+
+@-moz-keyframes glowing {
+  0% { color: #660000; }
+  50% { color: #ff0000; }
+  100% { color: #660000;  }
+}
+
+@-o-keyframes glowing {
+  0% { color: #660000; }
+  50% { color: #ff0000; }
+  100% { color: #660000;  }
+}
+
+@keyframes glowing {
+  0% { color: #660000; }
+  50% { color: #ff0000; }
+  100% { color: #660000;  }
+}

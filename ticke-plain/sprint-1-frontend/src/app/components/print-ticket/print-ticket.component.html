@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 ticket">
+      <div class="row">
+        <div class="col-sm-7">
+          <h3>Mã đặt chỗ : {{bookingCode}}</h3><h5></h5>
+          <p>Nơi xuất vé : C0620G1</p>
+        </div>
+        <div class="col-sm-5 logo">
+          <img src="../../../assets/C06Airline.PNG"/>
+          <p>295 Nguyễn Tất Thành, Đà Nẵng</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h5>Tên hành khách</h5>
+          <hr>
+          <p class="passengerName">{{ticket.passengerName}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h5>Thông tin chuyến bay</h5>
+          <hr class="hrBottom">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <p>Hãng hàng không: <span>{{flightInformationDisplay.airline}}</span></p>
+          <p>Từ: <span>{{flightInformationDisplay.departure}}</span></p>
+          <p>Khởi hành: <span>{{flightInformationDisplay.departureTime}}</span></p>
+          <p>Ngày đi: <span>{{flightInformationDisplay.departureDate | date : "dd/MM/yyyy"}}</span></p>
+        </div>
+        <div class="col-sm-6">
+          <p>Mã chuyến bay: <span>{{flightInformationDisplay.flightCode}}</span></p>
+          <p>Đến: <span>{{flightInformationDisplay.arrival}}</span></p>
+          <p>Dự kiến đến nơi: <span>{{flightInformationDisplay.arrivalTime}}</span></p>
+          <p>Giá vé: <span>{{ticket.priceDeparture}}</span> VNĐ</p>
+        </div>
+      </div>
+      <hr class="hrBottom">
+      <div class="row">
+        <div class="col-sm-12">
+          <p>Lưu ý: Quý khách vui lòng đến sân bay trước khi khởi hành 2h để làm thủ tục theo quy định. Mọi thắc mắc
+            xin liên hệ 0905456789. Chân thành cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi!
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="container-fluid">
+  <div class="row text-primary">
+    <div class="col-lg-12 d-flex justify-content-center mb-3"><h1>Thông tin đặt vé</h1></div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="row justify-content-between">
+        <h3>{{flightOne.departure}} <i class="fa fa-fighter-jet"></i> {{flightOne.arrival}}</h3>
+        <h5>{{flightOne.type}}</h5>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <p>{{flightOne.departure}}</p>
+          <p>{{flightOne.departureTime}} ,{{flightOne.departureDate| date: "dd/MM/yyyy"}}</p>
+        </div>
+        <div class="col-4">
+          <p>{{flightOne.arrival}}</p>
+          <p>{{flightOne.arrivalTime}} ,{{flightOne.arrivalDate| date: "dd/MM/yyyy"}}</p>
+        </div>
+        <div class="col-4">
+          <p>{{flightOne.airline}}</p>
+          <p>{{flightOne.flightCode}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <table>
+            <thead>
+            <tr>
+              <th>Loại khách</th>
+              <th>Số lượng vé</th>
+              <th>Giá mỗi vé</th>
+              <th>Thuế và phí</th>
+              <th>Tổng giá</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Người lớn</td>
+              <td>
+                <mat-form-field>
+                  <mat-label>Số lượng vé</mat-label>
+                  <mat-select [(ngModel)]="quantityTicketOne">
+                    <mat-option value="1">1</mat-option>
+                    <mat-option value="2">2</mat-option>
+                    <mat-option value="3">3</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>{{flightOne.price}}</td>
+              <td>{{flightOne.price * 10 / 100}}</td>
+              <td>{{quantityTicketOne * flightOne.price + flightOne.price * 10 / 100}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="flightTwo !== ''">
+    <div class="col-12">
+      <div class="row justify-content-between">
+        <h3>{{flightTwo.departure}} <i class="fa fa-fighter-jet"></i> {{flightTwo.arrival}}</h3>
+        <h5>{{flightTwo.type}}</h5>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <p>{{flightTwo.departure}}</p>
+          <p>{{flightTwo.departureTime}} ,{{flightTwo.departureDate| date: "dd/MM/yyyy"}}</p>
+        </div>
+        <div class="col-4">
+          <p>{{flightTwo.arrival}}</p>
+          <p>{{flightTwo.arrivalTime}} ,{{flightTwo.arrivalDate| date: "dd/MM/yyyy"}}</p>
+        </div>
+        <div class="col-4">
+          <p>{{flightTwo.airline}}</p>
+          <p>{{flightTwo.flightCode}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <table>
+            <thead>
+            <tr>
+              <th>Loại khách</th>
+              <th>Số lượng vé</th>
+              <th>Giá mỗi vé</th>
+              <th>Thuế và phí</th>
+              <th>Tổng giá</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Người lớn</td>
+              <td>
+                <mat-form-field>
+                  <mat-label>Số lượng vé</mat-label>
+                  <mat-select [(ngModel)]="quantityTicketTwo">
+                    <mat-option value="1">1</mat-option>
+                    <mat-option value="2">2</mat-option>
+                    <mat-option value="3">3</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>{{flightTwo.price}}</td>
+              <td>{{flightTwo.price * 10 / 100}}</td>
+              <td>{{quantityTicketTwo * flightTwo.price + flightTwo.price * 10 / 100}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 d-flex justify-content-end">
+      <button mat-button (click)="cancel()">Hủy</button>
+      <button class="ml-5" mat-button (click)="dialogPassenger()">Chọn</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,256 @@
+<!--<div class="container card" style="width: 100%">-->
+<!--  <div class="row ">-->
+<!--    <div class="container">-->
+<!--      <div class="title-customer">-->
+<!--        <h3>QUẢN LÝ KHÁCH HÀNG</h3>-->
+<!--        <h4>Thêm Khách Hàng</h4>-->
+<!--        <hr>-->
+<!--      </div>-->
+
+<!--      <form [formGroup]="formCreate">-->
+
+<!--        <div class="form-group d-flex align-items-center form-group">-->
+<!--          <label class="col-lg-3 col-md-3">Họ Và Tên:</label>-->
+<!--          <mat-form-field class="vw-10 col-lg-9 col-md-9">-->
+<!--            <input matInput placeholder="Họ Và Tên Khách Hàng" formControlName="fullName">-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--                  <span class="text-danger"-->
+<!--                        *ngIf="formCreate.get('fullName').invalid && formCreate.get('fullName').touched">{{ name_msg }}-->
+<!--                  </span>-->
+<!--        </div>-->
+
+<!--        <div class="form-group d-flex align-items-center form-group">-->
+<!--          <label class="col-lg-3">Ngày Sinh:</label>-->
+<!--          <mat-form-field class="w-50 col-lg-9 col-md-9">-->
+<!--            <input [max]="maxDate" [min]="minDate" matInput [matDatepicker]="myDatepicker" datePickerFormat="YYYY/MM/DD"-->
+<!--                   formControlName="birthday" placeholder="Chọn ngày sinh" format="yyyy-MM-dd">-->
+<!--            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>-->
+<!--            <mat-datepicker #myDatepicker startView="month"></mat-datepicker>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--                  <span class="text-danger"-->
+<!--                        *ngIf="formCreate.get('birthday').invalid && formCreate.get('birthday').touched">{{ birthday_msg }}-->
+<!--                  </span>-->
+<!--        </div>-->
+
+<!--        <div class="form-group d-flex align-items-center form-group">-->
+<!--          <label class="col-lg-3">Giới Tính:</label>-->
+<!--          <mat-radio-group class="col-lg-9 col-md-9" aria-label="Select an option" formControlName="gender">-->
+<!--            <mat-radio-button checked="true" value="true">Nam</mat-radio-button>-->
+<!--            <mat-radio-button style="margin-left: 20px" value="false">Nữ</mat-radio-button>-->
+<!--          </mat-radio-group>-->
+<!--        </div>-->
+
+
+<!--        <div class="d-flex align-items-center form-group">-->
+<!--          <label class="col-lg-3 col-md-3 ">Email:</label>-->
+<!--          <mat-form-field class="w-50 col-lg-9 col-md-9">-->
+<!--            <input matInput placeholder="Email Khách Hàng" formControlName="email">-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--                  <span class="text-danger"-->
+<!--                        *ngIf="formCreate.get('email').invalid && formCreate.get('email').touched">{{ email_msg }}-->
+<!--                  </span>-->
+<!--        </div>-->
+
+<!--        <div class="d-flex align-items-center form-group">-->
+<!--          <label class="col-lg-3 col-md-3">Số Điện Thoại:</label>-->
+<!--          <mat-form-field class="w-50 col-lg-9 col-md-9">-->
+<!--            <input matInput placeholder="Số Điện Thoại" formControlName="phoneNumber">-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+
+<!--        <div>-->
+<!--                  <span class="text-danger"-->
+<!--                        *ngIf="formCreate.get('phoneNumber').invalid && formCreate.get('phoneNumber').touched">{{ phone_msg }}-->
+<!--                  </span>-->
+<!--        </div>-->
+
+
+<!--        <div class="d-flex align-items-center form-group">-->
+<!--          <label class="col-lg-3 col-md-3 ">Cmnd - Passport:</label>-->
+<!--          <mat-form-field class="w-50 col-lg-9 col-md-9">-->
+<!--            <input matInput placeholder="Cmnd - PassPort" formControlName="identityNumber">-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+
+<!--        <div>-->
+<!--                  <span class="text-danger"-->
+<!--                        *ngIf="formCreate.get('identityNumber').invalid && formCreate.get('identityNumber').touched">{{ idCard_msg }}-->
+<!--                  </span>-->
+<!--        </div>-->
+
+
+<!--        <div class="d-flex align-items-center form-group">-->
+<!--          <label class="col-lg-3 col-md-3">Địa Chỉ:</label>-->
+<!--          <mat-form-field class=" col-lg-9 col-md-9" >-->
+<!--              <input  matInput placeholder="Địa Chỉ" formControlName="address">-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+
+<!--        <div>-->
+<!--                  <span class="text-danger"-->
+<!--                        *ngIf="formCreate.get('address').invalid && formCreate.get('address').touched">{{ address_msg }}-->
+<!--                  </span>-->
+<!--        </div>-->
+
+<!--        <div class="d-flex align-items-center form-group">-->
+<!--          <label class="col-lg-3 col-md-3">Ký Gửi Hành Lý:</label>-->
+<!--          <mat-form-field class="col-lg-9">-->
+<!--            <mat-label>Chọn Gói Hành Lý</mat-label>-->
+<!--            <mat-select formControlName="luggageId">-->
+<!--              <mat-option *ngFor="let lug of luggageList" [value]="lug.id">-->
+<!--                {{lug.name}}-->
+<!--              </mat-option>-->
+<!--            </mat-select>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--      <div class="d-flex align-items-center form-group">-->
+<!--        <div class="col-lg-3 col-md-3">-->
+<!--        </div>-->
+<!--        <div class="col-lg-9 col-md-9">-->
+<!--          <button (click)="callApi()" class="btn-orange-add" type="submit" [disabled]="formCreate.invalid">Thêm Mới-->
+<!--          </button>-->
+<!--          <button (click)="cancel()" class="btn-orange-cancel">Hủy Bỏ</button>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="container card" style="width: 100%">
+  <div class="row ">
+    <div class="container">
+      <div class="title-customer">
+        <h3>QUẢN LÝ KHÁCH HÀNG</h3>
+        <h4>Thêm Khách Hàng</h4>
+        <hr>
+      </div>
+
+      <form [formGroup]="formCreate">
+
+        <div class="form-group d-flex align-items-center form-group">
+          <label class="col-lg-3 col-md-3">Họ Và Tên:</label>
+          <mat-form-field class="vw-10 col-lg-9 col-md-9">
+            <input matInput placeholder="Họ Và Tên Khách Hàng" formControlName="fullName">
+            <span style="font-size: 14px ;font-family: -apple-system" class="text-danger"
+                  *ngIf="formCreate.get('fullName').invalid && formCreate.get('fullName').touched">{{ name_msg }}
+            </span>
+          </mat-form-field>
+        </div>
+
+
+
+        <div class="form-group d-flex align-items-center form-group">
+          <label class="col-lg-3">Ngày Sinh:</label>
+          <mat-form-field class="w-50 col-lg-9 col-md-9">
+            <input [max]="maxDate" [min]="minDate" matInput [matDatepicker]="myDatepicker" datePickerFormat="YYYY/MM/DD"
+                   formControlName="birthday" placeholder="Chọn ngày sinh" format="yyyy-MM-dd">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker startView="month"></mat-datepicker>
+            <span style="font-size: 14px ; font-family: -apple-system" class="text-danger"
+                  *ngIf="formCreate.get('birthday').invalid && formCreate.get('birthday').touched">{{ birthday_msg }}
+                  </span>
+          </mat-form-field>
+
+        </div>
+
+        <div class="form-group d-flex align-items-center form-group">
+          <label class="col-lg-3">Giới Tính:</label>
+          <mat-radio-group class="col-lg-9 col-md-9" aria-label="Select an option" formControlName="gender">
+            <mat-radio-button value="true">Nam</mat-radio-button>
+            <mat-radio-button style="margin-left: 20px" value="false">Nữ</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+
+        <div class="d-flex align-items-center form-group">
+          <label class="col-lg-3 col-md-3 ">Email:</label>
+          <mat-form-field class="w-50 col-lg-9 col-md-9">
+            <input matInput placeholder="Email Khách Hàng" formControlName="email">
+            <span style="font-size: 14px;font-family: -apple-system" class="text-danger"
+                  *ngIf="formCreate.get('email').invalid && formCreate.get('email').touched">{{ email_msg }}
+                  </span>
+          </mat-form-field>
+        </div>
+
+
+        <div class="d-flex align-items-center form-group">
+          <label class="col-lg-3 col-md-3">Số Điện Thoại:</label>
+          <mat-form-field class="w-50 col-lg-9 col-md-9">
+            <input matInput placeholder="Số Điện Thoại" formControlName="phoneNumber">
+
+            <span style="font-size: 14px;font-family: -apple-system" class="text-danger"
+                  *ngIf="formCreate.get('phoneNumber').invalid && formCreate.get('phoneNumber').touched">{{ phone_msg }}
+                  </span>
+          </mat-form-field>
+        </div>
+
+
+        <div class="d-flex align-items-center form-group">
+          <label class="col-lg-3 col-md-3 ">Cmnd - Passport:</label>
+          <mat-form-field class="w-50 col-lg-9 col-md-9">
+            <input matInput placeholder="Cmnd - PassPort" formControlName="identityNumber">
+            <span style="font-size: 14px;font-family: -apple-system"  class="text-danger"
+                  *ngIf="formCreate.get('identityNumber').invalid && formCreate.get('identityNumber').touched">{{ idCard_msg }}
+                  </span>
+          </mat-form-field>
+        </div>
+
+
+
+
+        <div class="d-flex align-items-center form-group">
+          <label class="col-lg-3 col-md-3">Địa Chỉ:</label>
+          <mat-form-field class=" col-lg-9 col-md-9">
+            <input matInput placeholder="Địa Chỉ" formControlName="address">
+            <span class="text-danger" style="font-size: 14px;font-family: -apple-system"
+                  *ngIf="formCreate.get('address').invalid && formCreate.get('address').touched">{{ address_msg }}
+                  </span>
+          </mat-form-field>
+        </div>
+
+
+        <div class="d-flex align-items-center form-group">
+          <label class="col-lg-3 col-md-3">Ký Gửi Hành Lý:</label>
+          <mat-form-field class="col-lg-9">
+            <mat-label>Chọn Gói Hành Lý</mat-label>
+            <mat-select formControlName="luggageId">
+              <mat-option *ngFor="let lug of luggageList" [value]="lug.id">
+                {{lug.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </form>
+      <div class="d-flex align-items-center form-group">
+        <div class="col-lg-3 col-md-3">
+        </div>
+        <div class="col-lg-9 col-md-9">
+          <button (click)="callApi()" class="btn-orange-add" type="submit" [disabled]="formCreate.invalid">Thêm Mới
+          </button>
+          <button (click)="cancel()" class="btn-orange-cancel">Hủy Bỏ</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

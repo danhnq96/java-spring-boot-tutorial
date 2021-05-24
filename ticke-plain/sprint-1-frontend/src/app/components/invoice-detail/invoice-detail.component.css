@@ -1,0 +1,89 @@
+/*h1,h2,h4,p{*/
+/*  color: white;*/
+/*}*/
+#nt{
+  color: #007bff;
+}
+#content{
+  width: 80%;
+  height: 100%;
+}
+#brand{
+  font-size: 40px;
+  /*color: white;*/
+}
+#logo{
+  font-size: 40px;
+  /*color: white;*/
+}
+#iconLogo{
+  color: orange;
+
+}
+#dvb{
+  font-style:italic;
+  font-weight: bold;
+  /*color: white;*/
+}
+#dc{
+  font-style:italic;
+  font-weight: bold;
+  /*color: white;*/
+}
+#mst{
+  font-style:italic;
+  font-weight: bold;
+  /*color: white;*/
+}
+#so{
+  color: blue;
+}
+#td{
+  font-family: 'Helvetica Neue',serif;
+}
+#kh{
+  font-family: 'Helvetica Neue',serif;
+  font-size: 20px;
+}
+#tenKH{
+  font-style: italic;
+  font-weight: bold;
+}
+#sdt{
+  font-style: italic;
+  font-weight: bold;
+}
+#dckh{
+  font-style: italic;
+  font-weight: bold;
+}
+#tg{
+  font-style: italic;
+  font-weight: bold;
+}
+#ngtg{
+  font-style: italic;
+  font-weight: bold;
+}
+#tmck{
+  font-style: italic;
+  font-weight: bold;
+}
+button {
+  background-color: #FAA61A;
+  color: white;
+  width: 200px;
+  height: 40px;
+  border: none;
+}
+button:hover {
+  background-color: black;
+}
+@media only screen and (min-width: 600px) {
+  [class*="col-"] {
+    width: 100%;
+  }
+  #mytable{
+    width: 100%;
+  }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: headFragment"></head>
+
+<body class="app flex-row align-items-center">
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card-group">
+                <div class="card p-4">
+                    <div class="card-body form-login">
+                        <form id="loginForm" name="loginForm" method="POST">
+                            <h1 class="text-center">[[#{login.title}]]</h1>
+                            <div class="input-group mb-3">
+                                <label class="col-md-2 col-form-label">[[#{login.id}]]</label>
+                                <div class="input-group-prepend">
+											<span class="input-group-text">
+												<i class="icon-user"></i>
+											</span>
+                                </div>
+                                <input class="form-control" type="text" name="name" id="name" onkeydown="enterLogin()"
+                                       th:placeholder="#{login.name.placeholder}">
+                            </div>
+                            <div class="input-group mb-4">
+                                <label class="col-md-2 col-form-label">[[#{login.password}]]</label>
+                                <div class="input-group-prepend">
+											<span class="input-group-text">
+												<i class="icon-lock"></i>
+											</span>
+                                </div>
+                                <input class="form-control" type="password" name="password" id="password"
+                                       onkeydown="enterLogin()" th:placeholder="#{login.name.password}">
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="idSaveCheck">
+                                <label class="custom-control-label" for="idSaveCheck">[[#{login.remember}]]</label>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-12">
+                                    <button class="btn btn-primary px-4" data-toggle="modal" type="button"
+                                            th:onclick="|javasctipt:actionLoginMember()|">[[#{login}]]
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="idEmpty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="header-title">
+                    <h4 class="modal-title">[[#{login.note}]]</h4>
+                </div>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>[[#{error.EL001}]]</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" data-dismiss="modal">[[#{login.confirm}]]</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="passwordEmpty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="header-title">
+                    <h4 class="modal-title">[[#{login.note}]]</h4>
+                </div>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>[[#{error.EL002}]]</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" data-dismiss="modal">[[#{login.confirm}]]</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="loginError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="header-title">
+                    <h4 class="modal-title">[[#{login.note}]]</h4>
+                </div>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>[[#{error.EL003}]]</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" data-dismiss="modal">[[#{login.confirm}]]</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="fragments/scripts :: scriptFragment"></th:block>
+<script type="text/javascript" th:src="@{/pageJs/login/login.js}"></script>
+</body>
+</html>

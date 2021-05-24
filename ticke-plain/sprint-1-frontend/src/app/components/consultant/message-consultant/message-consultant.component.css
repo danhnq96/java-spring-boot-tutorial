@@ -1,0 +1,77 @@
+#body-chat-consultant {
+  height: 290px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.mess-consultant {
+  width: 50px;
+  color: white;
+  border-radius: 10px 0px 10px 10px;
+  border: blue solid 1px;
+  background-color: #4545ff;
+  padding-left: 5px;
+  padding-right: 5px;
+  word-wrap: break-word;
+}
+
+
+.mess-from-user {
+  width: 50px;
+  color: black;
+  border-radius: 10px 10px 10px 0px;
+  border: #d1d1d5 solid 1px;
+  background-color: #e4e6eb;
+  padding-left: 5px;
+  padding-right: 5px;
+  word-wrap: break-word;
+}
+
+div #chat-option {
+  z-index: 40;
+  margin-top: -12px;
+  height: 50px;
+
+}
+
+div #input-inline {
+  margin-left: 0px;
+  margin-top: 21px;
+}
+
+
+#content-chat-cons {
+  border-radius: 10px;
+  width: 8%;
+}
+
+.option-icon {
+  font-size: 30px;
+  color: orange;
+  margin-top: 10px;
+}
+
+#submit-consultant {
+  background-color: #fafafa;
+  border: none;
+}
+
+#icon-box-consultant {
+  display: block;
+  background-color: #e6ecf5;
+  z-index: 100;
+  position: relative;
+  width: 40%;
+  border-radius: 20px;
+  margin-top: -110px;
+  margin-left: 5px;
+  margin-bottom: 0px;
+  overflow-x: auto;
+  overflow-y: scroll;
+  height: 112px;
+}
+
+#mess-consultant{
+  background-color: #fafafa;
+}

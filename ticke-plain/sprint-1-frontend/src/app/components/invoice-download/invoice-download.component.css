@@ -1,0 +1,55 @@
+kendo-pdf-export {
+  font-family: "DejaVu Sans", "Arial", sans-serif;
+  font-size: 12px;
+}
+@font-face {
+  font-family: "DejaVu Sans";
+  src: url("https://kendo.cdn.telerik.com/2018.2.620/styles/fonts/DejaVu/DejaVuSans.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DejaVu Sans";
+  font-weight: bold;
+  src: url("https://kendo.cdn.telerik.com/2018.2.620/styles/fonts/DejaVu/DejaVuSans-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DejaVu Sans";
+  font-style: italic;
+  src: url("https://kendo.cdn.telerik.com/2018.2.620/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DejaVu Sans";
+  font-weight: bold;
+  font-style: italic;
+  src: url("https://kendo.cdn.telerik.com/2018.2.620/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf") format("truetype");
+}
+button {
+  background-color: #FAA61A;
+  color: white;
+  width: 200px;
+  height: 40px;
+  border: none;
+}
+button:hover {
+  background-color: black;
+}
+#huy{
+  background-color: #666666;
+  color: white;
+}
+#huy:hover{
+  background-color: red;
+}
+#pg{
+  position: relative;
+  left: 230px;
+  color: white;
+}
+#downloadInvoice {
+  position: relative;
+  left: 40px;
+}
+@media only screen and (min-width: 600px) {
+  [class*="col-"] {
+    width: 100%;
+  }
+}

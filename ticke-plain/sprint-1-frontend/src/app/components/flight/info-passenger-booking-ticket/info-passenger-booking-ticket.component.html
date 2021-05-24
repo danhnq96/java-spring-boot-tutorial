@@ -1,0 +1,602 @@
+<div class="row justify-content-end p-0 m-0">
+  <button class="m-0 p-0 exit" mat-button (click)="cancel()">Thoát</button>
+</div>
+<div class="container-fluid">
+  <div class="row text-primary">
+    <div class="col-lg-12 d-flex justify-content-center mb-3"><h1>Thông tin đặt vé</h1></div>
+  </div>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+    <!--    Nhập thông tin tàu đi-->
+    <mat-step [stepControl]="passengerFormOne" label="Thông tin hành khách đặt chuyến tàu đi">
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="row justify-content-between">
+            <h3>{{flightOne.departure}} <i class="fa fa-fighter-jet"></i> {{flightOne.arrival}}</h3>
+            <h5>{{flightOne.type}}</h5>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <p>{{flightOne.departure}}</p>
+              <p>{{flightOne.departureTime}} ,{{flightOne.departureDate| date: "dd/MM/yyyy"}}</p>
+            </div>
+            <div class="col-4">
+              <p>{{flightOne.arrival}}</p>
+              <p>{{flightOne.arrivalTime}} ,{{flightOne.arrivalDate| date: "dd/MM/yyyy"}}</p>
+            </div>
+            <div class="col-4">
+              <p>{{flightOne.airline}}</p>
+              <p>{{flightOne.flightCode}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <table>
+                <thead>
+                <tr>
+                  <th>Loại khách</th>
+                  <th>Số lượng vé</th>
+                  <th>Giá mỗi vé</th>
+                  <th>Thuế và phí</th>
+                  <th>Tổng giá</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Người lớn</td>
+                  <td>
+                    {{quantityTicketOne}}
+                  </td>
+                  <td>{{flightOne.price}}</td>
+                  <td>{{flightOne.price * 10 / 100}}</td>
+                  <td>{{quantityTicketOne * flightOne.price + flightOne.price * 10 / 100}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <p>Thông tin hành khách</p>
+            </div>
+          </div>
+          <!--          Thông tin khách hàng là người lớn-->
+          <form class="row" [formGroup]="passengerFormOne">
+            <div class="col-lg-12">
+              <!--          row thông tin khách hàng đi-->
+              <div class="border border-primary p-3 mb-4" formArrayName="passengerForm"
+                   *ngFor="let formOne of passengerFormOne.get('passengerForm').controls; index as indexOne">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h5>Thông tin người lớn thứ {{indexOne + 1}}</h5>
+                  </div>
+                </div>
+                <div [formGroupName]="indexOne">
+                  <div class="row mb-5">
+                    <div class="col-lg-6 d-flex flex-column">
+                      <mat-form-field>
+                        <mat-label>Tên đầy đủ</mat-label>
+                        <input matInput placeholder="Nguyen Van A" formControlName="fullName">
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne , indexOne).get('fullName').hasError('required')">
+                          Tên đầy đủ không được để trống
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne , indexOne).get('fullName').hasError('minlength')">
+                          Tối thiểu 10 ký tự
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne , indexOne).get('fullName').hasError('maxlength')">
+                          Tối đa 50 ký tự
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne , indexOne).get('fullName').hasError('pattern')">
+                          Ghi hoa ký tự đầu của mỗi từ và Không dấu
+                        </mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Ngày sinh</mat-label>
+                        <input matInput [max]="maxBirthdayOfHuman" [matDatepicker]="picker" formControlName="birthday">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne , indexOne).get('birthday').hasError('required')">
+                          Ngày sinh không được để trống
+                        </mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Địa chỉ</mat-label>
+                        <input matInput placeholder="Đà Nẵng" formControlName="address">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="nguyenvana@gmail.com" formControlName="email">
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne , indexOne).get('email').hasError('required')">
+                          Email không được để trống
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne , indexOne).get('email').hasError('pattern')">
+                          Email không đúng định dạng abc@abc.abc
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-6 d-flex flex-column">
+                      <mat-form-field>
+                        <mat-label>Giới tính</mat-label>
+                        <mat-select formControlName="gender">
+                          <mat-option value="true">Nam</mat-option>
+                          <mat-option value="false">Nữ</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Số điện thoại</mat-label>
+                        <input matInput placeholder="0906965449" formControlName="phoneNumber">
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne , indexOne).get('phoneNumber').hasError('required')">
+                          Số điện thoại không được để trống
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne , indexOne).get('phoneNumber').hasError('pattern')">
+                          Số điện thoại có định dạng là +(84)9xxxxxxxx hoặc 09xxxxxxxx
+                        </mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Passport</mat-label>
+                        <input matInput placeholder="215874535" formControlName="identityNumber">
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne , indexOne).get('identityNumber').hasError('required')">
+                          CMND không được để trống
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne , indexOne).get('identityNumber').hasError('pattern')">
+                          CMND dạng số và có 9 số
+                        </mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Hành lý</mat-label>
+                        <mat-select formControlName="luggage">
+                          <mat-option *ngFor="let luggage1 of listLuggage" [value]="luggage1">
+                            {{luggage1.name}} - {{luggage1.price}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormOne, indexOne).get('luggage').hasError('required')">
+                          Vui lòng chọn gói hành lý
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!--            Form Array-->
+                  <div formArrayName="passengerList" *ngIf="passengerList(passengerFormOne , indexOne).length">
+                    <div [formGroupName]="i"
+                         *ngFor="let item of passengerList(passengerFormOne , indexOne).controls; let i = index;">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <h5>Thông tin trẻ em đi cùng {{i + 1}}</h5>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6 d-flex flex-column">
+                          <mat-form-field>
+                            <mat-label>Tên đầy đủ</mat-label>
+                            <input matInput placeholder="Nguyen Van A" formControlName="fullName">
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormOne , indexOne, i).get('fullName').hasError('required')">
+                              Tên đầy đủ không được để trống
+                            </mat-error>
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormOne , indexOne, i).get('fullName').hasError('minlength')">
+                              Tối thiểu 10 ký tự
+                            </mat-error>
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormOne , indexOne, i).get('fullName').hasError('maxlength')">
+                              Tối đa 50 ký tự
+                            </mat-error>
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormOne , indexOne, i).get('fullName').hasError('pattern')">
+                              Ghi hoa ký tự đầu của mỗi từ và Không dấu
+                            </mat-error>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Ngày sinh</mat-label>
+                            <input matInput [min]="minBirthdayOfChildren" [max]="maxBirthdayOfChildren"
+                                   [matDatepicker]="picker" formControlName="birthday">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormOne , indexOne , i).get('birthday').hasError('required')">
+                              Ngày sinh không được để trống
+                            </mat-error>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Địa chỉ</mat-label>
+                            <input matInput placeholder="Đà Nẵng" formControlName="address">
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="nguyenvana@gmail.com" formControlName="email">
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormOne , indexOne , i).get('email').hasError('pattern')">
+                              Email không đúng định dạng abc@abc.abc
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-lg-6 d-flex flex-column">
+                          <mat-form-field>
+                            <mat-label>Giới tính</mat-label>
+                            <mat-select formControlName="gender">
+                              <mat-option value="true">Nam</mat-option>
+                              <mat-option value="false">Nữ</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Số điện thoại</mat-label>
+                            <input matInput placeholder="0906965449" formControlName="phoneNumber">
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormOne , indexOne , i).get('phoneNumber').hasError('pattern')">
+                              Số điện thoại có định dạng là +(84)9xxxxxxxx hoặc 09xxxxxxxx
+                            </mat-error>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Passport</mat-label>
+                            <input matInput placeholder="215875354" formControlName="identityNumber">
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormOne , indexOne , i).get('identityNumber').hasError('pattern')">
+                              CMND dạng số và có 9 số
+                            </mat-error>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Hành lý</mat-label>
+                            <mat-select formControlName="luggage">
+                              <mat-option *ngFor="let luggage1 of listLuggage" [value]="luggage1">
+                                {{luggage1.name}} - {{luggage1.price}}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormOne, indexOne , i).get('luggage').hasError('required')">
+                              Vui lòng chọn gói hành lý
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12 d-flex justify-content-end">
+                          <button type="button" mat-button (click)="deleteItem(passengerFormOne, indexOne , i)">Xóa
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button type="button" mat-button (click)="addItem(passengerFormOne , indexOne)"
+                          *ngIf="passengerList(passengerFormOne , indexOne).length < 2">Thêm một trẻ em đi cùng
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row justify-content-end">
+        <button mat-button (click)="cancel()">Thoát</button>
+        <button mat-button class="ml-5" matStepperNext>Tiếp</button>
+      </div>
+    </mat-step>
+
+    <!--    Thông tin hành khách chuyến tàu về-->
+    <mat-step [stepControl]="passengerFormTwo" label="Thông tin hành khách đặt chuyến tàu về" *ngIf="flightTwo !== ''">
+      <div class="row" *ngIf="flightTwo !== ''">
+        <div class="col-12">
+          <div class="row justify-content-between">
+            <h3>{{flightTwo.departure}} <i class="fa fa-fighter-jet"></i> {{flightTwo.arrival}}</h3>
+            <h5>{{flightTwo.type}}</h5>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <p>{{flightTwo.departure}}</p>
+              <p>{{flightTwo.departureTime}} ,{{flightTwo.departureDate| date: "dd/MM/yyyy"}}</p>
+            </div>
+            <div class="col-4">
+              <p>{{flightTwo.arrival}}</p>
+              <p>{{flightTwo.arrivalTime}} ,{{flightTwo.arrivalDate| date: "dd/MM/yyyy"}}</p>
+            </div>
+            <div class="col-4">
+              <p>{{flightTwo.airline}}</p>
+              <p>{{flightTwo.flightCode}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <table>
+                <thead>
+                <tr>
+                  <th>Loại khách</th>
+                  <th>Số lượng vé</th>
+                  <th>Giá mỗi vé</th>
+                  <th>Thuế và phí</th>
+                  <th>Tổng giá</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Người lớn</td>
+                  <td>
+                    {{quantityTicketTwo}}
+                  </td>
+                  <td>{{flightTwo.price}}</td>
+                  <td>{{flightTwo.price * 10 / 100}}</td>
+                  <td>{{quantityTicketTwo * flightTwo.price + flightTwo.price * 10 / 100}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <p>Thông tin hành khách</p>
+            </div>
+          </div>
+          <!--          Thông tin khách hàng là người lớn-->
+          <form class="row" [formGroup]="passengerFormTwo">
+            <div class="col-lg-12">
+              <div class="border border-primary p-3 mb-4" formArrayName="passengerForm"
+                   *ngFor="let formOne of passengerFormTwo.get('passengerForm').controls; index as indexTwo">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h5>Thông tin người lớn thứ {{indexTwo + 1}}</h5>
+                  </div>
+                </div>
+                <div [formGroupName]="indexTwo">
+                  <div class="row mb-5">
+                    <div class="col-lg-6 d-flex flex-column">
+                      <mat-form-field>
+                        <mat-label>Tên đầy đủ</mat-label>
+                        <input matInput placeholder="Nguyễn Văn A" formControlName="fullName">
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo , indexTwo).get('fullName').hasError('required')">
+                          Tên đầy đủ không được để trống
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo , indexTwo).get('fullName').hasError('minlength')">
+                          Tối thiểu 10 ký tự
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo , indexTwo).get('fullName').hasError('maxlength')">
+                          Tối đa 50 ký tự
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo , indexTwo).get('fullName').hasError('pattern')">
+                          Ghi hoa ký tự đầu của mỗi từ và Không dấu
+                        </mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Ngày sinh</mat-label>
+                        <input matInput [max]="maxBirthdayOfHuman" [matDatepicker]="picker" formControlName="birthday">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo , indexTwo).get('birthday').hasError('required')">
+                          Ngày sinh không được để trống
+                        </mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Địa chỉ</mat-label>
+                        <input matInput placeholder="Đà Nẵng" formControlName="address">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="nguyenvana@gmail.com" formControlName="email">
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo , indexTwo).get('email').hasError('required')">
+                          Email không được để trống
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo , indexTwo).get('email').hasError('pattern')">
+                          Email không đúng định dạng abc@abc.abc
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-6 d-flex flex-column">
+                      <mat-form-field>
+                        <mat-label>Giới tính</mat-label>
+                        <mat-select formControlName="gender">
+                          <mat-option value="true">Nam</mat-option>
+                          <mat-option value="false">Nữ</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Số điện thoại</mat-label>
+                        <input matInput placeholder="0906965449" formControlName="phoneNumber">
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo , indexTwo).get('phoneNumber').hasError('required')">
+                          Số điện thoại không được để trống
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo , indexTwo).get('phoneNumber').hasError('pattern')">
+                          Số điện thoại có định dạng là +(84)9xxxxxxxx hoặc 09xxxxxxxx
+                        </mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Passport</mat-label>
+                        <input matInput placeholder="2158745354" formControlName="identityNumber">
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo , indexTwo).get('identityNumber').hasError('required')">
+                          CMND không được để trống
+                        </mat-error>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo , indexTwo).get('identityNumber').hasError('pattern')">
+                          CMND dạng số và có 9 số
+                        </mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Hành lý</mat-label>
+                        <mat-select formControlName="luggage">
+                          <mat-option *ngFor="let luggage of listLuggage" [value]="luggage">
+                            {{luggage.name}} - {{luggage.price}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error
+                          *ngIf="passengerFormIndex(passengerFormTwo, indexTwo).get('luggage').hasError('required')">
+                          Vui lòng chọn gói hành lý
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+
+                  <!--            Thông tin trẻ em đi kèm-->
+                  <div formArrayName="passengerList" *ngIf="passengerList(passengerFormTwo , indexTwo).length">
+                    <div [formGroupName]="i"
+                         *ngFor="let item of passengerList(passengerFormTwo , indexTwo).controls; let i = index;">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <h5>Thông tin trẻ em đi cùng {{i + 1}}</h5>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6 d-flex flex-column">
+                          <mat-form-field>
+                            <mat-label>Tên đầy đủ</mat-label>
+                            <input matInput placeholder="Nguyễn Văn A" formControlName="fullName">
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormTwo , indexTwo , i).get('fullName').hasError('required')">
+                              Tên đầy đủ không được để trống
+                            </mat-error>
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormTwo , indexTwo , i).get('fullName').hasError('minlength')">
+                              Tối thiểu 10 ký tự
+                            </mat-error>
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormTwo , indexTwo , i).get('fullName').hasError('maxlength')">
+                              Tối đa 50 ký tự
+                            </mat-error>
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormTwo , indexTwo , i).get('fullName').hasError('pattern')">
+                              Ghi hoa ký tự đầu của mỗi từ và Không dấu
+                            </mat-error>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Ngày sinh</mat-label>
+                            <input matInput [min]="minBirthdayOfChildren" [max]="maxBirthdayOfChildren"
+                                   [matDatepicker]="picker" formControlName="birthday">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormTwo , indexTwo , i).get('birthday').hasError('required')">
+                              Ngày sinh không được để trống
+                            </mat-error>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Địa chỉ</mat-label>
+                            <input matInput placeholder="Đà Nẵng" formControlName="address">
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="nguyenvana@gmail.com" formControlName="email">
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormTwo , indexTwo , i).get('email').hasError('pattern')">
+                              Email không đúng định dạng abc@abc.abc
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-lg-6 d-flex flex-column">
+                          <mat-form-field>
+                            <mat-label>Giới tính</mat-label>
+                            <mat-select formControlName="gender">
+                              <mat-option value="true">Nam</mat-option>
+                              <mat-option value="false">Nữ</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Số điện thoại</mat-label>
+                            <input matInput placeholder="0906965449" formControlName="phoneNumber">
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormTwo , indexTwo , i).get('phoneNumber').hasError('pattern')">
+                              Số điện thoại có định dạng là +(84)9xxxxxxxx hoặc 09xxxxxxxx
+                            </mat-error>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Passport</mat-label>
+                            <input matInput placeholder="2158745354" formControlName="identityNumber">
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormTwo , indexTwo , i ).get('identityNumber').hasError('pattern')">
+                              CMND dạng số và có 9 số
+                            </mat-error>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Hành lý</mat-label>
+                            <mat-select formControlName="luggage">
+                              <mat-option *ngFor="let luggage of listLuggage" [value]="luggage">
+                                {{luggage.name}} - {{luggage.price}}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error
+                              *ngIf="passengerListIndex(passengerFormTwo, indexTwo, i ).get('luggage').hasError('required')">
+                              Vui lòng chọn gói hành lý
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12 d-flex justify-content-end">
+                          <button type="button" mat-button (click)="deleteItem(passengerFormTwo, indexTwo , i)">Xóa
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button type="button" mat-button (click)="addItem(passengerFormTwo , indexTwo)"
+                          *ngIf="passengerList(passengerFormTwo , indexTwo).length < 2">Thêm một trẻ em đi cùng
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button mat-button matStepperPrevious>Quay lại</button>
+        <button class="ml-5" mat-button matStepperNext>Tiếp</button>
+      </div>
+    </mat-step>
+    <mat-step label="Thanh toán">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>Chọn hình thức thanh toán</h1>
+        </div>
+      </div>
+      <div class="row">
+        <mat-tab-group>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <img
+                src="https://94now.com/media/amasty/blog/cache/t/i/1280/900/tich-hop-thanh-toan-paypal-vao-website.png"
+                height="100vh" width="100vh">
+            </ng-template>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <img src="https://www.vietnamairlines.com/~/media/Images/icon/icon-payment-MoMo.png"
+                   height="50vh" width="50vh">
+            </ng-template>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Visa.svg/1200px-Visa.svg.png"
+                   height="100vh" width="100vh">
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button mat-button matStepperPrevious>Quay lại</button>
+        <button class="ml-5" mat-button (click)="pay()">Đặt vé</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+

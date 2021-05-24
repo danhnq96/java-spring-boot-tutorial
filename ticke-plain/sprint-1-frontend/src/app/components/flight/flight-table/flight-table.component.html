@@ -1,0 +1,122 @@
+<div class="row border bg-white border-flight mb-5">
+  <div class="pl-5">
+    <h2>Chọn vé máy bay đi</h2>
+    <p>Danh sách các chuyến bay từ {{departure}} <i
+      class="fa fa-fighter-jet"></i> {{arrival}}
+    <p>{{dateDeparture | date: "EEEE" | weekdays }} -
+      Ngày {{dateDeparture| date: "dd/MM/yyyy"}}</p>
+  </div>
+  <div class="d-flex pl-5" *ngIf="listOneWayTable !== ''">
+    <button mat-button class="date-button"
+            *ngFor="let index of arraysOneWay" (click)="searchOneWayPage(index)">{{index | date: "EEEE"| weekdays}}<br>
+      {{index | date: "dd/MM/yyyy"}}</button>
+  </div>
+  <div class="justify-content-center" *ngIf="listOneWayTable !== undefined">
+    <table class="table" id="table1">
+      <thead>
+      <tr>
+        <th>Hãng</th>
+        <th>Mã chuyến bay</th>
+        <th>Giờ</th>
+        <th>Hạng</th>
+        <th>Giá VND</th>
+        <th>Chi tiết</th>
+        <th>Đặt vé</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let oneWay of listOneWayTable.content">
+        <td>{{oneWay.airline}}</td>
+        <td>{{oneWay.flightCode}}</td>
+        <td>{{oneWay.departureTime | slice : 0 : 5}} - {{oneWay.arrivalTime | slice : 0 : 5}}</td>
+        <td>{{oneWay.type}}</td>
+        <td class="text-right">{{ oneWay.price | currency:'VND'}}</td>
+        <td>
+          <button mat-button style="background-color: orange" (click)="dialogFlightInformation(oneWay.id)">Chi tiết</button>
+        </td>
+        <td>
+          <mat-radio-button name="flightOne" (click)="flightOne(oneWay.id)"></mat-radio-button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row justify-content-end pr-5">
+      <nav aria-label="Page navigation example" *ngIf="listOneWayTable.totalPages > 1">
+        <ul class="pagination">
+          <li class="page-item" *ngIf="listOneWayTable.pageable?.pageNumber !== 0"
+              (click)="searchOneWayPage(undefined,listOneWayTable.pageable?.pageNumber - 1)"><a class="page-link" href="#">Trước</a></li>
+          <li class="page-item" [ngClass]="page === listOneWayTable.pageable?.pageNumber ? 'active' : ''"
+              *ngFor="let page of createFor(listOneWayTable.totalPages)"
+              (click)="searchOneWayPage(undefined,page)"><a class="page-link" href="#">{{page + 1}}</a></li>
+          <li class="page-item" *ngIf="listOneWayTable.pageable?.pageNumber !== listOneWayTable.totalPages -1"
+              (click)="searchOneWayPage(undefined,listOneWayTable.pageable?.pageNumber + 1)"><a class="page-link" href="#">Tiếp</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<div class="row border bg-white border-flight" *ngIf="wayChildren === '2'">
+  <div class="pl-5">
+    <h2>Chọn vé máy bay về</h2>
+    <p>Danh sách các chuyến bay từ {{arrival}} <i
+      class="fa fa-fighter-jet"></i> {{departure}}
+    <p>{{dateArrival | date: "EEEE" | weekdays }} -
+      Ngày {{dateArrival| date: "dd/MM/yyyy"}}</p>
+  </div>
+  <div class="d-flex pl-5" *ngIf="listReturnTable !== ''">
+    <button mat-button class="date-button"
+            *ngFor="let arrivalReturen of arraysReturn"
+            (click)="searchReturnPage(arrivalReturen)">{{arrivalReturen | date: "EEEE"| weekdays}}<br>
+      {{arrivalReturen | date: "dd/MM/yyyy"}}</button>
+  </div>
+  <div *ngIf="listReturnTable !== undefined">
+    <table class="table" id="table2">
+      <thead>
+      <tr>
+        <th>Hãng</th>
+        <th>Mã chuyến bay</th>
+        <th>Giờ</th>
+        <th>Hạng</th>
+        <th>Giá VND</th>
+        <th>Chi tiết</th>
+        <th>Đặt vé</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let return of listReturnTable.content">
+        <td>{{return.airline}}</td>
+        <td>{{return.flightCode}}</td>
+        <td>{{return.departureTime | slice : 0 : 5}} - {{return.arrivalTime | slice : 0 : 5}}</td>
+        <td>{{return.type}}</td>
+        <td class="text-right">{{return.price | currency: "VND"}}</td>
+        <td>
+          <button mat-button style="background-color: orange" (click)="dialogFlight(return.id)">Chi tiết</button>
+        </td>
+        <td>
+          <mat-radio-button (click)="flightTwo(return.id)"></mat-radio-button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row justify-content-end pr-5">
+      <nav aria-label="Page navigation example" *ngIf="listReturnTable.totalPages > 1">
+        <ul class="pagination">
+          <li class="page-item" *ngIf="listReturnTable.pageable?.pageNumber !== 0"
+              (click)="searchReturnPage(undefined,listReturnTable.pageable?.pageNumber - 1)"><a class="page-link" href="#">Trước</a></li>
+          <li class="page-item" [ngClass]="page === listReturnTable.pageable?.pageNumber ? 'active' : ''"
+              *ngFor="let page of createFor(listReturnTable.totalPages)"
+              (click)="searchReturnPage(undefined,page)"><a class="page-link" href="#">{{page + 1}}</a></li>
+          <li class="page-item"
+              *ngIf="listReturnTable.pageable?.pageNumber !== listReturnTable.totalPages -1"
+              (click)="searchReturnPage(undefined,listReturnTable.pageable?.pageNumber + 1)">
+            <a class="page-link" href="#">Tiếp</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+<div class="row mt-5 pr-5 justify-content-end">
+  <button mat-button (click)="dialogTicket()">Xác nhận</button>
+</div>
+

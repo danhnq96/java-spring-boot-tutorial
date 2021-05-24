@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <h5>Xác nhận xóa</h5>
+  </div>
+  <hr>
+  <div class="row">
+    <form>
+      <p>Bạn có chắc chắn muốn xóa vé có thông tin:</p>
+      <p>Mã đặt chỗ: <span class="bookingCode">{{ticket.booking.bookingCode}}</span></p>
+      <p>Tên hành khách: <span class="passengerName">{{ticket.passengerName}}</span></p>
+      <p>Chuyến bay:<span class="flight"> {{ticket.flightInformation.departure}} -
+        {{ticket.flightInformation.arrival}}</span></p>
+      <p>Ngày đi : <span class="departureDate">
+        {{ticket.flightInformation.departureDate |date : "dd/MM/yyyy"}}</span></p>
+    </form>
+  </div>
+  <hr>
+  <div class="row justify-content-center">
+    <p class="warning">Lưu ý: Hành động này không thể hoàn tác.</p>
+  </div>
+  <div class="row justify-content-center">
+    <button mat-dialog-close class="back">Hủy</button>
+    <button class="accept" (click)="delete()">Xác Nhận</button>
+  </div>
+</div>

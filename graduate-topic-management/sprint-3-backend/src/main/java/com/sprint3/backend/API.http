@@ -1,0 +1,30 @@
+DELETE http://localhost:8080/check-thesis/delete-check-thesis/1
+Accept: application/json
+
+###
+GET http://localhost:8080/check-thesis/update-check-thesis/1
+Accept: application/json
+
+###
+GET http://localhost:8080/check-thesis/save-check-thesis/2
+Accept: application/json
+
+###
+GET http://localhost:8080/check-thesis/save-check-thesis/2
+Content-Type: application/json
+
+
+###
+GET http://localhost:8080/check-thesis/list-check-thesis-approved/2
+Accept: application/json
+
+###
+GET http://localhost:8080/check-thesis/list-check-thesis/2
+Accept: application/json
+
+###
+GET http://localhost:8080/group/list-student-group/2
+Accept: application/json
+
+###
+

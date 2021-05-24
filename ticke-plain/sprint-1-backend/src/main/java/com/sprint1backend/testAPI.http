@@ -1,0 +1,27 @@
+GET http://localhost:8080/employee/list
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob3F1eW5obWFpMTUwNUBnbWFpbC5jb20iLCJleHAiOjE2MDgyMTUxNDIsImlhdCI6MTYwODE5NzE0Mn0.HmgJM7cxo0RAtvoGnn5SlAC16c0dbdZ1rH312cyLAY9OTI0QY_P4SY2QWDkd4S9O-ODhvAbIvh90YiyH5FvCMQ
+###
+POST http://localhost:8080/authenticate
+Content-Type: application/json
+
+{
+  "username": "hoquynhmai1505@gmail.com",
+  "password": "Hoquynhmai123"
+}
+
+###
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+  "username": "c0620g1@gmail.com",
+  "password": "a",
+  "appUser": {
+    "fullName": "AAA",
+    "birthday": "2020-02-02"
+  }
+}
+
+###
+

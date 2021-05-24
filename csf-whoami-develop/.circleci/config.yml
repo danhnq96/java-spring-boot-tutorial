@@ -1,0 +1,65 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/csf-whoami
+    environment:
+      # Configure the JVM and Gradle to avoid OOM errors
+      _JAVA_OPTIONS: "-Xms128m -Xmx3g"
+      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
+    docker:
+      - image: circleci/openjdk:8-jdk-stretch
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - restore_cache:
+          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - run:
+          name: Install dependencies
+          command: ./gradlew build -x test
+      - save_cache:
+          paths:
+            - ~/.gradle/wrapper
+          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - save_cache:
+          paths:
+            - ~/.gradle/caches
+          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - run:
+          name: Assemble WAR
+          command: ./gradlew build
+      - store_artifacts:
+          path: build/libs
+      - save_cache:
+          key: war-build
+          paths:
+            - build/libs
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+
+  # Deploy to Server
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/csf-whoami
+    steps:
+      - attach_workspace:
+          at: .
+      - restore_cache:
+          key: war-build
+      - run: scp -P ${SSH_PORT} ${WAR_TARGET} ${SSH_USER}@${SSH_HOST}:${SERVER_PATH}
+
+# Workflow for build and deploy.
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

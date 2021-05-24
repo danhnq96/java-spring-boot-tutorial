@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+legend {
+  width: auto;
+}
+
+.search {
+  width: 100%;
+  margin-left: 10px;
+}
+
+.return {
+  margin-left: 5em;
+}
+
+.bg-white {
+  background: white;
+}
+
+button {
+  background-color: orange;
+  color: white;
+  width: 200px;
+  height: 40px;
+  border: none;
+}
+
+button:hover {
+  background-color: black;
+}
+
+.search-form {
+  border-radius: 0.75rem;
+}

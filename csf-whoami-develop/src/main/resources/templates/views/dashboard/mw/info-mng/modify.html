@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:replace="layouts/metadata"/>
+    <title>Simple Responsive Admin</title>
+    <link th:replace="layouts/common-style"/>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <!-- BEGIN Menu Top -->
+    <nav th:replace="layouts/menu-top"></nav>
+    <!-- END Menu Top -->
+
+    <!-- BEGIN Menu Left -->
+    <nav th:replace="layouts/menu-left"></nav>
+    <!-- END Menu Left -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Dashboard</h1>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard v1</li>
+                        </ol>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <form role="form" id="quickForm" autocomplete="off"
+                      th:action="${add} ? @{|${#httpServletRequest.requestURI}/add|} : @{./{informationId}(typeInfoId=${typeInfo.id})}"
+                      th:object="${information}" method="POST">
+                    <div class="col-md-12">
+                        <div class="card card-outline card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Bootstrap WYSIHTML5 <small>Simple and fast</small>
+                                </h3>
+                                <!-- tools box -->
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool btn-sm"
+                                            data-card-widget="collapse" data-toggle="tooltip"
+                                            title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool btn-sm"
+                                            data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <!-- /. tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body pad">
+                                <div class="form-group">
+                                    <label for="inputStatus">Status</label> <select
+                                        class="form-control custom-select">
+                                    <option selected disabled>Select one</option>
+                                    <option>On Hold</option>
+                                    <option>Canceled</option>
+                                    <option>Success</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-->
+
+                    <div class="col-md-12">
+                        <div class="card card-outline card-info">
+                            <!-- /.card-header -->
+                            <div class="card-body pad">
+                                <div class="form-group">
+                                    <label for="inputStatus">Content</label>
+                                    <textarea class="textarea" id="summernote" th:field="*{contentInfo}"
+                                              placeholder="Place some text here"
+                                              style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+										</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary" th:value="${add} ? 'Create' : 'Update'">Submit
+                        </button>
+                    </div>
+                </form>
+                <!-- /.col-->
+            </div>
+            <!-- ./row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer th:replace="layouts/footer"></footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<link th:replace="layouts/common-js"/>
+<script src="/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- <script src="/plugins/summernote/summernote-ext-ajaxfileupload.js"></script> -->
+<!-- /container -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            height: 300,
+            minHeight: null,
+            maxHeight: null,
+            focus: true,
+            callbacks: {
+                onImageUpload: function (files, editor, welEditable) {
+                    for (var i = files.length - 1; i >= 0; i--) {
+                        sendFile(files[i], this);
+                    }
+                }
+            }
+        });
+    });
+
+    function sendFile(file, el) {
+        var form_data = new FormData();
+        form_data.append('file', file);
+        $.ajax({
+            data: form_data,
+            type: "POST",
+            url: '/upload/image',
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function (url) {
+                console.log("response url: " + url)
+                $(el).summernote('editor.insertImage', url);
+            }
+        });
+    }
+</script>
+
+<!-- <script>
+
+    $(document).ready(function() {
+        $('.textarea').summernote({
+            callbacks: {
+                onImageUpload: function(files) {
+                    console.log("Call ajax that")
+                    uploadImage(files[0]);
+                }
+            }
+        });
+
+        function uploadImage(file) {
+            console.log("Call ajax upload method.")
+        data = new FormData();
+        data.append("file", file);
+
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: '/admin/fileUpload',
+            headers: {
+                'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+            },
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (url) {
+                console.log("Call ajax upload success.")
+                $('#summernote-long').summernote('insertImage', url);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Call ajax upload fail.")
+            }
+          });
+        }
+    });
+</script> -->
+<!-- Script for upload Image -->
+</body>
+</html>

@@ -1,0 +1,295 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thêm Mới Nhân Viên</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="groove">
+  <div class="container-fluid table-responsive">
+    <h3 class="text-center text-success mt-3">Thêm Mới Nhân Viên</h3>
+    <form [formGroup]="formCreateNew" (keydown)="keyDownFunction($event)">
+      <div class="row mt-5">
+        <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
+        <div class="col-sm-10 col-xs-10 col-md-10 col-lg-10">
+
+          <div class="form-row">
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Mã nhân viên</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <input matInput type="text" formControlName="employeeCode"/>
+              </mat-form-field>
+
+              <p class="text-danger" style=" margin-left: -91%;"
+                 *ngIf="formCreateNew.get('employeeCode').hasError('pattern')
+                                      && (formCreateNew.controls.employeeCode?.dirty
+                                      || formCreateNew.controls.employeeCode?.touched)">
+                Mã NV có định dạng NV-XXXX với X: 0-9.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -31%;"
+                 *ngIf="formCreateNew.get('employeeCode').hasError('required')
+                                      && (formCreateNew.controls.employeeCode?.dirty
+                                      || formCreateNew.controls.employeeCode?.touched)">
+                Vui lòng nhập mã nhân viên.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -97%;"
+                 *ngIf="formCreateNew.get('employeeCode').hasError('employeeCodeExists')
+                                      && (formCreateNew.controls.employeeCode?.dirty
+                                      || formCreateNew.controls.employeeCode?.touched)">
+                Mã này đã tồn tại. Vui lòng nhập mã khác.
+              </p>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Tài khoản</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <input matInput type="text" formControlName="email"/>
+              </mat-form-field>
+
+              <p class="text-danger"
+                 *ngIf="formCreateNew.get('email').hasError('required')
+                                      && (formCreateNew.controls.email?.dirty
+                                      || formCreateNew.controls.email?.touched)">
+                Vui lòng nhập email.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -101%;"
+                 *ngIf="formCreateNew.get('email').hasError('pattern')
+                                      && (formCreateNew.controls.email?.dirty
+                                      || formCreateNew.controls.email?.touched)">
+                Email phải đúng định dạng (abc@bac.com).
+              </p>
+
+              <p class="text-danger" style=" margin-left: -115%;"
+                 *ngIf="formCreateNew.get('email').hasError('emailExists')
+                                      && (formCreateNew.controls.email?.dirty
+                                      || formCreateNew.controls.email?.touched)">
+                Email này đã tồn tại. Vui lòng nhập email khác.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -19%;"
+                 *ngIf="formCreateNew.controls.email?.invalid
+                                      && !formCreateNew.get('email').hasError('pattern')
+                                      && !formCreateNew.get('email').hasError('required')
+                                      && !formCreateNew.get('email').hasError('emailExists')
+                                      && (formCreateNew.controls.email?.dirty
+                                      || formCreateNew.controls.email?.touched)">
+                Email không quá 40 ký tự.
+              </p>
+            </div>
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+          </div>
+
+
+          <div class="form-row">
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Họ tên</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <input matInput type="text" formControlName="fullName"/>
+              </mat-form-field>
+
+              <p class="text-danger"
+                 *ngIf="formCreateNew.get('fullName').hasError('required')
+                                      && (formCreateNew.controls.fullName?.dirty
+                                      || formCreateNew.controls.fullName?.touched)">
+                Vui lòng nhập họ tên.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -99%;"
+                 *ngIf="formCreateNew.get('fullName').hasError('whiteSpace')
+                                      && (formCreateNew.controls.fullName?.dirty
+                                      || formCreateNew.controls.fullName?.touched)">
+                Họ tên không được chỉ chứa khoảng trắng.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -82%;"
+                 *ngIf="formCreateNew.get('fullName').hasError('specialCharacter')
+                                      && (formCreateNew.controls.fullName?.dirty
+                                      || formCreateNew.controls.fullName?.touched)">
+                Họ tên không được chứa ký tự đặt biệt.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -26%;"
+                 *ngIf="formCreateNew.controls.fullName?.invalid
+                                      && !formCreateNew.get('fullName').hasError('required')
+                                      && !formCreateNew.get('fullName').hasError('whiteSpace')
+                                      && !formCreateNew.get('fullName').hasError('specialCharacter')
+                                      && (formCreateNew.controls.fullName?.dirty
+                                      || formCreateNew.controls.fullName?.touched)">
+                Họ tên không quá 40 ký tự.
+              </p>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Mật khẩu</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <input matInput type="password" formControlName="password"/>
+              </mat-form-field>
+
+              <p class="text-danger" style=" margin-left: -12%;"
+                 *ngIf="formCreateNew.get('password').hasError('required')
+                                      && (formCreateNew.controls.password?.dirty
+                                      || formCreateNew.controls.password?.touched)">
+                Vui lòng nhập mật khẩu.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -111%;"
+                 *ngIf="formCreateNew.get('password').hasError('whiteSpace')
+                                      && (formCreateNew.controls.password?.dirty
+                                      || formCreateNew.controls.password?.touched)">
+                Mật khẩu không được chỉ chứa khoảng trắng.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -38%;"
+                 *ngIf="formCreateNew.controls.password?.invalid
+                                      && !formCreateNew.get('password').hasError('required')
+                                      && !formCreateNew.get('password').hasError('whiteSpace')
+                                      && (formCreateNew.controls.password?.dirty
+                                      || formCreateNew.controls.password?.touched)">
+                Mật khẩu không quá 20 ký tự.
+              </p>
+            </div>
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+          </div>
+
+
+          <div class="form-row">
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Ngày sinh</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <input matInput [matDatepicker]="birthday" placeholder="Chọn ngày sinh" class="inputForm"
+                       formControlName="birthday" [max]="maxDate" [min]="minDate">
+                <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+                <mat-datepicker #birthday></mat-datepicker>
+              </mat-form-field>
+
+              <p class="text-danger" style=" margin-left: -15%;"
+                 *ngIf="formCreateNew.get('birthday').hasError('required')
+                                      && (formCreateNew.controls.birthday?.dirty
+                                      || formCreateNew.controls.birthday?.touched)">
+                Vui lòng nhập ngày sinh.
+              </p>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Số điện thoại</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <input matInput type="text" formControlName="phoneNumber"/>
+              </mat-form-field>
+
+              <p class="text-danger" style=" margin-left: -31%;"
+                 *ngIf="formCreateNew.get('phoneNumber').hasError('required')
+                                      && (formCreateNew.controls.phoneNumber?.dirty
+                                      || formCreateNew.controls.phoneNumber?.touched)">
+                Vui lòng nhập số điện thoại.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -97%;"
+                 *ngIf="formCreateNew.get('phoneNumber').hasError('pattern')
+                                      && (formCreateNew.controls.phoneNumber?.dirty
+                                      || formCreateNew.controls.phoneNumber?.touched)">
+                SĐT phải chỉ chứa kí tự số và ít nhất 10 số.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -53%;"
+                 *ngIf="formCreateNew.controls.phoneNumber?.invalid
+                                      && !formCreateNew.get('phoneNumber').hasError('required')
+                                      && !formCreateNew.get('phoneNumber').hasError('pattern')
+                                      && (formCreateNew.controls.phoneNumber?.dirty
+                                      || formCreateNew.controls.phoneNumber?.touched)">
+                Số điện thoại không quá 12 kí tự.
+              </p>
+            </div>
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+          </div>
+
+
+          <div class="form-row">
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Giới tính</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <mat-label>Chọn giới tính</mat-label>
+                <mat-select formControlName="gender">
+                  <mat-option value="0">Nữ</mat-option>
+                  <mat-option value="1">Nam</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <p class="text-danger" style=" margin-left: -10%;"
+                 *ngIf="formCreateNew.get('gender').hasError('required')
+                                      && (formCreateNew.controls.gender?.dirty
+                                      || formCreateNew.controls.gender?.touched)">
+                Vui lòng chọn giới tính.
+              </p>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Phân quyền</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <mat-label>Chọn quyền</mat-label>
+                <mat-select formControlName="role">
+                  <mat-option value="Admin">Quản trị viên</mat-option>
+                  <mat-option value="Employee">Nhân viên</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <p class="text-danger"
+                 *ngIf="formCreateNew.get('role').hasError('required')
+             && (formCreateNew.controls.role?.dirty
+            || formCreateNew.controls.role?.touched)">
+                Vui lòng chọn quyền.
+              </p>
+            </div>
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+          </div>
+
+
+          <div class="form-row mt-5 ml-5">
+            <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 p-0 m-0"></div>
+            <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 p-0 m-0">
+              <button type="button" class="btn btn-primary" value="Quay Lại"
+                      [routerLink]="['/list-employee']">Quay Lại
+              </button>
+              <button type="button" class="btn btn-dark ml-2" value="Xóa"
+                      (click)="resetAll()">Xóa
+              </button>
+              <button type="button" class="btn btn-success ml-2" value="Lưu"
+                      (click)="createNewEmployee()">Lưu
+              </button>
+            </div>
+            <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 p-0 m-0"></div>
+          </div>
+        </div>
+        <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<div class="row">
+  <div class="col-lg-7 col-7">
+          <div class="mr-5" [hidden]="listOneWay === ''">
+            <app-flight-table [listOneWayTable]="listOneWay"
+                              [listReturnTable]="listReturn"
+                              #flightTableComponent
+            ></app-flight-table>
+          </div>
+  </div>
+  <div class="col-lg-5 col-5">
+          <div class="p-1 bg-white border search-form">
+            <h1 class="text-center mt-3"><i class="fa fa-plane"></i> Tìm kiếm chuyến bay</h1>
+            <form class="form-group" (ngSubmit)="search(flightTableComponent)" [formGroup]="formSearch">
+              <div class="d-flex justify-content-center">
+                <mat-radio-group formControlName="way">
+                  <mat-radio-button [ngClass]="way.id === 2 ? 'return': null" *ngFor="let way of ways"
+                                    value="{{way.id}}">{{way.name}}</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <fieldset class="border">
+                <legend class="ml-3 d-flex justify-content-center">
+                  Sắp xếp
+                </legend>
+                <mat-radio-group aria-label="Select an option" formControlName="sort">
+                  <mat-radio-button class="search" *ngFor="let search of find"
+                                    value="{{search.id}}">{{search.name}}</mat-radio-button>
+                </mat-radio-group>
+              </fieldset>
+              <fieldset class="border">
+                <legend class="ml-3 d-flex justify-content-center">Đặt vé</legend>
+                <div class="row">
+                  <div class="col-lg-5 pl-4 p-0">
+                    <mat-form-field>
+                      <mat-label>Điểm đi *</mat-label>
+                      <mat-select formControlName="departure">
+                        <mat-option *ngFor="let location of listLocation" value="{{location}}">{{location}}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="formSearch.get('departure').hasError('required')">Vui lòng chọn diểm đi</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-2 d-flex justify-content-start align-items-center">
+                    <h1>⇄</h1>
+                  </div>
+                  <div class="col-lg-5 pl-4 p-0">
+                    <mat-form-field>
+                      <mat-label>Điểm đến *</mat-label>
+                      <mat-select formControlName="arrival">
+                        <mat-option *ngFor="let location of listLocation" value="{{location}}">{{location}}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="formSearch.get('arrival').hasError('required')">Vui lòng chọn điểm đến</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-5 pl-4 p-0">
+                    <mat-form-field>
+                      <mat-label>Ngày đi</mat-label>
+                      <input matInput [min]="minDepartureDate" [matDatepicker]="picker" formControlName="departureDate">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-error *ngIf="formSearch.get('departureDate').hasError('required')">
+                        Ngày đi không được để trống
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-2 d-flex justify-content-start align-items-center">
+                    <h1 [hidden]="formSearch.controls.way.value == 1">⇄</h1>
+                  </div>
+                  <div class="col-5 pl-4 p-0" [hidden]="formSearch.controls.way.value == 1">
+                    <mat-form-field>
+                      <mat-label>Ngày về</mat-label>
+                      <input matInput [min]="minArrivalDate" [matDatepicker]="picker2" formControlName="arrivalDate">
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                      <mat-error *ngIf="formSearch.get('arrivalDate').hasError('required')">
+                        Ngày về không được để trống
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="row">
+                  <div class="col-3 pl-5 d-flex align-items-center">Người lớn</div>
+                  <div class="col-4">
+                    <mat-form-field>
+                      <mat-label>Số lượng</mat-label>
+                      <mat-select formControlName="quantity">
+                        <mat-option value="1">0</mat-option>
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-5 d-flex align-items-center">(Từ 12 tuổi trở lên)</div>
+                </div>
+                <div class="row">
+                  <div class="col-3 pl-5 d-flex align-items-center">Trẻ em</div>
+                  <div class="col-4">
+                    <mat-form-field>
+                      <mat-label>Số lượng</mat-label>
+                      <mat-select>
+                        <mat-option value="1">0</mat-option>
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-5 d-flex align-items-center">(Từ 2 đến dưới 12 tuổi)</div>
+                </div>
+                <div class="row">
+                  <div class="col-3 pl-5 d-flex align-items-center">Em bé</div>
+                  <div class="col-4">
+                    <mat-form-field>
+                      <mat-label>Số lượng</mat-label>
+                      <mat-select>
+                        <mat-option value="1">0</mat-option>
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-5 d-flex align-items-center">(Dưới 2 tuổi)</div>
+                </div>
+                <div class="row">
+                  <div class="col-7"></div>
+                  <div class="col-5">
+                    <button>Tìm vé</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+  </div>
+</div>
+
+

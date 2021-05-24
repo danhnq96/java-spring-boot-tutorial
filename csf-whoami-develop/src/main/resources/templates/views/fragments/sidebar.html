@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ko">
+
+<th:block th:fragment="sidebarFragment">
+    <div class="sidebar-user d-flex flex-column align-items-center">
+        <a class="nav-link d-flex align-items-center" href="#" role="button">
+            <p class="m-0" th:text="${session.admin.username}"></p>
+        </a>
+        <div>
+            <a th:href="@{/admin/modify}" class="btn btn-primary">정보수정</a>
+            <a th:href="@{/admin/logout}" class="btn btn-primary">로그아웃</a>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <li class="nav-item" id="user-management">
+                <a class="nav-link" id="user" th:href="@{/admin/user/list}">
+                    <i class="nav-icon icon-people"></i> 사용자 관리</a>
+            </li>
+            <li class="nav-item" id="admin-management">
+                <a class="nav-link" id="admin" th:href="@{/admin/list}">
+                    <i class="nav-icon icon-user"></i> 관리자 관리</a>
+            </li>
+            <!-- 딸기콩 관리 -->
+            <li class="nav-item nav-dropdown" id="ddalgikong"
+                th:if="${session.adminRole.tbRoleId==1 || session.adminRole.tbRoleId==2}">
+                <a class="nav-link nav-dropdown-toggle">
+                    <i class="nav-icon icon-game-controller"></i> 딸기콩 관리</a>
+                <!--            <li class="nav-item">-->
+                <!--                <a class="nav-link" th:href="@{../pages/review-management/review-list.html}">-->
+                <!--                    <i class="nav-icon icon-speech"></i> 리뷰 관리</a>-->
+                <!--            </li>-->
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/popular/keyword}">
+                            <i class="nav-icon icon-tag"></i> 인기 키워드 관리</a>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item" id="material-management">
+                        <a class="nav-link" id="material" th:href="@{/admin/material/list}">
+                            <i class="nav-icon icon-bag"></i> 자재 관리</a>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item" id="group-management">
+                        <a class="nav-link" id="group" th:href="@{/admin/group/list}">
+                            <i class="nav-icon icon-book-open"></i> 전집 관리</a>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item" id="product-management">
+                        <a class="nav-link" id="product" th:href="@{/admin/product/list}">
+                            <i class="nav-icon icon-present"></i> 상품 관리</a>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item nav-dropdown " id="home-management">
+                        <a class="nav-link nav-dropdown-toggle" th:href="@{#}">
+                            <i class="nav-icon icon-home"></i> 홈 관리</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link pl-5" id="banner" th:href="@{/admin/banner/management}">공통 배너 관리</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-5" id="when" th:href="@{/admin/theme/list/this}">이럴 땐 이런 딸기콩</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-5" id="dj" th:href="@{/admin/theme/list/dj}">딸기콩 DJ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-5" id="theme" th:href="@{/admin/theme/list/monthly}">이달의 테마</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-5" id="school" th:href="@{/admin/theme/list/school}">쏙쏙 딸기콩 스쿨</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-5" id="audio" th:href="@{/admin/theme/list/character}">캐릭터
+                                    오디오북</a>
+                            </li>
+                            <!--                    <li class="nav-item">-->
+                            <!--                        <a class="nav-link pl-5" th:href="@{/admin/theme/list/bottom}">하단 테마 영역</a>-->
+                            <!--                    </li>-->
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item nav-dropdown ">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="nav-icon icon-directions"></i> 카테고리 관리</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link pl-5 @@activeAge" th:href="@{/admin/category/age/list}">연령 관리</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-5 @@activeSection" th:href="@{/admin/category/subject/list}">영역
+                                    관리</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item nav-dropdown " id="operation-management">
+                        <a class="nav-link nav-dropdown-toggle">
+                            <i class="nav-icon icon-game-controller"></i> 운영 관리</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link pl-5 " id="notice" th:href="@{/admin/notice/list}">공지사항</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-5 @@activeEnquiry" id="enquiry" th:href="@{/admin/qna/list}">1:1
+                                    문의</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+
+            <!--베베북 관리자-->
+            <li class="nav-item nav-dropdown" th:if="${session.adminRole.tbRoleId==1 || session.adminRole.tbRoleId==3}">
+                <a class="nav-link nav-dropdown-toggle">
+                    <i class="nav-icon icon-game-controller"></i> 베베북 관리</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link pl-5" href="#">menu</a>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link pl-5" href="#">menu</a>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link pl-5" href="#">menu</a>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link pl-5" href="#">menu</a>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link pl-5" href="#">menu</a>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link pl-5" href="#">menu</a>
+                    </li>
+                </ul>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link pl-5" href="#">menu</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</th:block>

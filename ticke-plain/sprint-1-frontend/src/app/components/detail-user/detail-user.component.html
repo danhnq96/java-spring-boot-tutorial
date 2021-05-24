@@ -1,0 +1,104 @@
+<!--<div class="container-fluid px-0 mx-0 bg-white">-->
+<!--  <div class=" row px-0 ">-->
+<!--    <div class="col-lg-8 col-md-8 pt-0">-->
+<!--      <div class="flex-content">-->
+<!--        <div class="custom-form custom-form-fields">-->
+<!--          <h3 class="mb-5 d-flex justify-content-center"> Thông tin cá nhân</h3>-->
+<!--          <form [formGroup]="infoFormUser">-->
+<!--            <div class="form-group d-flex align-items-center">-->
+<!--              <label class="col-lg-2 col-md-2">Tên: </label>-->
+<!--              <input class="col-lg-10 col-md-10 form-control" formControlName="fullName"  readonly>-->
+<!--            </div>-->
+<!--            <div class="form-group d-flex align-items-center">-->
+<!--              <label class="col-lg-2 col-md-2">Ngày sinh: </label>-->
+<!--              <input type="text" class="col-lg-10 col-md-10 form-control" formControlName="birthday" readonly>-->
+<!--            </div>-->
+<!--            <div class="form-group d-flex align-items-center">-->
+<!--              <label class="col-lg-2 col-md-2">Địa chỉ: </label>-->
+<!--              <textarea rows="1" class="col-lg-10 col-md-10 form-control" formControlName="address"-->
+<!--                        readonly></textarea>-->
+<!--            </div>-->
+<!--            <div class="form-group d-flex align-items-center">-->
+<!--              <label class="col-lg-2 col-md-2">Email: </label>-->
+<!--              <input class="col-lg-10 col-md-10 form-control" formControlName="email" readonly>-->
+<!--            </div>-->
+<!--            <div class="form-group d-flex align-items-center">-->
+<!--              <label class="col-lg-2 col-md-2">Giới tính: </label>-->
+<!--              <input class="col-lg-10 col-md-10 form-control" formControlName="gender" readonly>-->
+<!--            </div>-->
+<!--            <div class="form-group d-flex align-items-center">-->
+<!--              <label class="col-lg-2 col-md-2">Điện thoại: </label>-->
+<!--              <input class="col-lg-10 col-md-10 form-control" formControlName="phoneNumber" readonly>-->
+<!--            </div>-->
+<!--            <div class="form-group d-flex align-items-center">-->
+<!--              <label class="col-lg-2 col-md-2">Xếp hạng: </label>-->
+<!--              <input class="col-lg-10 col-md-10 form-control" formControlName="userRank" readonly>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-lg-4 col-md-4 p-0">-->
+<!--      <div class="avatar mt-5">-->
+<!--        <img src="https://st4.depositphotos.com/8440746/25321/v/1600/depositphotos_253217468-stock-illustration-airport-icon-vector-female-user.jpg"-->
+<!--             alt="registration-img"/>-->
+<!--        <button class="btn btn-orange mt-5 btn-block" (click)="openDialogEdit()">Chỉnh sửa</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+<div class="container-fluid d-flex">
+  <div class="col-lg-9 col-md-9">
+    <div class="flex-content">
+      <div class="custom-form custom-form-fields">
+        <h3 class="mb-5 d-flex justify-content-center">Thông tin cá nhân</h3>
+        <ng-form>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Tên: </label>
+            <label class="col-lg-10 col-md-10 form-control"  *ngIf="users">{{users.fullName}}</label>
+          </div>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Ngày sinh: </label>
+            <label class="col-lg-10 col-md-10 form-control">{{users.birthday | date: 'dd/MM/yyyy'}}</label>
+          </div>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Địa chỉ: </label>
+            <textarea rows="1" class="col-lg-10 col-md-10 form-control">{{users.address}}</textarea>
+          </div>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Email: </label>
+            <label class="col-lg-10 col-md-10 form-control" >{{users.email}}</label>
+          </div>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Giới tính: </label>
+            <label class="col-lg-10 col-md-10 form-control">{{users.gender}}</label>
+          </div>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Điện thoại: </label>
+            <label class="col-lg-10 col-md-10 form-control">{{users.phoneNumber}}</label>
+          </div>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Xếp hạng: </label>
+            <label class="col-lg-10 col-md-10 form-control">{{users.userRank}}</label>
+          </div>
+        </ng-form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 p-0">
+    <div class="avatar mt-5">
+      <img class="img-fluid"
+           src="https://phunugioi.com/wp-content/uploads/2020/01/anh-avatar-supreme-dep-lam-dai-dien-facebook.jpg"
+           alt="registration-img"/>
+      <button class="btn btn-warning mt-5 btn-block" data-toggle="modal" (click)="openDialogEdit()"
+              data-target="#modal">Chỉnh sửa
+      </button>
+    </div>
+  </div>
+</div>
+
+
+

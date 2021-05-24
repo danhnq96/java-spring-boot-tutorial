@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
+    <meta name="format-detection" content="telephone=no">
+
+    <title>딸기콩 관리자</title>
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/plugin/vendor.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        배포 관리
+                        <span>서비스의 배포 내역을 확인할 수 있습니다.</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        배포 관리 등록하기
+                    </div>
+                    <div class="card-body">
+                        <div class="table-detail-info overscroll-mobile mb-3">
+                            <!-- Begin info -->
+                            <table class="table custom-table table-bordered w-250">
+                                <tbody>
+                                <tr>
+                                    <td class="font-weight-bold">OS<span class="red-point">*</span></td>
+                                    <td colspan="3">
+                                        <div class="content-button d-flex align-items-center">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-os-radio2" name="os-link"
+                                                       class="custom-control-input" checked value="1">
+                                                <label class="custom-control-label"
+                                                       for="btn-os-radio2">Android</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-os-radio3" name="os-link"
+                                                       class="custom-control-input" value="2">
+                                                <label class="custom-control-label"
+                                                       for="btn-os-radio3">IOS</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="font-weight-bold">구분<span class="red-point">*</span></td>
+                                    <td colspan="3">
+                                        <div class="content-button d-flex align-items-center">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-deploy-radio2" name="deploy-link"
+                                                       class="custom-control-input" checked value="prod">
+                                                <label class="custom-control-label"
+                                                       for="btn-deploy-radio2">운영</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-deploy-radio3" name="deploy-link"
+                                                       class="custom-control-input" value="dev">
+                                                <label class="custom-control-label"
+                                                       for="btn-deploy-radio3">검증</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">업데이트 날짜<span class="red-point">*</span></td>
+                                    <td colspan="3">
+                                        <div class="wrap-end-date d-flex align-items-center">
+                                            <input id="startDate12" name="versionUpdatedAt"
+                                                   class="form-control datepicker" size="36" autocomplete="off"
+                                                   placeholder="이곳을 클릭하여 기간을 설정하십시오.">
+                                            <i class="fa fa-calendar ml-2"></i>
+                                        </div>
+                                    </td>
+                                    <td class="font-weight-bold">업데이트 버전<span class="red-point">*</span></td>
+                                    <td colspan="3">
+                                        <div class="input-group">
+                                            <input type="text" value="" id="version" class="form-control"
+                                                   placeholder="업데이트 버전을 입력해주세요." required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">앱 다운 링크</td>
+                                    <td colspan="7">
+                                        <div class="input-group">
+                                            <input type="text" value="" id="link" class="form-control"
+                                                   placeholder="앱 다운 링크를 입력해주세요." required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">이슈</td>
+                                    <td colspan="7">
+                                        <div class="form-group mb-0">
+                                            <textarea class="form-control" id="content" rows="8" cols="50"
+                                                      placeholder="내용을 입력해 주세요."></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="group-btn-bottom text-right">
+                                <a class="btn btn-primary cancel-btn" th:href="@{/admin/group-mng/list}">취소</a>
+                                <button class="btn btn-primary" type="button" onclick="javascript:insertAppVersion()">
+                                    등록
+                                </button>
+                            </div>
+                            <!-- End info -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:include="fragments/modal/oneButtonModal :: oneModal"></div>
+<script type="text/javascript" th:src="@{/pageJs/group-management/group-insert.js}"></script>
+</body>
+</html>

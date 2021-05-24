@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:replace="layouts/metadata"/>
+    <title>Simple Responsive Admin</title>
+    <link th:replace="layouts/common-style"/>
+</head>
+
+<body>
+<!-- BEGIN Menu Top -->
+<nav th:replace="layouts/menu-top"></nav>
+<!-- END Menu Top -->
+
+<br>
+<br>
+<br>
+<br>
+
+<!-- BEGIN Menu Left -->
+<nav th:replace="layouts/menu-left"></nav>
+<!-- END Menu Left -->
+
+<!-- BEGIN Content page. -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Thể loại thông tin chi tiết</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Simple Tables</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-12">
+                    <div th:if="${typeInfo}" class="card">
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type name</th>
+                                    <th>Type Code</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td th:text="${typeInfo.id}"></td>
+                                    <td th:text="${typeInfo.infoType}"></td>
+                                    <td th:text="${typeInfo.typeCode}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                        <!-- /.card-body -->
+                        <div th:if="not ${allowDelete}" class="card-header">
+
+                            <a th:href="@{|${#httpServletRequest.requestURI}/edit/{id}(id=${typeInfo.id})|}"
+                               class="btn btn-primary"> Edit </a> <a
+                                th:href="@{|${#httpServletRequest.requestURI}/delete/{id}(id=${typeInfo.id})|}"
+                                class="btn btn-primary"> Delete </a>
+                        </div>
+                        <!-- <form th:if="${allowDelete}" th:action="@{/typeInfos/{typeInfoId}/delete(typeInfoId=${typeInfo.id})}" method="POST">
+            Delete this typeInfo? <input type="submit" th:value="Yes" />
+        </form> -->
+                        <div th:if="${errorMessage}" th:utext="${errorMessage}"
+                             class="error"></div>
+                        <!-- END Content page. -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<div th:replace="layouts/footer"></div>
+<link th:replace="layouts/common-js"></link>
+
+</body>
+</html>

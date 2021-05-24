@@ -1,0 +1,134 @@
+<div class="container-fluid" id="mess-consultant" style="background-color: #fafafa">
+  <div class="row">
+    <div class="col-lg-12" id="body-chat-consultant">
+      <div *ngFor="let mess of listMessage">
+        <div *ngIf="(mess.isUser == 'false')">
+          <div *ngIf="mess.content.length > 40">
+            <div class="row mt-1 mb-1" style="margin-bottom: 2px">
+              <div class="col-lg-6"></div>
+              <div class="col-lg-6 mess-consultant" align="right"><span><span
+                style="margin-left: 2px; "></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="mess.content.length > 31 && mess.content.length <=40 ">
+            <div class="row mt-1 mb-1" style="margin-bottom: 2px">
+              <div class="col-lg-7"></div>
+              <div class="col-lg-5 mess-consultant" align="right"><span><span
+                style="margin-left: 2px; "></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="mess.content.length > 23 && mess.content.length <=31 ">
+            <div class="row mt-1 mb-1" style="margin-bottom: 2px">
+              <div class="col-lg-8"></div>
+              <div class="col-lg-4 mess-consultant" align="right"><span><span
+                style="margin-left: 2px; "></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="mess.content.length > 14 && mess.content.length <=23 ">
+            <div class="row mt-1 mb-1" style="margin-bottom: 2px">
+              <div class="col-lg-9"></div>
+              <div class="col-lg-3 mess-consultant" align="right"><span><span
+                style="margin-left: 2px; "></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="mess.content.length > 6 && mess.content.length <=14 ">
+            <div class="row mt-1 mb-1" style="margin-bottom: 2px">
+              <div class="col-lg-10"></div>
+              <div class="col-lg-2 mess-consultant" align="right"><span><span
+                style="margin-left: 2px; "></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="mess.content.length <= 6">
+            <div class="row mt-1 mb-1" style="margin-bottom: 2px">
+              <div class="col-lg-11"></div>
+              <div class="col-lg-1 mess-consultant" align="right"><span><span
+                style="margin-left: 2px; "></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="(mess.isUser == 'true')">
+          <div *ngIf="mess.content.length > 40">
+            <div class="row mt-1 mb-1">
+              <div class="col-lg-6 mess-from-user" align="left"><span><span
+                style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span></div>
+              <div class="col-lg-6"></div>
+            </div>
+          </div>
+          <div *ngIf="mess.content.length > 31 && mess.content.length <= 40">
+            <div class="row mt-1 mb-1">
+              <div class="col-lg-5 mess-from-user" align="left"><span><span
+                style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span></div>
+              <div class="col-lg-7"></div>
+            </div>
+          </div>
+          <div *ngIf="mess.content.length > 23 && mess.content.length <= 31">
+            <div class="row mt-1 mb-1">
+              <div class="col-lg-4 mess-from-user" align="left"><span><span
+                style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span></div>
+              <div class="col-lg-8"></div>
+            </div>
+          </div>
+          <div *ngIf="mess.content.length > 14 && mess.content.length <= 23">
+            <div class="row mt-1 mb-1">
+              <div class="col-lg-3 mess-from-user" align="left"><span><span
+                style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span></div>
+              <div class="col-lg-9"></div>
+            </div>
+          </div>
+          <div *ngIf="mess.content.length > 6 && mess.content.length <= 14">
+            <div class="row mt-1 mb-1">
+              <div class="col-lg-2 mess-from-user" align="left"><span><span
+                style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span></div>
+              <div class="col-lg-10"></div>
+            </div>
+          </div>
+          <div *ngIf="mess.content.length <= 6">
+            <div class="row mt-1 mb-1">
+              <div class="col-lg-1 mess-from-user" align="left"><span><span
+                style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span></div>
+              <div class="col-lg-11"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="icon-box-consultant">
+    <emoji-mart
+      [set]="set"
+      [isNative]="native"
+      [hideRecent]="false"
+      (emojiSelect)="handleClick($event)"
+      title="Pick your emoji…"
+      emoji="point_up">
+    </emoji-mart>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div id="chat-option">
+        <form (ngSubmit)="sendMess()" [formGroup]="formSendMess">
+          <div class="input-group form-inline" id="input-inline">
+            <input formControlName="content" class="form-control form-control-lg" type="text"
+                   placeholder="Type message ..." id="content-chat-cons">
+            <span class="input-group-btn ml-1 mt-1">
+              <i class="fa fa-paperclip option-icon"></i>
+            </span>
+            <span class="input-group-btn ml-1 mt-1">
+              <i class="fa fa-smile-o option-icon" id="consultant-icon"></i>
+            </span>
+
+            <button type="submit" class="input-group-btn ml-1 mt-1 option-icon" id="submit-consultant">
+              <i class="fa fa-paper-plane icon-option"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div style="text-align: center; color:#faa61a">
+    <h3></h3>
+    <h3>DANH SÁCH HÓA ĐƠN</h3>
+  </div>
+  <div class="row">
+    <table class="table table-striped mx-3 mt-4" style="background-color: #ffffff">
+      <thead>
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Ký hiệu hóa đơn</th>
+        <th scope="col">Mẫu số hóa đơn</th>
+        <th scope="col">Số hóa đơn</th>
+        <td><input type="checkbox" onClick="toggle(this)"/></td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let element of listInvoice | paginate: { itemsPerPage: 3, currentPage: p } ; let i= index">
+        <td>{{i + 1}}</td>
+        <td>{{element.invoiceSymbol}}</td>
+        <td>{{element.formCode}}</td>
+        <td>{{element.invoiceCode}}</td>
+        <td><input type="checkbox"></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="row">
+    <div class="col-lg-6  justify-content-start">
+      <button type="submit"  class="btn btn-warning btn-outline-dark">Tải hóa đơn</button>
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+      <nav aria-label="Page navigation example">
+        <pagination-controls  (pageChange)="p = $event"  previousLabel="Trước"
+                              nextLabel="Sau"
+                              responsive="true"></pagination-controls>
+      </nav>
+    </div>
+  </div>
+</div>
+
+

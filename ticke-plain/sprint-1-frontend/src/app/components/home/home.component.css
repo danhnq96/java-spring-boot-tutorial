@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+ul.list-inline{
+  margin:12px 0;
+}
+#info-bar {
+  font-family: 'Lato', sans-serif;
+  background: black;
+  font-size: 15px;
+}
+span {
+  font-family: 'Lato', sans-serif;
+  color: #FAA61A;
+}
+body {
+  font-family: 'Breda Bold', sans-serif;
+}
+nav {
+  font-weight: bold;
+  height: 100px;
+}
+.navbar-brand {
+  font-size: 30px;
+  margin-left: 80px;
+}
+.bg-white {
+  background: white;
+}
+button {
+  background-color: orange;
+  color: white;
+  width: 200px;
+  height: 40px;
+  border: none;
+}
+button:hover {
+  background-color: black;
+}
+#info-bar > div > ul > li > a {
+  color: white;
+}
+legend {
+  width: auto;
+}

@@ -1,0 +1,475 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="accordion mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['information']"><span><i class="fa fa-user"></i> Thông tin cá nhân</span></a>
+            </h2>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['listEmployee']"><span><i class="fa fa-users"></i>Thông tin nhân viên</span>
+              </a>
+            </h2>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['#']"><span><i class="fa fa-line-chart"></i>Quản lí khách hàng</span></a>
+            </h2>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['#']"><span><i class="fa fa-line-chart"></i>Quản lí bán vé</span></a>
+            </h2>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['#']"><span><i class="fa fa-line-chart"></i>Đặt vé</span></a>
+            </h2>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['#']"><span><i class="fa fa-line-chart"></i>Thống kê</span></a>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 ticket">
+          <div class="row justify-content-center"><h3>QUẢN LÝ BÁN VÉ</h3></div>
+          <div class="row justify-content-center inputTicket"><h5>NHẬP VÉ BÁN</h5></div>
+
+          <div class="row justify-content-center">
+            <form [formGroup]="formCreate" (keydown)="keyDownFunction($event)">
+              <fieldset class="scheduler-border">
+                <legend class="scheduler-border header">Thông tin chung</legend>
+                <div class="form-row">
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Mã đặt chỗ</p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput formControlName="booking" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Hãng bay</p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput value="{{flightInformationDeparture.airline}}" readonly>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Nơi đi</p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput value="{{flightInformationDeparture.departure}}" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Nơi đến</p>
+                  </div>
+                  <div class="col-sm-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput value="{{flightInformationDeparture.arrival}}" readonly>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Ngày đi</p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput value="{{flightInformationDeparture.departureDate}}" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Ngày về</p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput value="{{flightInformationArrival.departureDate}}" readonly>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Danh sách người đi<sup class="text-danger"> *</sup></p>
+                  </div>
+                  <div class="col-sm-9">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <textarea matInput formControlName="passengerName" type="text"></textarea>
+                    </mat-form-field>
+                    <p class="text-danger passengerList"
+                       *ngIf="formCreate.get('passengerName').hasError('required')
+                                                              && (formCreate.controls.passengerName?.dirty
+                                                              || formCreate.controls.passengerName?.touched)">
+                      Vui lòng nhập danh sách người đi!
+                    </p>
+                    <p class="text-danger passengerList"
+                       *ngIf="formCreate.get('passengerName').hasError('pattern')
+                                                              && (formCreate.controls.passengerName?.dirty
+                                                              || formCreate.controls.passengerName?.touched)">
+                      Dữ liệu không hợp lệ. Tên người đi viết không dấu, cách nhau bằng dấu ","
+                      và không có khoảng trắng thừa.
+                    </p>
+                    <p class="text-danger passengerList"
+                       *ngIf="formCreate.controls.passengerName?.invalid
+                                                  && !formCreate.get('passengerName').hasError('required')
+                                                  && !formCreate.get('passengerName').hasError('pattern')
+                                                  && (formCreate.controls.passengerName?.dirty
+                                                  || formCreate.controls.passengerName?.touched)">
+                      Danh sách người đi tối đa chỉ được 150 kí tự.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Người lớn<sup class="text-danger"> *</sup></p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput formControlName="adults" type="text">
+                    </mat-form-field>
+                    <p class="text-danger passengerAndPrice"
+                       *ngIf="formCreate.get('adults').hasError('required')
+                                  && (formCreate.controls.adults?.dirty
+                                  || formCreate.controls.adults?.touched)">
+                      Vui lòng nhập số lượng hành khách là người lớn!
+                    </p>
+                    <p class="text-danger passengerAndPrice"
+                       *ngIf="formCreate.get('adults').hasError('pattern')
+                                  && (formCreate.controls.adults?.dirty
+                                  || formCreate.controls.adults?.touched)">
+                      Vui lòng chỉ nhập số, không nhập chữ cái và kí tự đặc biệt!
+                    </p>
+                    <p class="text-danger passengerAndPrice"
+                       *ngIf="formCreate.get('adults').hasError('min')
+                                  && !formCreate.get('adults').hasError('pattern')
+                                  && (formCreate.controls.adults?.dirty
+                                  || formCreate.controls.adults?.touched)">
+                      Số lượng hành khách là người lớn phải lớn hơn hoặc bằng 1.
+                    </p>
+                    <p class="text-danger passengerAndPrice"
+                       *ngIf="formCreate.controls.adults?.invalid
+                                  && !formCreate.get('adults').hasError('required')
+                                  && !formCreate.get('adults').hasError('pattern')
+                                  && !formCreate.get('adults').hasError('min')
+                                  && (formCreate.controls.adults?.dirty
+                                  || formCreate.controls.adults?.touched)">
+                      Số lượng hành khách là người lớn tối đa có 2 số.
+                    </p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Trẻ em<sup class="text-danger"> *</sup></p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput formControlName="babies" type="text">
+                    </mat-form-field>
+                    <p class="text-danger passengerAndPrice"
+                       *ngIf="formCreate.get('babies').hasError('required')
+                                  && (formCreate.controls.babies?.dirty
+                                  || formCreate.controls.babies?.touched)">
+                      Vui lòng nhập số lượng hành khách là trẻ em!
+                    </p>
+                    <p class="text-danger passengerAndPrice"
+                       *ngIf="formCreate.get('babies').hasError('pattern')
+                                  && (formCreate.controls.babies?.dirty
+                                  || formCreate.controls.babies?.touched)">
+                      Vui lòng chỉ nhập số, không nhập chữ cái và kí tự đặc biệt!
+                    </p>
+                    <p class="text-danger passengerAndPrice"
+                       *ngIf="formCreate.controls.babies?.invalid
+                                  && !formCreate.get('babies').hasError('required')
+                                  && !formCreate.get('babies').hasError('pattern')
+                                  && (formCreate.controls.babies?.dirty
+                                  || formCreate.controls.babies?.touched)">
+                      Số lượng hành khách là trẻ em tối đa có 2 số.
+                    </p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="scheduler-border">
+                <legend class="scheduler-border header">Chuyến bay đi</legend>
+
+                <div class="form-row">
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Mã chuyến bay đi</p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput value="{{flightInformationDeparture.flightCode}}" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Khoang</p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput value="{{flightInformationDeparture.type}}" readonly>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Giờ đi</p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput value="{{flightInformationDeparture.departureTime}}" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Giờ đến</p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput value="{{flightInformationDeparture.arrivalTime}}" readonly>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Giá gốc</p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial price">
+                      <mat-label></mat-label>
+                      <input matInput value="{{flightInformationDeparture.price}} VNĐ" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Giá bán<sup class="text-danger"> *</sup></p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial price">
+                      <mat-label></mat-label>
+                      <input matInput type="text" formControlName="priceDeparture"
+                             (change)="priceSell(priceDeparture.value, priceArrival.value)" #priceDeparture>
+                    </mat-form-field>
+                    <p class="text-danger passengerAndPrice"
+                       *ngIf="formCreate.get('priceDeparture').hasError('required')
+                                  && (formCreate.controls.priceDeparture?.dirty
+                                  || formCreate.controls.priceDeparture?.touched)">
+                      Vui lòng nhập giá bán!
+                    </p>
+                    <p class="text-danger passengerAndPrice"
+                       *ngIf="formCreate.get('priceDeparture').hasError('pattern')
+                                  && (formCreate.controls.priceDeparture?.dirty
+                                  || formCreate.controls.priceDeparture?.touched)">
+                      Vui lòng chỉ nhập số, không nhập chữ cái và kí tự đặc biệt!
+                      Nếu là số thực thì chỉ chứa 1 dấu chấm và phía sau phải có phần thập phân.
+                    </p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div [hidden]="checkArrival === 'false'">
+                <fieldset class="scheduler-border">
+                  <legend class="scheduler-border header">Chuyến bay về</legend>
+                  <div class="form-row">
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <p class="properties">Mã chuyến bay về</p>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <mat-form-field class="matInputMaterial">
+                        <mat-label></mat-label>
+                        <input matInput value="{{flightInformationArrival.flightCode}}" readonly>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <p class="properties">Khoang</p>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <mat-form-field class="matInputMaterial">
+                        <mat-label></mat-label>
+                        <input matInput value="{{flightInformationArrival.type}}" readonly>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <p class="properties">Giờ đi</p>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <mat-form-field class="matInputMaterial">
+                        <mat-label></mat-label>
+                        <input matInput value="{{flightInformationArrival.departureTime}}" readonly>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <p class="properties">Giờ đến</p>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <mat-form-field class="matInputMaterial">
+                        <mat-label></mat-label>
+                        <input matInput value="{{flightInformationArrival.arrivalTime}}" readonly>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <p class="properties">Giá gốc</p>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <mat-form-field class="matInputMaterial">
+                        <mat-label></mat-label>
+                        <input matInput value="{{flightInformationArrival.price}} VNĐ" readonly>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <p class="properties">Giá bán<sup class="text-danger"> *</sup></p>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                      <mat-form-field class="matInputMaterial">
+                        <mat-label></mat-label>
+                        <input matInput type="text" formControlName="priceArrival"
+                               (change)="priceSell(priceDeparture.value, priceArrival.value)" #priceArrival>
+                      </mat-form-field>
+                      <p class="text-danger passengerAndPrice"
+                         *ngIf="formCreate.get('priceArrival').hasError('required')
+                                    && (formCreate.controls.priceArrival?.dirty
+                                    || formCreate.controls.priceArrival?.touched)">
+                        Vui lòng nhập giá bán!
+                      </p>
+                      <p class="text-danger passengerAndPrice"
+                         *ngIf="formCreate.get('priceArrival').hasError('pattern')
+                                  && (formCreate.controls.priceArrival?.dirty
+                                  || formCreate.controls.priceArrival?.touched)">
+                        Vui lòng chỉ nhập số, không nhập chữ cái và kí tự đặc biệt!
+                        Nếu là số thực thì chỉ chứa 1 dấu chấm và phía sau phải có phần thập phân.
+                      </p>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <fieldset class="scheduler-border">
+                <legend class="scheduler-border header">Thanh toán</legend>
+                <div class="form-row">
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Tổng giá gốc</p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field [hidden]="idFlightArrival != 0" class="matInputMaterial price">
+                      <mat-label></mat-label>
+                      <input matInput
+                             value="{{flightInformationDeparture.price}} VNĐ" readonly>
+                    </mat-form-field>
+                    <mat-form-field [hidden]="idFlightArrival == 0" class="matInputMaterial price">
+                      <mat-label></mat-label>
+                      <input matInput
+                             value="{{flightInformationDeparture.price + flightInformationArrival.price}} VNĐ" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Tổng giá bán<sup class="text-danger"> *</sup></p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <mat-form-field class="matInputMaterial price">
+                      <mat-label></mat-label>
+                      <input matInput readonly value="{{totalPriceSell}} VNĐ">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <p class="properties">Email khách hàng<sup class="text-danger"> *</sup></p>
+                  </div>
+                  <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">
+                    <mat-form-field class="matInputMaterial">
+                      <mat-label></mat-label>
+                      <input matInput formControlName="appUser">
+                    </mat-form-field>
+                    <p class="text-danger email"
+                       *ngIf="formCreate.get('appUser').hasError('required')
+                                    && (formCreate.controls.appUser?.dirty
+                                    || formCreate.controls.appUser?.touched)">
+                      Vui lòng nhập email thanh toán!
+                    </p>
+                    <p class="text-danger email"
+                       *ngIf="formCreate.get('appUser').hasError('emailUserExists')
+                                    && (formCreate.controls.appUser?.dirty
+                                    || formCreate.controls.appUser?.touched)">
+                      Vui lòng nhập email đã đăng ký trong hệ thống!
+                    </p>
+                    <p class="text-danger email"
+                       *ngIf="formCreate.get('appUser').hasError('pattern')
+                                    && (formCreate.controls.appUser?.dirty
+                                    || formCreate.controls.appUser?.touched)">
+                      Email sai định dạng. Email chuẩn có dạng abc@abc.abc
+                    </p>
+                    <p class="text-danger email"
+                       *ngIf="formCreate.controls.appUser?.invalid
+                                    && !formCreate.get('appUser').hasError('required')
+                                    && !formCreate.get('appUser').hasError('pattern')
+                                    && !formCreate.get('appUser').hasError('emailUserExists')
+                                    && (formCreate.controls.appUser?.dirty
+                                    || formCreate.controls.appUser?.touched)">
+                      Độ dài tối đa của email là 40 kí tự.
+                    </p>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                    <button class="testEmail">Kiểm tra Email</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class="row justify-content-center message">
+            <h5 [hidden]="message === 'Nothing'">{{message}}</h5>
+          </div>
+          <div class="row">
+            <button class="btn btn-secondary back" [routerLink]="'/list-ticket'">Quay Lại</button>
+            <button (click)="save()" class="btn btn-success save">Lưu</button>
+            <button (click)="saveAndPrint()" class="btn btn-primary print">In vé</button>
+          </div>
+        </div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+  </div>
+</div>

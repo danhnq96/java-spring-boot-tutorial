@@ -1,0 +1,14 @@
+<h2>Kết quả thống kê </h2>
+<div class="jsChartDiv">
+  <i>Từ ngày: {{data.data1.dateStart | date: "dd/MM/yyyy"}}</i><br>
+  <i> Đến ngày: {{data.data1.dateEnd | date: "dd/MM/yyyy"}}</i><br><br>
+  <canvas id="JsChart">
+  </canvas>
+  <i>Kết quả</i>
+</div>
+<br><br>
+<button class="btn-orange" (click)="printStatistic()">In báo cáo</button>
+
+
+
+

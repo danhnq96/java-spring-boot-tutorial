@@ -1,0 +1,158 @@
+.list-group-item {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  background-color: black;
+  color: orange;
+  opacity: .8;
+}
+.list-group-item:hover {
+  color: white;
+}
+.flex-content {
+  display: flex;
+  flex-wrap: wrap;
+  vertical-align: top;
+  overflow: auto;
+  font-family: 'Lato', sans-serif;
+  color: black;
+  font-size: 15px;;
+}
+.custom-form {
+  background-image: url("//");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 2px 40px 55px;
+}
+.custom-form h3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  font-weight: bolder;
+  text-transform: initial;
+  margin-bottom: 10px;
+}
+.form-control {
+  width: 400px;
+}
+.custom-form-fields {
+  flex: auto;
+}
+img {
+  border-radius: 0%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  width: 250px;
+  height: 100%;
+}
+.btn-warning {
+  color: white;
+  height: 40px;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 130px;
+  border-radius: 0;
+  /*display: block;*/
+}
+.btn-orange:hover {
+  background: black;
+}
+.btn-secondary {
+  margin-left: 520px;
+}
+
+   /*side menu*/
+.accordion .card {
+  color: #424e5d;
+  border: 1px solid #dddddd;
+}
+
+.accordion .card a {
+  color: #424e5d;
+  text-decoration: none;
+}
+
+.accordion .card-header {
+  background: linear-gradient(#fff, #f1f1f1);
+  padding: .75rem 1rem;
+  position: relative;
+}
+
+.accordion .card-header:hover {
+  background: linear-gradient(#f1f1f1, #e8e8e8);
+}
+
+.accordion .card-header h2 {
+  font-size: 1rem;
+}
+
+.accordion .fa {
+  width: 20px;
+  margin-right: .25rem;
+}
+
+.accordion .card-header a {
+  float: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+.accordion .toggle {
+  font-size: .8rem;
+  line-height: .8rem;
+  cursor: pointer;
+  opacity: 0.7;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  width: 14px;
+  margin: 0;
+}
+
+.accordion .toggle:hover {
+  opacity: 1;
+}
+
+.accordion .card-body {
+  padding: 0;
+}
+
+.accordion .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 1px 0;
+  padding-left: 30px;
+  background: #d6dbe0;
+  font-weight: 500;
+}
+
+.accordion .list-group-item:hover {
+  background: #007bff;
+}
+
+.accordion .list-group-item:hover a {
+  color: #fff !important;
+}
+
+.accordion .list-group-item:hover .badge {
+  background: #fff;
+  color: #007bff;
+}
+
+.accordion .list-group-item a {
+  color: #61656b;
+  display: block;
+}
+
+.accordion .list-group-item .badge {
+  float: right;
+  min-width: 36px;
+}
+
+.accordion .rotate {
+  transform: rotate(180deg);
+}
+.container-fluid{
+  background-image: url("https://images.vexels.com/media/users/3/144709/raw/95b04989b71b9375d9d04c3ee50cfc05-abstract-white-background-or-backdrop.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}

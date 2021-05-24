@@ -1,0 +1,23 @@
+{
+  "version": 3,
+  "sources": [
+    "common.js"
+  ],
+  "names": [
+    "$",
+    "document",
+    "ready",
+    "click",
+    "$_datahref",
+    "data",
+    "window",
+    "location",
+    "jQuery"
+  ],
+  "mappings": ";;AAAA,CAAC,UAASA,CAAT,EAAY;AACXA,IAAE,YAAW;AACXA,MAAEC,QAAF,EAAYC,KAAZ,CAAkB,UAASF,CAAT,EAAY;AAC5BA,QAAE,kBAAF,EAAsBG,KAAtB,CAA4B,YAAW;AACrC,YAAIC,aAAaJ,EAAE,IAAF,EAAQK,IAAR,CAAa,MAAb,CAAjB;AACA,YAAI,OAAOD,UAAP,KAAsB,WAA1B,EAAuC;AACrCE,iBAAOL,QAAP,CAAgBM,QAAhB,GAA2BP,EAAE,IAAF,EAAQK,IAAR,CAAa,MAAb,CAA3B;AACD;AACF,OALD;AAMD,KAPD;AAQD,GATD;AAUD,CAXD,EAWGG,MAXH",
+  "file": "common.js",
+  "sourcesContent": [
+    "(function($) {\r\n  $(function() {\r\n    $(document).ready(function($) {\r\n      $(\"tbody .table-row\").click(function() {\r\n        var $_datahref = $(this).data(\"href\");\r\n        if (typeof $_datahref !== \"undefined\") {\r\n          window.document.location = $(this).data(\"href\");\r\n        }\r\n      });\r\n    });\r\n  });\r\n})(jQuery);\r\n"
+  ],
+  "sourceRoot": "../src"
+}

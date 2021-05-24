@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>[[#{config.title}]]</title>
+    </head>
+    <body>
+        <H2>Menu content.</H2>
+        <div class="card-body">
+            <th:block th:if="${list != null && !list.empty}">
+                <th:block th:each="datas : ${list}">
+                    <div class="first">
+                        <a href="#javascript:;" th:onclick="|javascript:selectMenu('${datas.linkScreen}')|">
+                            [[${datas.menuName}]]
+                        </a>
+                    </div>
+                </th:block>
+            </th:block>
+        </div>
+
+        <script th:inline="text">
+            function selectMenu(link) {
+                parent.document.getElementById('floor').src = link;
+            }
+        </script>
+    </body>
+</html>

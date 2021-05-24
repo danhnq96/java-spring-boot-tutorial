@@ -1,0 +1,8 @@
+GET http://localhost:8080/statistic/total-car-of-customer
+Accept: application/json
+
+###
+GET http://localhost:8080/car/find-all-car-by-customerId/1
+Accept: application/json
+
+###

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>[[#{test.content}]]</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:replace="layouts/common-style"/>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="list">
+    <table id="testTableId">
+        <thead>
+        <tr class="sort">
+            <th>test header</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:if="${listdata != null}">
+            <th:block th:each="datas, state : ${listdata}">
+                <tr id="gyo" th:classappend="${state.odd} ? 'odd' : 'evn'"
+                    th:onclick="'javascript:execSubmit()' + ${state.index} + ')'">
+                    <td width=60><span id="test">[[${datas.getValue('testData')}]]</span></td>
+                </tr>
+            </th:block>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+<form th:attr="action=@{./TestMngModify}" method="post" target="floor" name="TestMngModel">
+    <input type="hidden" name="testCode">
+    <input type="hidden" name="action">
+    <input type="hidden" name="lastConditionKey">
+</form>
+</body>
+</html>

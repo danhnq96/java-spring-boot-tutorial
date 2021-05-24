@@ -1,0 +1,68 @@
+<div class="container-fluid">
+  <div class="row justify-content-between">
+    <div class="row">
+      <h2 style="margin-left: 30px">Danh sách khuyến mãi</h2>
+      <button type="button" class="btn btn-success" style="height: 40px; margin-left: 20px" [routerLink]="['/add-new']">Thêm mới</button>
+      <div class="d-flex" style="margin-left: 1050px; margin-top: -40px">
+        <input class="form-control mr-2" type="text" width="400px;" placeholder="tìm kiếm" [(ngModel)]="term">
+        <button type="button" class="btn btn-success" style="height: 40px; width: 140px">Tìm kiếm</button>
+      </div>
+    </div>
+    <thead class="table-light" style="font-size: 25px; font-weight: bold; margin-top: 20px">
+    <tr>
+      <a style="padding-left: 30px; font-family: 'Book Antiqua';color: #faa61a" [routerLink]="['/mon']">Thứ hai</a>
+      <a style="padding-left: 80px; font-family: 'Book Antiqua';color: #faa61a" [routerLink]="['/tues']">Thứ ba</a>
+      <a style="padding-left: 100px; font-family: 'Book Antiqua';color: #faa61a" [routerLink]="['/weds']">Thứ tư</a>
+      <a style="padding-left: 100px; font-family: 'Book Antiqua';color: #faa61a" [routerLink]="['/thurs']">Thứ năm</a>
+      <a style="padding-left: 90px;font-family: 'Book Antiqua';color:  #faa61a" [routerLink]="['/fri']">Thứ sáu</a>
+      <a style="padding-left: 130px;font-family: 'Book Antiqua';color:  #faa61a" [routerLink]="['/sat']">Thứ bảy</a>
+      <a style="padding-left: 180px;font-family: 'Book Antiqua';color:  #faa61a; width: 350px"
+         [routerLink]="['/sun']">Chủ nhật</a>
+      <a style="padding-left: 200px;font-family: 'Book Antiqua';color:  #faa61a; width: 50px"
+         [routerLink]="['/sun']"></a>
+    </tr>
+    </thead>
+    <table class="table" style="font-size: 20px;">
+      <thead class="table-dark">
+      <tr>
+        <!--        <th scope="col">Chuyến bay</th>-->
+        <th scope="col">Hãng hàng không</th>
+        <th scope="col">Số hiệu Chuyến bay</th>
+        <th scope="col">Ngày Khởi hành</th>
+        <!--        <th scope="col">Ga Khởi hành</th>-->
+        <th scope="col">Thời gian Khởi hành</th>
+        <!--      <th scope="col">Ngày đến</th>-->
+        <!--        <th scope="col">Ga đến</th>-->
+        <th scope="col">Thời gian đến</th>
+<!--        <th scope="col">Thông tin chi tiết</th>-->
+        <th scope="col">Giá</th>
+        <th scope="col">Các thao tác</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let promotion of listPromotion|filter:term|paginate: { itemsPerPage: 2, currentPage: p}">
+      <tr>
+        <!--        <td>{{promotion.flight}}</td>-->
+        <td>{{promotion.airline}}</td>
+        <td>{{promotion.flightNumber}}</td>
+        <td>{{promotion.departureDate}}</td>
+        <!--        <td>{{promotion.departurePlace}}</td>-->
+        <td>{{promotion.departureTime | date:'HH:mm'}}</td>
+        <!--      <td>{{promotion.arrivalDate}}</td>-->
+        <!--        <td>{{promotion.arrivalPlace}}</td>-->
+        <td>{{promotion.arrivalTime | date:'HH:mm'}}</td>
+<!--        <td>{{promotion.information}}</td>-->
+        <td>{{promotion.price}}</td>
+        <td style="width: 15%;">
+          <button type="button" class="btn btn-warning" style="margin-right: 10px" [routerLink]="['/edit/'+promotion.id]">Edit</button>
+          <button type="button" class="btn btn-dark" (click)=confirmDelete(promotion.id)>Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
+
+
+

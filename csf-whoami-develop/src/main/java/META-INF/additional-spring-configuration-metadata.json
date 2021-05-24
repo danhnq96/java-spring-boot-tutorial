@@ -1,0 +1,129 @@
+{
+  "properties": [
+    {
+      "name": "server.tmp-image",
+      "type": "java.lang.String",
+      "description": "A description for 'server.tmp-image'"
+    },
+    {
+      "name": "spring.storage",
+      "type": "java.lang.String",
+      "description": "A description for 'spring.storage'"
+    },
+    {
+      "name": "jwt.secret",
+      "type": "java.lang.String",
+      "description": "A description for 'jwt.secret'"
+    },
+    {
+      "name": "databasekey",
+      "type": "java.lang.String",
+      "description": "A description for 'databasekey'"
+    },
+    {
+      "name": "security.jwt.token.secret-key",
+      "type": "java.lang.String",
+      "description": "A description for 'security.jwt.token.secret-key'"
+    },
+    {
+      "name": "security.jwt.token.expire-length",
+      "type": "java.lang.String",
+      "description": "A description for 'security.jwt.token.expire-length'"
+    },
+    {
+      "name": "server.tomcat.servlet.session.timeout",
+      "type": "java.lang.String",
+      "description": "A description for 'server.tomcat.servlet.session.timeout'"
+    },
+    {
+      "name": "server.tomcat.use-forward-headers",
+      "type": "java.lang.String",
+      "description": "A description for 'server.tomcat.use-forward-headers'"
+    },
+    {
+      "name": "server.tomcat.servlet.cookie.max-age",
+      "type": "java.lang.String",
+      "description": "A description for 'server.tomcat.servlet.cookie.max-age'"
+    },
+    {
+      "name": "spring.image.upload-dir",
+      "type": "java.lang.String",
+      "description": "A description for 'spring.image.upload-dir'"
+    },
+    {
+      "name": "spring.image.display-path",
+      "type": "java.lang.String",
+      "description": "A description for 'spring.image.display-path'"
+    },
+    {
+      "name": "server.local-url",
+      "type": "java.lang.String",
+      "description": "A description for 'server.local-url'"
+    },
+    {
+      "name": "swagger.path.mapping",
+      "type": "java.lang.String",
+      "description": "A description for 'swagger.path.mapping'"
+    },
+    {
+      "name": "swagger.path.host",
+      "type": "java.lang.String",
+      "description": "A description for 'swagger.path.host'"
+    },
+    {
+      "name": "swagger.path.base",
+      "type": "java.lang.String",
+      "description": "A description for 'swagger.path.base'"
+    },
+    {
+      "name": "google.mail-services.service_account_email",
+      "type": "java.lang.String",
+      "description": "A description for 'google.mail-services.service_account_email'"
+    },
+    {
+      "name": "google.drive-services.address",
+      "type": "java.lang.String",
+      "description": "A description for 'google.drive-services.address'"
+    },
+    {
+      "name": "google.drive-services.role",
+      "type": "java.lang.String",
+      "description": "A description for 'google.drive-services.role'"
+    },
+    {
+      "name": "google.drive-services.type",
+      "type": "java.lang.String",
+      "description": "A description for 'google.drive-services.type'"
+    },
+    {
+      "name": "google.mail-services.service_account_key",
+      "type": "java.lang.String",
+      "description": "A description for 'google.mail-services.service_account_key'"
+    },
+    {
+      "name": "google.mail-services.application_name",
+      "type": "java.lang.String",
+      "description": "A description for 'google.mail-services.application_name'"
+    },
+    {
+      "name": "google.mail-services.folder_id",
+      "type": "java.lang.String",
+      "description": "A description for 'google.mail-services.folder_id'"
+    },
+    {
+      "name": "info.app.name",
+      "type": "java.lang.String",
+      "description": "A description for 'info.app.name'"
+    },
+    {
+      "name": "info.app.description",
+      "type": "java.lang.String",
+      "description": "A description for 'info.app.description'"
+    },
+    {
+      "name": "info.app.version",
+      "type": "java.lang.String",
+      "description": "A description for 'info.app.version'"
+    }
+  ]
+}

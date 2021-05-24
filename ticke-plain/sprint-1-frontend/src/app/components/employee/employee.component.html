@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="accordion mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['information']"><span><i class="fa fa-user"></i> Thông tin cá nhân</span></a>
+            </h2>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['#']"><span><i class="fa fa-users"></i>Thông tin nhân viên</span>
+              </a>
+            </h2>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['#']"><span><i class="fa fa-line-chart"></i>Quản lí khách hàng</span></a>
+            </h2>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['#']"><span><i class="fa fa-line-chart"></i>Quản lí bán vé</span></a>
+            </h2>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['#']"><span><i class="fa fa-line-chart"></i>Đặt vé</span></a>
+            </h2>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <a [routerLink]="['#']"><span><i class="fa fa-line-chart"></i>Thống kê</span></a>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9 m-0">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

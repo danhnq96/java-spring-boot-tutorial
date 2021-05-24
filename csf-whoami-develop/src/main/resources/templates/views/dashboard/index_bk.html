@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:replace="layouts/metadata"/>
+    <title>Simple Responsive Admin</title>
+    <link th:replace="layouts/common-style"/>
+</head>
+
+<body>
+
+<!-- BEGIN Menu Top -->
+<nav th:replace="layouts/menu-top"></nav>
+<!-- END Menu Top -->
+
+<br><br><br><br>
+
+<!-- BEGIN Menu Left -->
+<nav th:replace="layouts/menu-left"></nav>
+<!-- END Menu Left -->
+
+<!-- /. NAV SIDE  -->
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 style="text-align: center">ADMIN DASHBOARD
+
+                </h2>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <hr/>
+        <div class="row">
+            <div class="col-lg-12 ">
+                <div class="alert alert-info">
+                    <strong>Welcome <span id="userName"> </span> ! </strong> You Have No pending Task For Today.
+                </div>
+
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <div class="row text-center pad-top">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="data.html">
+                        <i class="fa fa-bar-chart-o fa-5x"></i>
+                        <h4>Check Data</h4>
+                    </a>
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="blank.html">
+                        <i class="fa fa-envelope-o fa-5x"></i>
+                        <h4>Mail Box</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="/admin/tours/new">
+                        <i class="fa fa-edit fa-5x"></i>
+                        <h4>New Tour</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="/admin/users">
+                        <i class="fa fa-users fa-5x"></i>
+                        <h4>See Users</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="blank.html">
+                        <i class="fa fa-key fa-5x"></i>
+                        <h4>Admin </h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="/admin/new-article">
+                        <i class="fa fa-edit fa-5x"></i>
+                        <h4>New Article</h4>
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <div class="row text-center pad-top">
+
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="/admin/tours">
+                        <i class="fa fa-table fa-5x"></i>
+                        <h4>All Tours</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="blank.html">
+                        <i class="fa fa-gear fa-5x"></i>
+                        <h4>Settings</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="/admin/article">
+                        <i class="fa fa-wechat fa-5x"></i>
+                        <h4>All Article</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="blank.html">
+                        <i class="fa fa-bell-o fa-5x"></i>
+                        <h4>Notifications </h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="blank.html">
+                        <i class="fa fa-rocket fa-5x"></i>
+                        <h4>Launch</h4>
+                    </a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="registration.html">
+                        <i class="fa fa-user fa-5x"></i>
+                        <h4>Register </h4>
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /. PAGE INNER  -->
+</div>
+<!-- /. PAGE WRAPPER  -->
+</div>
+
+<div th:replace="layouts/footer"></div>
+<link th:replace="layouts/common-js"/>
+
+</body>
+</html>

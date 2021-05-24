@@ -1,0 +1,58 @@
+<div class="container-fluid ml-lg-5 mr-lg-5 px-lg-0 mx-lg-0 bg-white">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-12">
+            <h2><b>Lịch sử thanh toán</b></h2>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+
+          <th>Nơi đi</th>
+          <th>Nơi đến</th>
+          <th>Ngày đặt</th>
+          <th>Ngày bay</th>
+          <th>Giá (VND)</th>
+          <th>Tình trạng</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="listBooking!=null">
+        <tr *ngFor="let index = index;let booking of listBooking.content | paginate: { itemsPerPage: pageSize, currentPage: pageNumber }">
+          <td>{{booking.flightInformation.departure}}</td>
+          <!--					<td *ngIf="pageNumber==1">{{ticket.ticketCode}} {{index}}</td>-->
+          <!--					<td *ngIf="pageNumber>1">{{ticket.ticketCode}} {{(pageNumber-1)*pageSize+index}}</td>-->
+          <td>{{booking.flightInformation.arrival}}</td>
+          <td>{{booking.booking.bookingDate | date: "dd/MM/yyyy"}}</td>
+          <!--					<td>{{ticket.booking.bookingDate}}</td>-->
+          <td>{{booking.flightInformation.departureDate | date: 'dd/MM/yyyy'}}</td>
+          <!--					<td>{{ticket.flightInformation.departureDate}}</td>-->
+          <td class="text-right" *ngIf="booking.priceDeparture !== null">{{booking.priceDeparture | number: 0}}</td>
+          <td class="text-right" *ngIf="booking.priceArrival !== null">{{booking.priceArrival | number: 0}}</td>
+          <td>{{booking.statusPayment.name}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="row justify-content-end pr-5">
+        <nav aria-label="Page navigation example" *ngIf="listBooking.totalPages > 1">
+          <ul class="pagination">
+            <li class="page-item" *ngIf="listBooking.pageable?.pageNumber !== 0"
+                (click)="listHistory(listBooking.pageable?.pageNumber - 1)"><a class="page-link" href="#">Trước</a></li>
+            <li class="page-item" [ngClass]="page === listBooking.pageable?.pageNumber ? 'active' : ''"
+                *ngFor="let page of createFor(listBooking.totalPages)"
+                (click)="listHistory(page)"><a class="page-link" href="#">{{page + 1}}</a></li>
+            <li class="page-item"
+                *ngIf="listBooking.pageable?.pageNumber !== listBooking.totalPages -1"
+                (click)="listHistory(listBooking.pageable?.pageNumber + 1)">
+              <a class="page-link" href="#">Tiếp</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+

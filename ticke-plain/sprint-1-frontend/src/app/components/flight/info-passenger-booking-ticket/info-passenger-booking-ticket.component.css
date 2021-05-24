@@ -1,0 +1,14 @@
+.mat-button {
+  background-color: orange;
+  border-color: orange;
+  color: white;
+}
+
+.exit {
+  background-color: #007bff;
+  color: white;
+}
+
+table {
+  width: 100%;
+}

@@ -1,0 +1,75 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 ticket">
+      <div class="row">
+        <div class="col-sm-7">
+          <h3>Mã đặt chỗ : {{bookingCode}}</h3><h5></h5>
+          <p>Nơi xuất vé : C0620G1</p>
+        </div>
+        <div class="col-sm-5 logo">
+          <img src="../../../assets/C06Airline.PNG"/>
+          <p>295 Nguyễn Tất Thành, Đà Nẵng</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h5>Tên hành khách</h5>
+          <hr>
+          <div *ngFor="let element of passengerArray">
+            <p class="passengerName">{{element}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <h5 class="flightInformation">Chuyến bay đi</h5>
+        </div>
+        <div class="col-sm-6">
+          <h5 class="flightInformation">Chuyến bay về</h5>
+        </div>
+      </div>
+      <hr class="hrMiddle">
+      <div class="row">
+        <div class="col-sm-6">
+          <p>Hãng hàng không: <span>{{flightInformationDeparture.airline}}</span></p>
+          <p>Mã chuyến bay: <span>{{flightInformationDeparture.flightCode}}</span></p>
+          <p>Từ: <span>{{flightInformationDeparture.departure}}</span></p>
+          <p>Đến: <span>{{flightInformationDeparture.arrival}}</span></p>
+          <p>Ngày đi: <span>{{flightInformationDeparture.departureDate | date : "dd/MM/yyyy"}}</span></p>
+          <p>Khởi hành: <span>{{flightInformationDeparture.departureTime}}</span></p>
+          <p>Dự kiến đến nơi: <span>{{flightInformationDeparture.arrivalTime}}</span></p>
+        </div>
+        <div class="col-sm-6">
+          <p [hidden]="check === 'true'">Không đăng ký vé khứ hồi</p>
+          <div [hidden]="check === 'false'">
+            <p>Hãng hàng không: <span *ngIf="check === 'true'">{{flightInformationArrival.airline}}</span>
+              <span *ngIf="check === 'false'">Không có</span></p>
+            <p>Mã chuyến bay: <span *ngIf="check === 'true'">{{flightInformationArrival.flightCode}}</span>
+              <span *ngIf="check === 'false'">Không có</span></p>
+            <p>Từ: <span *ngIf="check === 'true'">{{flightInformationArrival.departure}}</span>
+              <span *ngIf="check === 'false'">Không có</span></p>
+            <p>Đến: <span *ngIf="check === 'true'">{{flightInformationArrival.arrival}}</span>
+              <span *ngIf="check === 'false'">Không có</span></p>
+            <p>Ngày đi: <span *ngIf="check === 'true'">
+            {{flightInformationArrival.departureDate | date : "dd/MM/yyyy"}}</span>
+              <span *ngIf="check === 'false'">Không có</span></p>
+            <p>Khởi hành: <span *ngIf="check === 'true'">{{flightInformationArrival.departureTime}}</span>
+              <span *ngIf="check === 'false'">Không có</span></p>
+            <p>Dự kiến đến nơi: <span *ngIf="check === 'true'">{{flightInformationArrival.arrivalTime}}</span>
+              <span *ngIf="check === 'false'">Không có</span></p>
+          </div>
+        </div>
+      </div>
+      <hr class="hrBottom">
+      <div class="row">
+        <div class="col-sm-12">
+          <p>Lưu ý: Quý khách vui lòng đến sân bay trước khi khởi hành 2h để làm thủ tục theo quy định. Mọi thắc mắc
+            xin liên hệ 0905456789. Chân thành cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi!
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+</div>

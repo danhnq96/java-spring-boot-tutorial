@@ -1,0 +1,207 @@
+<!--<div id="animation-border" class="align-self-center"></div>-->
+<div class="openChatBtn" align="center">
+  <div><img id="icon-message" class="align-self-center"
+                                     src="https://scontent.fsgn2-1.fna.fbcdn.net/v/t1.0-9/131426681_844750992982252_5573492330164978289_n.jpg?_nc_cat=105&ccb=2&_nc_sid=730e14&_nc_ohc=kcCsG2i189EAX8OmaTn&_nc_ht=scontent.fsgn2-1.fna&oh=5c32128ce6a38e2ea5daad12680c2dfa&oe=5FFF5DAD">
+  </div>
+</div>
+<div class="requiredChat container-fluid">
+  <div class="row">
+    <div class="col-lg-12 header-openChat">
+      <button class="close" style="color: white">X</button>
+      <br>
+      <span style="color: white; padding-top: 20px">Hãy nhập thông tin để được sự tư vấn</span>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg-12 mb-1 content-box">
+      <div align="center">
+        <form focusInvalidInput (ngSubmit)="sendRequest()" [formGroup]="formSendRequest" id="form-begin-chat">
+          <input id="content-name" class="form-control mt-3" type="text" placeholder="*Tên" formControlName="name"
+                 required>
+          <small class="input-request"
+                 *ngIf="formSendRequest.controls.name?.touched && formSendRequest.controls.name?.errors?.required">
+            Hãy nhập tên của bạn vào
+          </small>
+          <small class="input-request"
+                 *ngIf="formSendRequest.controls.name?.touched && formSendRequest.controls.name?.errors?.maxlength">
+            Tên không được lớn hơn 25 kí tự
+          </small>
+          <input id="content-email" class="form-control mt-3" type="email" placeholder="*Email" formControlName="email"
+                 required>
+          <small class="input-request"
+                 *ngIf="formSendRequest.controls.email?.touched && formSendRequest.controls.email?.errors?.required">
+            Hãy nhập email của bạn vào
+          </small>
+          <small class="input-request"
+                 *ngIf="formSendRequest.controls.email?.touched && formSendRequest.controls.email?.errors?.email">
+            Hãy nhập đúng định dạng email
+          </small>
+          <input id="content-phone" class="form-control mt-3" type="text" placeholder="*Số điện thoại"
+                 formControlName="phone" required>
+          <small class="input-request"
+                 *ngIf="formSendRequest.controls.phone?.touched && formSendRequest.controls.phone?.errors?.required">
+            Hãy nhập số điện thoại của bạn vào
+          </small>
+          <small class="input-request"
+                 *ngIf="formSendRequest.controls.phone?.touched && formSendRequest.controls.phone?.errors?.pattern">
+            Số điện thoại phải có từ 10 số đến 12 số
+          </small><br>
+          <button class=" form-control begin-chat">Bắt đầu trò chuyện</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="openChat container-fluid">
+  <div class="row">
+    <div class="col-lg-12 header-openChat">
+      <button class="close" style="color: white">X</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 content-box">
+      <div class="row">
+        <div class="col-lg-12 chat-body" id="chat-body">
+          <div *ngFor="let mess of listMess">
+            <div *ngIf="(mess.isUser == 'false')">
+              <div *ngIf="mess.content.length > 15">
+                <div class="row mt-1 mb-1" style=" z-index: 1">
+                  <div class="col-lg-6 mess-consultant" align="left">
+                <span><span
+                  style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                    <div class="col-lg-6"></div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="mess.content.length > 11 && mess.content.length <= 15">
+                <div class="row mt-1 mb-1" style="z-index: 1">
+                 
+                  <div class="col-lg-5 mess-consultant" align="right"><span><span
+                    style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                  </div>
+                  <div class="col-lg-7"></div>
+                </div>
+              </div>
+              <div *ngIf="mess.content.length >7 && mess.content.length <= 11">
+                <div class="row mt-1 mb-1" style="z-index: 1">
+                  
+                  <div class="col-lg-4 mess-consultant" align="right"><span><span
+                    style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                  </div>
+                  <div class="col-lg-8"></div>
+                </div>
+              </div>
+              <div *ngIf="mess.content.length > 4 && mess.content.length <= 7">
+                <div class="row mt-1 mb-1" style="z-index: 1">
+                  
+                  <div class="col-lg-3 mess-consultant" align="right"><span><span
+                    style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                  </div>
+                  <div class="col-lg-9"></div>
+                </div>
+              </div>
+              <div *ngIf="mess.content.length > 1 && mess.content.length <= 4">
+                <div class="row mt-1 mb-1" style="z-index: 1">
+                
+                  <div class="col-lg-2 mess-consultant" align="right"><span><span
+                    style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                  </div>
+                  <div class="col-lg-10"></div>
+                </div>
+              </div>
+              <div *ngIf="mess.content.length == 1">
+                <div class="row mt-1 mb-1" style=" z-index: 1">
+                  <div class="col-lg-1 mess-consultant" align="left">
+                <span><span
+                  style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                    <div class="col-lg-11"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="(mess.isUser == 'true')">
+              <div *ngIf="mess.content.length > 15">
+                <div class="row mt-1 mb-1" style="z-index: 1">
+                  <div class="col-lg-6"></div>
+                  <div class="col-lg-6 mess-from-user" align="right"><span><span
+                    style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="mess.content.length > 11 && mess.content.length <= 15">
+                <div class="row mt-1 mb-1" style="z-index: 1">
+                  <div class="col-lg-7"></div>
+                  <div class="col-lg-5 mess-from-user" align="right"><span><span
+                    style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="mess.content.length > 7 && mess.content.length <= 11">
+                <div class="row mt-1 mb-1" style="z-index: 1">
+                  <div class="col-lg-8"></div>
+                  <div class="col-lg-4 mess-from-user" align="right"><span><span
+                    style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="mess.content.length > 4 && mess.content.length <= 7">
+                <div class="row mt-1 mb-1" style="z-index: 1">
+                  <div class="col-lg-9"></div>
+                  <div class="col-lg-3 mess-from-user" align="right"><span><span
+                    style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="mess.content.length > 1 && mess.content.length <= 4">
+                <div class="row mt-1 mb-1" style="z-index: 1">
+                  <div class="col-lg-10"></div>
+                  <div class="col-lg-2 mess-from-user" align="right"><span><span
+                    style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="mess.content.length == 1">
+                <div class="row mt-1 mb-1" style="z-index: 1">
+                  <div class="col-lg-11"></div>
+                  <div class="col-lg-1 mess-from-user" align="right"><span><span
+                    style="margin-left: 2px"></span>{{mess.content}}<span style="margin-right: 2px"></span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="icon-box">
+        <emoji-mart
+          [set]="set"
+          [isNative]="native"
+          [hideRecent]="false"
+          (emojiSelect)="handleClick($event)"
+          title="Pick your emoji…"
+          emoji="point_up">
+        </emoji-mart>
+      </div>
+      <div class="row row-option">
+        <input type="hidden" id="is-request"/>
+        <form (ngSubmit)="sendMessage()" [formGroup]="formSend" class="form-inline">
+          <div class="input-group form-inline" id="input-inline">
+            <input id="content-mess" formControlName="content" class="form-control" type="text"
+                   placeholder="Type message ...">
+            <span class="input-group-btn ml-1 mt-2">
+              <i class="fa fa-paperclip icon-option " id="icon-upload-file"></i>
+            </span>
+            <span class="input-group-btn ml-1 mt-2">
+              <i class="fa fa-smile-o icon-option" id="icon"></i>
+            </span>
+
+            <button type="submit" class="input-group-btn ml-1 mt-1" id="btn-submit-mess">
+              <i class="fa fa-paper-plane icon-option"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

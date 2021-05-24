@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mã khyến mãi</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+        crossorigin="anonymous"/>
+  <style>
+    .buyNow:hover {
+      color: orange;
+    }
+
+    a .span1:hover {
+      color: #53c6ff;
+    }
+
+    .link1:hover {
+      color: #53c6ff;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container-fluid ">
+  <div class="row">
+    <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 d-flex justify-content-center">
+      <div class=" box d-flex justify-content-center" style="border: 1px ">
+        <div class="row d-flex justify-content-center">
+          <div class="ex3 col-sm-8 col-xs-8 col-md-8 col-lg-8 " style="overflow: auto;height: 600px">
+            <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 p-0 m-0 d-flex justify-content-center">
+              <div class="row box  "
+                   style="border: 1px ; font-size: 20px;">
+
+                <h2 style="color: red;"><b>Giá ưu đãi</b></h2>
+                <br>
+                <table class="table mt-3 table-striped" style="font-size: 16px">
+                  <thead>
+                  <tr class=" btn-warning">
+                    <th>Hành Trình</th>
+                    <th>Giá từ (vnđ)</th>
+                    <th>Thời gian bay</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng *ngFor="let promotion of promotionCodeResult  | paginate: { itemsPerPage: 3, currentPage: p }">
+                    <td>
+                      <p class="ml-0">{{promotion.airline}}, {{promotion.flightNumber}}</p>
+                      <p class="ml-0">{{promotion.departurePlace}}-{{promotion.arrivalPlace}}</p>
+                    </td>
+                    <td class="d-flex justify-content-end">
+                      <h5 style="color: orange">{{promotion.price}}</h5>
+                    </td>
+                    <td>
+                      <p>{{promotion.departureTime }}, {{promotion.departureDate | date:'MM-dd-yyyy'}}</p>
+                      <p>{{promotion.arrivalTime }}, {{promotion.arrivalDate | date:'MM-dd-yyyy'}} </p>
+                    </td>
+                    <td>
+                      <a href="#" class="buyNow">
+                        <h5 style="color: orange">Mua Ngay</h5>
+
+                      </a>
+                    </td>
+
+
+                  </tr>
+                  </tbody>
+                </table>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                <p style="font-size: 10px"><span style="color: red">*</span> Chưa bao gồm: Thuế + phí, hành lý ký gửi,
+                  các yêu cầu đặc
+                  biệt trong chuyến bay và có áp dụng các điều kiện.</p>
+
+              </div>
+
+            </div>
+            <br>
+
+          </div>
+
+          <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 ">
+            <div class="row">
+
+              <div class="col-12 d-flex justify-content-center">
+                <div class="row box "
+                     style="border: 1px ;margin: 20px; font-size: 20px">
+
+                  <div style="margin: 20px; font-size: 20px">
+
+                    <h3>Tổng đài đặt vé và hỗ trợ khách hàng</h3>
+                    <br>
+                    <h2>Gọi ngay: <span style="color: orange;">1900 1886</span></h2>
+                    <br>
+                    <form [formGroup]="formSendEmail" (ngSubmit)="sendEmail()">
+                      <H4>Đăng ký email để nhận thông tin khuyến mãi tại đây.</H4>
+                      <input placeholder="Email của bạn: " class="mr-3 rounded " formControlName="emailPassgenger">
+                      <p *ngIf="formSendEmail.controls.emailPassgenger.errors?.required &&
+              formSendEmail.controls.emailPassgenger.touched"
+                         class="text-danger">
+                        Vui lòng nhập email
+                      </p>
+                      <p *ngIf="formSendEmail.controls.emailPassgenger.errors?.email &&
+              formSendEmail.controls.emailPassgenger.touched"
+                         class="text-danger">
+                        Vui lòng nhập đúng định dạng email
+                      </p>
+                      <button type="submit" class="btn btn-success mt-2" (click)="sendEmail()">
+                        Đăng ký
+                      </button>
+                    </form>
+                    <div *ngIf="messageSuccess == ''; else blockMessage"></div>
+                    <ng-template #blockMessage>
+                      <div class="alert alert-danger mt-2 " role="alert">{{messageSuccess}}</div>
+                    </ng-template>
+
+                    <br>
+                    <div>
+                      <br>
+                      <h5> C06Ariline trên mạng xã hội:</h5>
+
+                      <a class="link1" href="#">
+                        <i class="fab fa-twitter"></i>
+                        <span class="span1"> C06Ariline trên Twitter</span>
+                      </a>
+                      <br>
+                      <a class="link1" href="#">
+                        <i class="fab fa-youtube" style="color: red"></i>
+                        <span class="span1"> Xem C06Ariline trên Youtuber</span>
+
+                      </a>
+                      <br>
+
+                      <a class="link1" href="#">
+                        <i class="fab fa-facebook" style="color: #1b19a9"></i>
+                        <span class="span1"> C06Ariline trên Facebook</span>
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
+
+
+

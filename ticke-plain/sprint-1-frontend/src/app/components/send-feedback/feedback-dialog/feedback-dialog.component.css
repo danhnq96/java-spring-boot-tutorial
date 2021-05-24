@@ -1,0 +1,13 @@
+.btn-cancel-dialog{
+  background-color: orange;
+  color: white;
+
+}
+
+.btn-cancel-dialog:hover {
+  background-color: black;
+}
+
+#dialog-feedback-container{
+  border-radius: 40px;
+}

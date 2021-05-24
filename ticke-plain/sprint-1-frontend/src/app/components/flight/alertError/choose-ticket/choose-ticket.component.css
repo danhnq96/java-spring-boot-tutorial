@@ -1,0 +1,8 @@
+.mat-button {
+  color: white;
+  background-color: orange;
+}
+.mat-error {
+  font-weight: bold;
+  font-size: 2em;
+}

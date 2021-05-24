@@ -1,0 +1,10 @@
+#div_navbar{
+  background: #FFD058;
+  width: 100%;
+  height: 50px;
+}
+h1 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 35%;
+}

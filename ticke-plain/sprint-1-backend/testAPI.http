@@ -1,0 +1,37 @@
+POST http://localhost:8080/ticket/save/3/33
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYWFhQGFhYS5hYSIsImV4cCI6MTYwODI4NTAwMCwiaWF0IjoxNjA4MjY3MDAwfQ.5HmqAKBPTrkHfxWC5mCF7E3lJQ_SeIqbTsVNdLhClpG8kZVsLxOZ8j6byGrF5gbzvdNTU45yi9W9vaV0FLyf4g
+
+{"adults": "1",
+  "appUser": "supea52795@gmail.com",
+  "babies": "0",
+  "booking": "abde",
+  "invoice": "1",
+  "employee": "1",
+  "passengerName": "Chau",
+  "priceArrival": "500",
+  "priceDeparture": "1",
+  "statusCheckin": "1",
+  "statusPayment": "1",
+  "ticketCode": "1"
+}
+
+
+###
+POST http://localhost:8080/authenticate
+Content-Type: application/json
+
+{"username": "aaaa@aaa.aa",
+  "password": "a"}
+
+###
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+  "username": "aaaa@aaa.aa",
+  "password": "a",
+  "appUser": {}
+}
+
+###

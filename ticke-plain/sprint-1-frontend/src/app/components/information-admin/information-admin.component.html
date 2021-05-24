@@ -1,0 +1,46 @@
+<div class="container-fluid d-flex">
+  <div class="col-lg-9 col-md-9 bg-white">
+    <div class="flex-content">
+      <div class="custom-form custom-form-fields">
+        <h3 class="mb-5">Thông tin admin</h3>
+        <ng-form *ngIf="admin">
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Tên: </label>
+            <label class="col-lg-10 col-md-10 form-control">{{admin.fullName}}</label>
+          </div>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Ngày sinh: </label>
+            <label class="col-lg-10 col-md-10 form-control">{{admin.birthday | date:'dd/MM/yyyy'}}</label>
+          </div>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Địa chỉ: </label>
+            <textarea readonly class="col-lg-10 col-md-10 form-control bg-white">{{admin.address}}</textarea>
+          </div>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Email: </label>
+            <label class="col-lg-10 col-md-10 form-control">{{admin.email}}</label>
+          </div>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Giới tính: </label>
+            <label class="col-lg-10 col-md-10 form-control">{{admin.gender === true ? 'Nam' : 'Nữ'}}</label>
+          </div>
+          <div class="form-group d-flex align-items-center">
+            <label class="col-lg-2 col-md-2">Điện thoại: </label>
+            <label class="col-lg-10 col-md-10 form-control">{{admin.phoneNumber}}</label>
+          </div>
+        </ng-form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 p-0 bg-white">
+    <div class="avatar mt-5">
+      <img class="img-fluid"
+           src="https://phunugioi.com/wp-content/uploads/2020/01/anh-avatar-supreme-dep-lam-dai-dien-facebook.jpg"
+           alt="registration-img"/>
+      <button class="btn btn-orange mt-5 btn-block" data-toggle="modal" (click)="openDialog(admin)"
+              data-target="#modal">
+        Đổi mật khẩu
+      </button>
+    </div>
+  </div>
+</div>

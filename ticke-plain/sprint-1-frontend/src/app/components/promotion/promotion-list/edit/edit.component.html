@@ -1,0 +1,96 @@
+<div class="container">
+  <h2 class="text-center">Chỉnh sửa thông tin</h2>
+  <div class="col-6 justify-content-center">
+    <form [formGroup]="formEdit" class="form-group">
+      <div class="form-group" style="align-content: center">
+        <div class="form-group">
+          <label for="departurePlace">Ga đi</label>
+          <select class="form-control" id="departurePlace" formControlName="departurePlace">
+            <option name="departurePlace" disabled>Chọn sân bay khởi hành</option>
+            <option name="departurePlace" value="Đà Nẵng (DAD)">Đà Nẵng (DAD)</option>
+            <option name="departurePlace" value="Tp. Hồ Chí Minh (SGN)">Tp. Hồ Chí Minh (SGN)</option>
+            <option name="departurePlace" value="Hà Nội (HAN)">Hà Nội (HAN)</option>
+            <option name="departurePlace" value="Đà Lạt (DLI)">Đà Lạt (DLI)</option>
+            <option name="departurePlace" value="Hải Phòng (HPH)">Hải Phòng (HPH)</option>
+            <option name="departurePlace" value="Cần Thơ (VCA)">Cần Thơ (VCA)</option>
+            <option name="departurePlace" value="Buôn Mê Thuột (BMV)">Buôn Mê Thuột (BMV)</option>
+            <option name="departurePlace" value="Vinh (VII)">Vinh (VII)</option>
+          </select>
+          <p *ngIf="formEdit.get('departurePlace').invalid && formEdit.get('departurePlace').touched"
+             class="text-danger">Ga đi không được để trống</p>
+        </div>
+        <div class="form-group">
+          <label for="arrivalPlace">Ga đến</label>
+          <select class="form-control" id="arrivalPlace" formControlName="arrivalPlace">
+            <option name="type" disabled>Chọn sân bay đến</option>
+            <option name="type" value="Đà Nẵng (DAD)">Đà Nẵng (DAD)</option>
+            <option name="type" value="Tp. Hồ Chí Minh (SGN)">Tp. Hồ Chí Minh (SGN)</option>
+            <option name="type" value="Hà Nội (HAN)">Hà Nội (HAN)</option>
+            <option name="type" value="Đà Lạt (DLI)">Đà Lạt (DLI)</option>
+            <option name="type" value="Hải Phòng (HPH)">Hải Phòng (HPH)</option>
+            <option name="type" value="Cần Thơ (VCA)">Cần Thơ (VCA)</option>
+            <option name="type" value="Buôn Mê Thuột (BMV)">Buôn Mê Thuột (BMV)</option>
+            <option name="type" value="Vinh (VII)">Vinh (VII)</option>
+          </select>
+          <p *ngIf="formEdit.get('arrivalPlace').invalid && formEdit.get('arrivalPlace').touched"
+             class="text-danger">Ga đến không được để trống</p>
+        </div>
+        <div class="form-group">
+          <label for="flight">Tên chuyến bay</label>
+          <input type="text" class="form-control" id="flight" name="flight" formControlName="flight">
+          <p *ngIf="formEdit.get('flight').invalid && formEdit.get('flight').touched"
+             class="text-danger">Vui lòng nhập tên chuyến bay theo định dạng như sau: DAD-SGN</p>
+        </div>
+        <label for="type">Hãng hàng không</label>
+        <select class="form-control" id="type" formControlName="airline">
+          <option name="type" disabled>Select a branch</option>
+          <option name="type" value="VietJet Air">VietJet Air</option>
+          <option name="type" value="Vietnam Airline">Vietnam Airline</option>
+          <option name="type" value="Bamboo Airway">Bamboo Airway</option>
+        </select>
+        <p *ngIf="formEdit.get('airline').invalid && formEdit.get('airline').touched"
+           class="text-danger">Hãng hàng không được để trống</p>
+      </div>
+      <div class="form-group">
+        <label for="flightNumber">Số hiệu chuyến bay</label>
+        <input type="text" class="form-control" id="flightNumber" name="flightNumber" formControlName="flightNumber">
+        <p *ngIf="formEdit.get('flightNumber').invalid && formEdit.get('flightNumber').touched"
+           class="text-danger">Vui lòng nhập số hiệu chuyến bay theo định dạng: VN /VJ /QH 246</p>
+      </div>
+      <div class="form-group">
+        <mat-label>Ngày khởi hành</mat-label><br>
+        <input class="form-control" id="departureDate" name="departureDate" formControlName="departureDate" matInput [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <p *ngIf="formEdit.get('departureDate').invalid && formEdit.get('departureDate').touched"
+           class="text-danger">Ngày khởi hành không được để trống</p>
+      </div>
+      <div class="form-group">
+        <label for="departureTime">Giờ khởi hành</label>
+<!--        <input class="form-control" id="departureTime" name="departureTime" formControlName="departureTime" [ngxTimepicker]="picker2">-->
+<!--        <ngx-material-timepicker #picker2></ngx-material-timepicker>-->
+        <input type = "time" class="form-control" id="departureTime" name="arrivalTime" formControlName="departureTime">
+        <p *ngIf="formEdit.get('departureTime').invalid && formEdit.get('departureTime').touched"
+           class="text-danger">Giờ khởi hành không được để trống</p>
+      </div>
+      <div class="form-group">
+        <label for="arrivalTime">Giờ đến</label>
+<!--        <input class="form-control" id="arrivalTime" name="arrivalTime" formControlName="arrivalTime" [ngxTimepicker]="picker3">-->
+<!--        <ngx-material-timepicker #picker3></ngx-material-timepicker>-->
+        <input type = "time" class="form-control" id="arrivalTime" name="arrivalTime" formControlName="arrivalTime">
+        <p *ngIf="formEdit.get('arrivalTime').invalid && formEdit.get('arrivalTime').touched"
+           class="text-danger">Giờ đến không được để trống</p>
+      </div>
+      <div class="form-group">
+        <label for="price">Giá vé</label>
+        <input type="text" class="form-control" id="price" name="price" formControlName="price">
+        <p *ngIf="formEdit.get('price').invalid && formEdit.get('price').touched"
+           class="text-danger">Vui lòng nhập giá vé bằng số</p>
+      </div>
+      <button type="submit" [disabled]="formEdit.invalid" class="btn btn-primary" (click)="updatePromo()">Submit</button>
+    </form>
+  </div>
+</div>
+
+
+

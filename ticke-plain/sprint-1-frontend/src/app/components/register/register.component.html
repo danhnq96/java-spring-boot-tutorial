@@ -1,0 +1,127 @@
+<div class="container-fluid bg-white">
+  <div class="row border" style="border-radius: 20px;">
+    <div class="col-md-6 col-sm-12 p-0"><img
+      src="https://64.media.tumblr.com/844af3b050fc6c5705f648c8d3580049/tumblr_n567qpN1841qg20eyo1_500.jpg"
+      alt="airplane" style="width: 100%"></div>
+    <div class="col-md-6 col-sm-12">
+      <div class="d-flex justify-content-center pt-4">
+        <h1>Đăng kí tài khoản</h1>
+      </div>
+      <div>
+        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+                <mat-error *ngIf="registerForm.controls.email.errors?.required">Email không được để trống.</mat-error>
+                <mat-error *ngIf="registerForm.controls.email.errors?.pattern">Sai định dạng email.</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <mat-form-field class="example-full-width">
+                <mat-label>Mật khẩu</mat-label>
+                <input type="password" matInput formControlName="password">
+                <mat-error *ngIf="registerForm.controls.password.errors?.required">Mật khẩu không được để trống.</mat-error>
+                <mat-error *ngIf="registerForm.controls.password.errors?.pattern">Mật khẩu tổi thiểu 8 kí tự, 1 chữ thườmg, 1 chữ in hoa và 1 số.</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <mat-form-field class="example-full-width">
+                <mat-label>Xác nhận mật khẩu</mat-label>
+                <input type="password" matInput formControlName="confirmPassword" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="registerForm.controls.confirmPassword.errors?.required">Xác nhận mật khẩu không đươc để trống.</mat-error>
+                <mat-error *ngIf="registerForm.controls.confirmPassword.errors?.confirmedValidator">Mật khẩu không trùng khớp.</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <mat-form-field class="example-full-width">
+                <mat-label>Điện thoại</mat-label>
+                <input matInput formControlName="phone">
+                <mat-error *ngIf="registerForm.controls.phone.errors?.required">Điện thoại không đươc để trống.</mat-error>
+                <mat-error *ngIf="registerForm.controls.phone.errors?.pattern">Điện thoại không đúng định dạng.</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <mat-form-field class="example-full-width">
+                <mat-label>Họ và tên</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="registerForm.controls.name.errors?.required">Họ tên không đươc để trống.</mat-error>
+                <mat-error *ngIf="registerForm.controls.name.errors?.pattern">Họ tên không đúng định dạng.</mat-error>
+                <mat-error *ngIf="registerForm.controls.name.errors?.minlength">Họ tên tối thiểu 10 kí tự.</mat-error>
+                <mat-error *ngIf="registerForm.controls.name.errors?.maxlength">Họ tên tối đa 50 kí tự.</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <mat-form-field>
+                <mat-label>Ngày sinh</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="birthday">
+                <mat-error *ngIf="registerForm.controls.birthday.errors?.required">Ngày sinh không đươc để trống.</mat-error>
+                <mat-error *ngIf="registerForm.controls.birthday.errors?.ageError">Tuổi phải lớn hơn 18 và nhỏ hơn 150.</mat-error>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <mat-form-field class="example-full-width">
+                <mat-label>Địa chỉ</mat-label>
+                <textarea matInput cdkTextareaAutosize formControlName="address"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <mat-form-field>
+                <mat-label>Giới tính</mat-label>
+                <mat-select formControlName="gender">
+                  <mat-option value=true>Nam</mat-option>
+                  <mat-option value=false>Nữ</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="col-2"></div>
+            </div>
+          </div>
+          <div class="row pt-4">
+            <div class="col-3"></div>
+            <div class="col-6 d-flex justify-content-center">
+              <button type="submit">Đăng kí</button>
+            </div>
+            <div class="col-3"></div>
+          </div>
+          <div class="row pt-4">
+            <div class="col-12 d-flex justify-content-center">
+              <mat-error *ngIf="message">{{message}}</mat-error>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

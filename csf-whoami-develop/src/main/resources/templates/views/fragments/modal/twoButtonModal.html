@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="twoModal">
+    <div class="modal fade passwordCheck" id="modal_message2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-primary" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="header-title">
+                        <h4 class="modal-title">[[#{notice}]]</h4>
+                    </div>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="modal_message_content2"></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" data-dismiss="modal" aria-label="Close">[[#{close}]]
+                    </button>
+                    <button class="btn btn-primary" type="button" id="twoBtn" data-dismiss="modal">[[#{confirm}]]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

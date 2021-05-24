@@ -1,0 +1,117 @@
+  <div id="title" class="card-header col-12">
+    <h2 class="selected-price">Quản lý kinh doanh</h2>
+  </div>
+  <div class="card-body col-12 bg-white" id="body_bao_cao">
+      <h3>Thống kê báo cáo</h3>
+      <br>
+    <form [formGroup]="reportForm">
+        <table>
+          <tr>
+            <td><label>Kiểu thống kê : </label></td>
+            <td>
+              <mat-form-field>
+                <mat-label>Chọn kiểu Thống kê(*)</mat-label>
+                <mat-select formControlName="typeReport" >
+                  <mat-option *ngFor="let type of typeReport" [value]="type.value">
+                    {{ type.viewValue }}
+                  </mat-option>
+                </mat-select>
+<!--                <i style="color:red" *ngIf="reportForm.get('typeReport').invalid&&reportForm.get('typeReport').touched">Bắt buộc(*)</i>-->
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td><label>Mục thống kê : </label></td>
+            <td>
+              <mat-form-field>
+                <mat-label>Chọn mục thống kê(*)</mat-label>
+                <mat-select formControlName="itemReport">
+                  <mat-option *ngFor="let about of reportAbout" [value]="about.value">
+                    {{ about.viewValue }}
+                  </mat-option>
+                </mat-select>
+<!--                <i style="color:red" *ngIf="reportForm.get('itemReport').invalid&&reportForm.get('itemReport').touched">Bắt buộc(*)</i>-->
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td><label>Thời gian thống kê : </label></td>
+            <td>
+              <mat-form-field>
+                <mat-label>Chọn thời gian(*)</mat-label>
+                <mat-select [(value)]="reportTimeSelected" formControlName="timeSelection">
+                  <mat-option *ngFor="let time of timesSelection" [value]="time.value">
+                    {{ time.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td><label>Từ ngày : </label></td>
+            <td>
+              <mat-form-field>
+                <input matInput [max]="maxDate" formControlName="dateStart" [matDatepicker]="dateStart" placeholder="Chọn 1 ngày(*)">
+                <mat-datepicker-toggle matSuffix [for]="dateStart"></mat-datepicker-toggle>
+                <mat-datepicker #dateStart></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td><label>Đến ngày : </label></td>
+            <td>
+              <mat-form-field>
+                <input matInput [max]="maxDate" [min]="reportForm.controls.dateStart.value" formControlName="dateEnd" [matDatepicker]="dateEnd" placeholder="Chọn kết thúc(*)">
+                <mat-datepicker-toggle matSuffix [for]="dateEnd"></mat-datepicker-toggle>
+                <mat-datepicker #dateEnd></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="defaultUnchecked" (click)="showCompareReportForm()"/>
+          <label class="custom-control-label" for="defaultUnchecked">Bạn có muốn đối chiếu kết quả thống kê trong một thời gian khác?</label>
+        </div>
+        <br>
+
+        <table *ngIf="compareReport" >
+          <tr>
+            <td><label>Thời gian so sánh : </label></td>
+            <td>
+              <mat-form-field>
+              <mat-label>Chọn thời gian(*)</mat-label>
+              <mat-select [(value)]="compareReportTimeSelected" formControlName="compareReportTimeSelection">
+                <mat-option *ngFor="let time of timesSelection" [value]="time.value">
+                  {{ time.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td><label>Từ ngày : </label></td>
+            <td>
+              <mat-form-field>
+                <input matInput [max]="maxDate" [min]="minDateStart" formControlName="compareReportDateStart" [matDatepicker]="compareReportDateStart" placeholder="Chọn 1 ngày(*)">
+                <mat-datepicker-toggle matSuffix [for]="compareReportDateStart"></mat-datepicker-toggle>
+                <mat-datepicker #compareReportDateStart></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td><label>Đến : </label></td>
+            <td>
+              <mat-form-field>
+                <input matInput [max]="maxDate" [min]="reportForm.controls.compareReportDateStart.value" formControlName="compareReportDateEnd" [matDatepicker]="compareReportDateEnd" placeholder="Chọn ngày kết thúc(*)">
+                <mat-datepicker-toggle matSuffix [for]="compareReportDateEnd"></mat-datepicker-toggle>
+                <mat-datepicker #compareReportDateEnd ></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <h4 id="demo" (click)="openDemoDialog()">Xem hướng dẫn</h4><br>
+        <button type="submit" class="btn-orange" [disabled]="reportForm.invalid" (click)="addNewReport()">Xem kết quả</button>
+      </form>
+ </div>
+

@@ -1,0 +1,83 @@
+<div class="container-fluid bg-white">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="row border bg-light" style="border-radius: 20px;">
+        <div class="col-md-6 col-sm-12">
+          <div class="pt-4">
+            <div class="d-flex justify-content-center">
+              <h1>Đăng nhập</h1>
+            </div>
+            <div class="container">
+              <div class="row d-flex justify-content-center">
+                <div class="col-10">
+                  <div class="row">
+                    <div class="col-12">
+                      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+                        <div class="row">
+                          <div class="col-2"></div>
+                          <div class="col-8">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Email</mat-label>
+                              <input matInput formControlName="email">
+                              <mat-error *ngIf="loginForm.controls.email.errors?.required">Email không được để trống</mat-error>
+                              <mat-error *ngIf="loginForm.controls.email.errors?.pattern">Sai định dạng email</mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-2"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-2"></div>
+                          <div class="col-8">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Mật khẩu</mat-label>
+                              <input type="password" matInput formControlName="password">
+                              <mat-error *ngIf="loginForm.controls.password.errors?.required">Mật khẩu không được để trống</mat-error>
+                              <mat-error *ngIf="loginForm.controls.password.errors?.pattern">Mật khẩu tổi thiểu 8 kí tự, 1 chữ thườmg, 1 chữ in hoa và 1 số</mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-2"></div>
+                        </div>
+                        <div class="row pt-3 justify-content-center">
+                          <div class="col-6">
+                            <button mat-button type="submit" id="login-btn">Đăng nhập</button>
+                            <mat-error>{{message}}</mat-error>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="container">
+                      <div class="line">
+                        <mat-divider></mat-divider>
+                      </div>
+                      <div class="text mat-typography">Hoặc đăng nhập bằng mạng xã hội</div>
+                      <div class="line">
+                        <mat-divider></mat-divider>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-center">
+                    <div class="col-8">
+                      <a class="fb btn" (click)="loginFacebook()">
+                        <i class="fa fa-facebook fa-fw"></i>Đăng nhập bằng Facebook
+                      </a>
+                      <a class="google btn" (click)="loginGoogle()"><i class="fa fa-google fa-fw">
+                      </i>Đăng nhập bằng Google+
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 pr-0">
+          <img style="width: 100%"
+               src="https://media.self.com/photos/5f0885ffef7a10ffa6640daa/4:3/w_2560%2Cc_limit/travel_plane_corona.jpeg"
+               alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

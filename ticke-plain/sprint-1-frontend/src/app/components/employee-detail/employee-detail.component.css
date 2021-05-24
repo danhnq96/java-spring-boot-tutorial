@@ -1,0 +1,73 @@
+.list-group-item {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  background-color: black;
+  color: orange;
+  opacity: .8;
+}
+
+.list-group-item:hover {
+  color: white;
+}
+
+.flex-content {
+  display: flex;
+  flex-wrap: wrap;
+  vertical-align: top;
+  overflow: auto;
+  font-family: 'Lato', sans-serif;
+  color: black;
+  font-size: 13px;
+  font-weight: bolder;
+
+}
+
+.custom-form {
+  padding: 10px 30px 10px;
+}
+
+.custom-form h3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 25px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  color: orange;
+  margin-left: 260px;
+}
+
+.form-control {
+  width: 400px;
+}
+
+.custom-form-fields {
+  flex: auto;
+}
+
+img {
+  border-radius: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  width: 310px;
+  height: 100%;
+}
+
+.btn-orange {
+  background-color: orange;
+  color: white;
+  height: 40px;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 130px;
+  border-radius: 0;
+}
+
+.btn-orange:hover {
+  background: black;
+}
+
+.btn-secondary {
+  margin-left: 520px;
+}
+

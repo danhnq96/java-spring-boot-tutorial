@@ -1,0 +1,89 @@
+<div class="container">
+  <h2 class="text-center">Thêm mới chuyến bay khuyến mãi</h2>
+  <div class="col-6 justify-content-center">
+    <form [formGroup]="formAddNew" class="form-group">
+      <div class="form-group" style="align-content: center">
+        <div class="form-group">
+          <label for="departurePlace">Ga đi</label>
+          <select class="form-control" id="departurePlace" formControlName="departurePlace">
+            <option name="departurePlace" disabled>Chọn sân bay khởi hành</option>
+            <option name="departurePlace" value="Đà Nẵng (DAD)">Đà Nẵng (DAD)</option>
+            <option name="departurePlace" value="Tp. Hồ Chí Minh (SGN)">Tp. Hồ Chí Minh (SGN)</option>
+            <option name="departurePlace" value="Hà Nội (HAN)">Hà Nội (HAN)</option>
+            <option name="departurePlace" value="Đà Lạt (DLI)">Đà Lạt (DLI)</option>
+            <option name="departurePlace" value="Hải Phòng (HPH)">Hải Phòng (HPH)</option>
+            <option name="departurePlace" value="Cần Thơ (VCA)">Cần Thơ (VCA)</option>
+            <option name="departurePlace" value="Buôn Mê Thuột (BMV)">Buôn Mê Thuột (BMV)</option>
+            <option name="departurePlace" value="Vinh (VII)">Vinh (VII)</option>
+          </select>
+          <p *ngIf="formAddNew.get('departurePlace').invalid && formAddNew.get('departurePlace').touched"
+             class="text-danger">Sân bay khởi hành không được để trống</p>
+        </div>
+        <div class="form-group">
+          <label for="arrivalPlace">Ga đến</label>
+          <select class="form-control" id="arrivalPlace" formControlName="arrivalPlace">
+            <option name="type" disabled>Chọn sân bay đến</option>
+            <option name="type" value="Đà Nẵng (DAD)">Đà Nẵng (DAD)</option>
+            <option name="type" value="Tp. Hồ Chí Minh (SGN)">Tp. Hồ Chí Minh (SGN)</option>
+            <option name="type" value="Hà Nội (HAN)">Hà Nội (HAN)</option>
+            <option name="type" value="Đà Lạt (DLI)">Đà Lạt (DLI)</option>
+            <option name="type" value="Hải Phòng (HPH)">Hải Phòng (HPH)</option>
+            <option name="type" value="Cần Thơ (VCA)">Cần Thơ (VCA)</option>
+            <option name="type" value="Buôn Mê Thuột (BMV)">Buôn Mê Thuột (BMV)</option>
+            <option name="type" value="Vinh (VII)">Vinh (VII)</option>
+          </select>
+          <p *ngIf="formAddNew.get('arrivalPlace').invalid && formAddNew.get('arrivalPlace').touched"
+             class="text-danger">Sân bay đến không được để trống</p>
+        </div>
+        <div class="form-group">
+          <label for="flight">Tên chuyến bay</label>
+          <input type="text" class="form-control" id="flight" name="flight" formControlName="flight">
+          <p *ngIf="formAddNew.get('flight').invalid && formAddNew.get('flight').touched"
+             class="text-danger">Vui lòng nhập tên chuyến bay theo định dạng như sau: DAD-SGN</p>
+        </div>
+        <label for="type">Hãng hàng không</label>
+        <select class="form-control" id="type" formControlName="airline">
+          <option name="type" disabled>Select a branch</option>
+          <option name="type" value="VietJet Air">VietJet Air</option>
+          <option name="type" value="Vietnam Airline">Vietnam Airline</option>
+          <option name="type" value="Bamboo Airway">Bamboo Airway</option>
+        </select>
+        <p *ngIf="formAddNew.get('airline').invalid && formAddNew.get('airline').touched"
+           class="text-danger">Hãng hàng không không được để trống</p>
+      </div>
+      <div class="form-group">
+        <label for="flightNumber">Số hiệu chuyến bay</label>
+        <input type="text" class="form-control" id="flightNumber" name="flightNumber" formControlName="flightNumber">
+        <p *ngIf="formAddNew.get('flightNumber').invalid && formAddNew.get('flightNumber').touched"
+           class="text-danger">Vui lòng nhập số hiệu chuyến bay theo định dạng: VN /VJ /QH 246</p>
+      </div>
+      <div class="form-group">
+        <label for="departureDate">Ngày khởi hành</label>
+        <input class="form-control" id="departureDate" name="departureDate" formControlName="departureDate" matInput [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <p *ngIf="formAddNew.get('departureDate').invalid && formAddNew.get('departureDate').touched"
+           class="text-danger">Ngày khởi hành không được để trống</p>
+      </div>
+      <div class="form-group">
+        <label for="arrivalTime">Giờ khởi hành</label>
+        <input type="time" class="form-control" id="arrivalTime" name="arrivalTime" formControlName="departureTime">
+        <p *ngIf="formAddNew.get('departureTime').invalid && formAddNew.get('departureTime').touched"
+           class="text-danger">Giờ khởi hành không được để trống</p>
+      </div>
+      <div class="form-group">
+        <label for="arrivalTime">Giờ đến</label>
+        <input type="time" class="form-control" id="arrival_time" name="arrival_time" formControlName="arrivalTime">
+        <p *ngIf="formAddNew.get('arrivalTime').invalid && formAddNew.get('arrivalTime').touched"
+           class="text-danger">Giờ đến không được để trống</p>
+      </div>
+      <div class="form-group">
+        <label for="price">Giá vé</label>
+        <input type="text" class="form-control" id="price" name="price" formControlName="price">
+        <p *ngIf="formAddNew.get('price').invalid && formAddNew.get('price').touched"
+           class="text-danger">Vui lòng nhập giá vé bằng số</p>
+      </div>
+      <button type="submit" [disabled]="formAddNew.invalid" class="btn btn-primary" (click)="addNewPromo()">Submit</button>
+    </form>
+  </div>
+</div>

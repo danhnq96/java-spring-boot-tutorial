@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
+    <meta name="format-detection" content="telephone=no">
+
+    <title>[[#{title}]]</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/plugin/vendor.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">[[#{group.title}]] <span>[[#{group.description}]]</span></div>
+                    <form class="card-body" th:action="@{/admin/group-mng/list}" method="post" th:object="${search}"
+                          id="formBtn">
+                        <div class="table-detail-info overscroll-mobile mb-3">
+                            <!-- Begin info -->
+                            <table class="table custom-table table-bordered w-250">
+                                <tbody>
+                                <tr>
+                                    <td class="font-weight-bold">[[#{group.owner}]]</td>
+                                    <td colspan="3">
+                                        <div class="content-button d-flex align-items-center">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-on-radio" name="on-link"
+                                                       class="custom-control-input" checked value="0">
+                                                <label class="custom-control-label"
+                                                       for="btn-on-radio">[[#{radio.all}]]</label>
+                                            </div>
+                                            <th:block th:if="${onRd != null && !onRd.empty}">
+                                                <th:block th:each="data, state : ${onRd}">
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio"
+                                                               th:attr="id='btn-on-radio' + ${state.index + 1}"
+                                                               name="on-link" class="custom-control-input" value="1">
+                                                        <label class="custom-control-label"
+                                                               th:attr="for='btn-on-radio' + ${state.index + 1}">[[${data}]]</label>
+                                                    </div>
+                                                </th:block>
+                                            </th:block>
+                                        </div>
+                                    </td>
+                                    <td class="font-weight-bold">[[#{group.active}]]</td>
+                                    <td colspan="3">
+                                        <div class="content-button d-flex align-items-center">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-active-radio1" name="active-link"
+                                                       class="custom-control-input" checked value="ALL">
+                                                <label class="custom-control-label" for="btn-active-radio1">[[#{radio.all}]]</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-active-radio2" name="active-link"
+                                                       class="custom-control-input" value="active">
+                                                <label class="custom-control-label" for="btn-active-radio2">[[#{radio.active}]]</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-active-radio3" name="active-link"
+                                                       class="custom-control-input" value="inactive">
+                                                <label class="custom-control-label" for="btn-active-radio3">[[#{radio.inactive}]]</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">[[#{group.regist.date}]]</td>
+                                    <td colspan="7">
+                                        <div class="d-flex align-items-center">
+                                            <div class="wrap-end-date d-flex align-items-center">
+                                                <input id="startDate" th:field="*{startDate}"
+                                                       class=" form-control datepicker " size="36"
+                                                       th:placeholder="#{calendar.placeholder}">
+                                                <i class="fa fa-calendar ml-2"></i>
+                                            </div>
+                                            <span class="mx-4">~</span>
+                                            <div class="wrap-end-date d-flex align-items-center">
+                                                <input id="endDate" th:field="*{endDate}"
+                                                       class=" form-control datepicker " size="36"
+                                                       th:placeholder="#{calendar.placeholder}">
+                                                <i class="fa fa-calendar ml-2"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">[[#{group.keyword}]]</td>
+                                    <td colspan="7">
+                                        <div class="input-group">
+                                            <input type="text" name="keyword" class="form-control" th:field="*{keyword}"
+                                                   th:placeholder="#{group.keyword.placeholder}">
+                                            <div class="input-group-append">
+                                                <button class="input-group-text" type="submit">
+                                                    <i class="icon-magnifier"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!-- End info -->
+                        </div>
+
+                        <!-- Begin Content -->
+                        <th:block th:if="${list != null}">
+                            <th:block th:if="${totalCount > 0}">
+                                <div class="tab-content border-0">
+                                    <div id="post_lists" class="overscroll-mobile ">
+                                        <table class="table table-striped table-hover text-center w-250">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <!--/* <th>[[#{group.list.no}]]</th> */-->
+                                                <th>[[#{group.list.id}]]</th>
+                                                <th>[[#{group.list.name}]]</th>
+                                                <th>[[#{group.list.url}]]</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="table-row" th:each="data, stage : ${list}"
+                                                th:onclick="|window.location.href='/admin/group-mng/detail/${data.groupId}'|">
+                                                <!--/* <td th:text="${totalCount - ((pageNumber * 20) + stage.index)}"></td> */-->
+                                                <td th:text="${data.groupId}"></td>
+                                                <td th:text="${data.groupName}"></td>
+                                                <td th:text="${data.groupUrl}"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- Begin pagination -->
+                                    <ul class="pagination justify-content-center"
+                                        th:with="startNumber=${T(Math).floor(list.number/10)}*10+1,endNumber=(${list.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${list.totalPages}">
+                                        <li class="page-item" th:classappend="${list.number}"><span
+                                                class="page-link submit_btn" th:value="1"><i
+                                                class="fa fa-angle-double-left"></i></span></li>
+                                        <li class="page-item" th:style="${list.first} ? 'display:none'">
+													<span class="page-link submit_btn" th:value="${list.number}"><i
+                                                            class="fa fa-angle-left"></i></span>
+                                        </li>
+                                        <li class="page-item"
+                                            th:each="page :${#numbers.sequence(startNumber, endNumber)}"
+                                            th:class="(${page} == ${list.number}+1) ? 'page-item active' : 'page-item'">
+													<span class="page-link submit_btn" th:value="${page}"
+                                                          th:text="${page}"></span>
+                                        </li>
+                                        <li class="page-item" th:style="${list.last} ? 'display:none'">
+													<span class="page-link submit_btn" th:value="${list.number}+2"><i
+                                                            class="fa fa-angle-right"></i></span>
+                                        </li>
+                                        <li class="page-item" th:classappend="${list.number}"><span
+                                                class="page-link submit_btn" th:value="${list.totalPages}"><i
+                                                class="fa fa fa-angle-double-right"></i></span></li>
+                                    </ul>
+                                </div>
+                            </th:block>
+                            <th:block th:unless="${totalCount > 0}">
+                                <div>[[#{error.FR000('GROUP'})}"]]</div>
+                            </th:block>
+                        </th:block>
+                        <!-- End Content -->
+
+                        <div class="group-btn-bottom text-right">
+                            <button class="btn btn-primary" type="button"
+                                    th:onclick="|window.location.href='/admin/group-mng/register'|">[[#{register}]]
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript" th:src="@{/lib/jquery/jquery.min.js}"></script>
+<!-- <footer class="app-footer">
+    <th:block th:replace="fragments/footer :: footerFragment"></th:block>
+</footer> -->
+<th:block th:replace="fragments/scripts :: scriptFragment"></th:block>
+</body>
+</html>

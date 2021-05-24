@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row" id="consultant-chat-box">
+    <div class="col-lg-3" id="user-list">
+      <div *ngFor="let user of listUser" class="user-box">
+        <a [routerLink]="['mess/', user.roomId]" style="text-decoration: none">
+          <div class="mess-user">{{user.name}}</div>
+        </a>
+      </div>
+      <br>
+    </div>
+    <div class="col-lg-7" id="chat-with-user">
+      <div id="content-mess-body">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <div class="col-lg-3">
+    </div>
+  </div>
+</div>

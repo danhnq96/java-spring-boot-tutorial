@@ -1,0 +1,41 @@
+body{
+  background-image: url("https://wallpaperset.com/w/full/7/a/b/70196.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: auto;
+  font-size: 110%;
+/*  */
+}
+
+html{
+  height: 100%;
+}
+
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr { border: 1px solid #ccc; }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+}
+
+h4{
+  text-align: center;
+  font-size: 50px;
+  color: #35ffe9
+}

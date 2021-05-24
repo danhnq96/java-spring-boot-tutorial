@@ -1,0 +1,74 @@
+<div class="container-fluid bg-light " id="contentToConvert"
+     style="width: 80%;height: 100%; opacity: 1; boder-radius: 10px">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="navbar-brand" style="font-size: 40px"><span style="font-size: 40px"><i class="fa fa-plane"
+                                                                                       style="color: orange">
+      </i>C06</span>AIRLINE</p>
+    </div>
+  </div>
+  <div class="row d-flex " style="font-family: 'Helvetica Neue',serif;font-size: 20px;text-align: justify-all">
+    <div class="col-md-9">
+      <p>Đơn Vị Bán:<span style="font-style:italic;font-weight: bold"> CÔNG TY CỖ PHẦN HÀNG KHÔNG C06AIRLINE</span></p>
+      <p>Mã Số thuế: <span style="font-style:italic;font-weight: bold"> 123567323</span></p>
+      <p>Địa Chỉ: <span style="font-style:italic;font-weight: bold"> 293 Nguyễn Tất Thành, Thành Phố Đà Nẵng</span></p>
+    </div>
+    <div class="col-md-3 text-right">
+      <p>Mẫu Số: <span>{{invoice.formCode}}</span></p>
+      <p>Kí Hiệu: <span>{{invoice.invoiceCode}}</span></p>
+      <p>Số: <span style="color: red">{{'0000' + invoice.id}}</span></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center" style="font-family: 'Helvetica Neue',serif">
+      <br>
+      <br>
+      <h1>HÓA ĐƠN TIỀN CƯỚC VẬN CHUYỂN VÀ PHÍ DỊCH VỤ</h1>
+      <h2>(COMMERCIAL INVOICE)</h2>
+      <h4>Ngày tạo: <span>{{invoice.dateCreated}}</span></h4>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-md-12" style="font-family: 'Helvetica Neue',serif;font-size: 20px">
+      <p>Tên Khách Hàng: <span style="font-style: italic;font-weight: bold">{{appUser.fullName}}</span></p>
+      <p>Số Điện Thoại: <span style="font-style: italic;font-weight: bold">{{appUser.phoneNumber}}</span></p>
+      <p>Địa chỉ: <span style="font-style: italic;font-weight: bold">{{appUser.address}}</span></p>
+      <p>Hình Thức Thanh Toán: TMCK</p>
+      <p>Loại Tiền Tệ: VND &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic;font-weight: bold">Tỷ Giá(Exchange rate): 1 </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-style: italic;font-weight: bold">Ngày tỷ giá(Date of ex): {{invoice.dateCreated}}</span></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table  table-bordered bg-white " id="mytable" *ngIf="ticketList.length !== 0">
+        <thead class="thead-light ">
+        <tr>
+          <th>Số Thứ Tự</th>
+          <th>Mã Số Vé</th>
+          <th>Chiều Đi</th>
+          <th>Chiều Về</th>
+          <th>Thành Tiền</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let ticket of ticketList">
+          <td>{{ticket.id}}</td>
+          <td>{{ticket.ticketCode}}</td>
+          <td>{{ticket.flightInformation.departure}}</td>
+          <td>{{ticket.flightInformation.arrival}}</td>
+          <td>{{ticket.invoice.totalMoney}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row d-flex justify-content-center" *ngIf="ticketList.length ===0">
+      <h3 style="font-family: 'Helvetica Neue',serif; color: orange">Chưa có vé nào được thanh toán</h3>
+    </div>
+  </div>
+  <button class="btn pdf" (click)="generatePDF()">Generate PDF</button>
+</div>
+
+

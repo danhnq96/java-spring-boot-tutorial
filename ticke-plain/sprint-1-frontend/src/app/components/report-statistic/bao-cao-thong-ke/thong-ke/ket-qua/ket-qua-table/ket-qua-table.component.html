@@ -1,0 +1,120 @@
+<h2>Kết quả thống kê </h2><br>
+<div id="tableDiv">
+  <p>Từ ngày: <span><i>{{data.data1.dateStart | date: "dd/MM/yyyy"}}</i></span> đến ngày: <span><i>{{data.data1.dateEnd | date: "dd/MM/yyyy"}}</i></span></p><br>
+  <div *ngIf="data.data1.item === 'staff'">
+    <table>
+      <tr>
+        <td>Số nhân viên</td>
+        <td>Số vé bán được ngày bắt đầu</td>
+        <td>Thu nhâp ngày bắt đầu (Triệu VNĐ)</td>
+        <td>Số vé bán được ngày kết thúc</td>
+        <td>Thu nhâp ngày kết thúc</td>
+      </tr>
+      <tr>
+        <td>{{tableData[0]}}</td>
+        <td>{{tableData[1]}}</td>
+        <td>{{tableData[2]}}</td>
+        <td>{{tableData[3]}}</td>
+        <td>{{tableData[4]}}</td>
+      </tr>
+    </table>
+    <div *ngIf="this.data.data1.timeSelectionCompare !== ''">
+      <br>
+      <p>So sánh với : Ngày <span><i>{{data.data1.compareReportDateStart | date: "dd/MM/yyyy"}}</i></span> đến ngày: <span><i>{{data.data1.compareReportDateEnd | date: "dd/MM/yyyy"}}</i></span></p>
+      <br>
+      <table>
+        <tr>
+          <td>Số nhân viên</td>
+          <td>Số vé bán được ngày bắt đầu</td>
+          <td>Thu nhâp ngày bắt đầu (Triệu VNĐ)</td>
+          <td>Số vé bán được ngày kết thúc</td>
+          <td>Thu nhâp ngày kết thúc</td>
+        </tr>
+        <tr>
+          <td>{{tableData[0]}}</td>
+          <td>{{tableData[5]}}</td>
+          <td>{{tableData[6]}}</td>
+          <td>{{tableData[7]}}</td>
+          <td>{{tableData[8]}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="data.data1.item === 'money'">
+    <table>
+      <tr>
+        <td>Tổng thu nhập (VNĐ)</td>
+        <td>Tổng vé</td>
+        <td>Thu nhâp ngày bắt đầu (VNĐ)</td>
+        <td>Thu nhâp ngày kết thúc (VNĐ)</td>
+      </tr>
+      <tr>
+        <td>{{tableData[0]}}</td>
+        <td>{{tableData[1]}}</td>
+        <td>{{tableData[2]}}</td>
+        <td>{{tableData[3]}}</td>
+      </tr>
+    </table>
+    <div *ngIf="this.data.data1.timeSelectionCompare !== ''">
+      <br>
+      <p>So sánh với : Ngày <span><i>{{data.data1.compareReportDateStart | date: "dd/MM/yyyy"}}</i></span> đến ngày: <span><i>{{data.data1.compareReportDateEnd | date: "dd/MM/yyyy"}}</i></span></p>
+      <br>
+      <table>
+        <tr>
+          <td>Tổng thu nhập (VNĐ)</td>
+          <td>Tổng vé</td>
+          <td>Thu nhâp ngày bắt đầu (VNĐ)</td>
+          <td>Thu nhâp ngày kết thúc (VNĐ)</td>
+        </tr>
+        <tr>
+          <td>{{tableData[0]}}</td>
+          <td>{{tableData[4]}}</td>
+          <td>{{tableData[5]}}</td>
+          <td>{{tableData[6]}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="data.data1.item === 'brand'">
+    <table>
+      <tr>
+        <td>Tổng số chuyến bay</td>
+        <td>Số chuyến bay ngày bắt đầu</td>
+        <td>Tổng giá chuyến bay ngày bắt đầu (Triệu VNĐ)</td>
+        <td>Số chuyến bayđược ngày kết thúc</td>
+        <td>Tổng giá chuyến bay ngày kết thúc (Triệu VNĐ)</td>
+      </tr>
+      <tr>
+        <td>{{tableData[0]}}</td>
+        <td>{{tableData[1]}}</td>
+        <td>{{tableData[2]}}</td>
+        <td>{{tableData[3]}}</td>
+        <td>{{tableData[4]}}</td>
+      </tr>
+    </table>
+    <div *ngIf="this.data.data1.timeSelectionCompare !== ''">
+      <br>
+      <p>So sánh với : Ngày <span><i>{{data.data1.compareReportDateStart | date: "dd/MM/yyyy"}}</i></span> đến ngày: <span><i>{{data.data1.compareReportDateEnd | date: "dd/MM/yyyy"}}</i></span></p>
+      <br>
+      <table>
+        <tr>
+          <td>Tổng số chuyến bay</td>
+          <td>Số chuyến bay ngày bắt đầu</td>
+          <td>Tổng giá chuyến bay ngày bắt đầu (Triệu VNĐ)</td>
+          <td>Số chuyến bayđược ngày kết thúc</td>
+          <td>Tổng giá chuyến bay ngày kết thúc (Triệu VNĐ)</td>
+        </tr>
+        <tr>
+          <td>{{tableData[0]}}</td>
+          <td>{{tableData[5]}}</td>
+          <td>{{tableData[6]}}</td>
+          <td>{{tableData[7]}}</td>
+          <td>{{tableData[8]}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <br>
+</div>
+<br><br>
+<button class="btn-orange" (click)="printStatistic()">In báo cáo</button>

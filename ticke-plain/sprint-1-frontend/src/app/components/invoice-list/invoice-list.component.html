@@ -1,0 +1,83 @@
+
+<div class="container-fluid p-5">
+  <h2 id="td" >DANH SÁCH THANH TOÁN</h2>
+  <div class="row p-3" *ngIf="appUser">
+    <div class="col-md-6 ">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="fontuser form-control">
+            <label id="nameKH" >{{appUser.fullName}}</label>
+            <i class="fa fa-user" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="fontuser form-control">
+            <label id="khdc" >{{appUser.address}}</label>
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="fontuser form-control">
+            <label id="pnb">{{appUser.phoneNumber}}</label>
+            <i class="fa fa-phone-square" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="fontuser form-control">
+            <label id="khEmail">{{appUser.email}}</label>
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12"></div>
+  </div>
+  <div class="row p-3 text-center" *ngIf="invoiceList">
+    <div class="col-md-12">
+      <table class="table  table-bordered bg-white">
+        <thead class="thead-light ">
+        <tr>
+          <th>Số Thứ Tự</th>
+          <th>Thành Tiền(VND)</th>
+          <th>Chi Tiết</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let invoice of invoiceList | paginate: { itemsPerPage: 2, currentPage: p } ">
+          <td>{{invoice.id}}</td>
+          <td>{{invoice.totalMoney}}</td>
+          <td><a href="#" [routerLink]="'/invoice-detail/'+invoice.id">Chi tiết</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-md-12" *ngIf="invoiceList.length===0">
+      <h2 style="color: orange">Không tồn tại danh sách hóa đơn đã thanh toán</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row ">
+
+    <div class="col-md-4">
+      <button class="btn btn-primary " data-toggle="modal" data-target="#myModal" id="add" routerLink="/invoice-download">
+        Tạo Hóa Đơn
+         <i class="material-icons" id="iconAdd">add_circle</i></button>
+    </div>
+    <div class="col-md-5" id="pt" style="color: white" >
+      <pagination-controls  (pageChange)="p = $event"  previousLabel="Quay Lại" responsive="false"  nextLabel="Kế Tiếp"
+                           autoHide="false">
+
+      </pagination-controls>
+  </div>
+</div>
+</div>
+

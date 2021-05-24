@@ -1,0 +1,42 @@
+GET http://localhost:8080/user-chat
+Accept: application/json
+
+###
+POST http://localhost:8080/send-feedback
+Content-Type: application/json
+
+{
+  "senderName": "Vinh",
+  "senderEmail": "vinhblue97@gmail.com",
+  "title": "booking",
+  "content": "I can't booking, please fix it"
+}
+
+###
+POST http://localhost:8080/request-chat
+Content-Type: application/json
+
+{
+  "name": "vinh",
+  "email": "vinhblue97@gmail.com",
+  "phone": "0334611971"
+}
+
+###
+#load toàn bộ tin
+GET http://localhost:8080/mess-user
+Accept: application/json
+
+###
+#gửi tin nhắn
+POST http://localhost:8080/send-mess
+Content-Type: application/json
+
+{
+  "content": "hi a danh"
+
+}
+###
+
+
+

@@ -1,0 +1,74 @@
+#btn-submit-feedback-form{
+  background-color: orange;
+  color: white;
+
+}
+
+#direct-map{
+  position: absolute;
+  animation: map;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+}
+
+#feedback-form{
+  animation: feedback;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+
+}
+
+@keyframes feedback {
+  from{transform: translate(1000px); opacity: 0}
+  to{transform: translate(0px); opacity: 1}
+}
+@keyframes map {
+  from{transform: translate(-1000px); opacity: 0}
+  to{transform: translate(-35px); opacity: 1}
+
+}
+
+#btn-submit-feedback-form{
+  margin-top: 25px;
+}
+
+#btn-submit-feedback-form:hover{
+
+  background-color: black;
+}
+
+.focus-style {
+  position:absolute;
+  left: 25%;
+  top: 10px;
+  font-size: 18px;
+  font-weight: 200;
+  color: #cecece;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+div .focus-input:focus.focus-style {
+  display:block;
+  color: black;
+  top: -20px;
+  font-size: 14px;
+}
+
+.error-feedback-required{
+  color: red;
+}
+
+#feedback-page{
+  height: 500px;
+  margin-bottom: 5rem !important;
+}
+
+.content-feedback{
+  height: 96px
+}
+
+#announce-success{
+  z-index: 10000;
+  width: 100px;
+}

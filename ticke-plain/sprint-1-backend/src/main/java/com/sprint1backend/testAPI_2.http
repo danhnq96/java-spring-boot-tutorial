@@ -1,0 +1,48 @@
+POST http://localhost:8080/feedback/send-feedback
+Content-Type: application/json
+
+{
+  "senderName": "Vinh",
+  "senderEmail": "vinhblue97@gmail.com",
+  "tittle": "Nothing",
+  "content": "CHans "
+}
+
+###
+POST http://localhost:8080/feedback/send-feedback
+
+Accept: application/json
+
+
+###
+GET http://localhost:8080/ticket/list/Pending
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMDYyMGcxQGdtYWlsLmNvbSIsImV4cCI6MTYwODE0MjcwMSwiaWF0IjoxNjA4MTI0NzAxfQ.9G0rcbnSb4ljSsKz4K-mpnmLc_TOnDdbb2TNrWgbNTKN7P1rD9rqBLnqd6CbjxK4ZES9Yuh-2X8CuSTjxMuTzw
+
+###
+GET http://localhost:8080/ticket/findTicketByID/1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMDYyMGcxQGdtYWlsLmNvbSIsImV4cCI6MTYwODMwNzg5NSwiaWF0IjoxNjA4Mjg5ODk1fQ.c4Gzcm6cB-I7hQlXG8bFriq45Y8k8eMUm8aciFchfA5SM0cM8cSErC8PNra7dELAbj5suOi0dbjJouS6CkFKWA
+
+###
+GET http://localhost:8080/ticket/search?statusPaymentName=Pending&searchBy=bookingCode&searchValue=123
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMDYyMGcxQGdtYWlsLmNvbSIsImV4cCI6MTYwODMwNzg5NSwiaWF0IjoxNjA4Mjg5ODk1fQ.c4Gzcm6cB-I7hQlXG8bFriq45Y8k8eMUm8aciFchfA5SM0cM8cSErC8PNra7dELAbj5suOi0dbjJouS6CkFKWA
+
+###
+PUT http://localhost:8080/ticket/set-status-payment/1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMDYyMGcxQGdtYWlsLmNvbSIsImV4cCI6MTYwODMwODQ2NSwiaWF0IjoxNjA4MjkwNDY1fQ.LCh4qTOXEOd8M9WcbdU_TDxSk0CX55d8F4gaEiuq1D1Ar30NRcIAWbR4rss_BWO_vKy5-GdtfAeLPNiGVa7Hhg
+
+{
+  "id": 1,
+  "statusPaymentName": "Paid"
+
+}
+###
+
+
+
+

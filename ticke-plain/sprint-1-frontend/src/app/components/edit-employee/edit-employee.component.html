@@ -1,0 +1,201 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sửa Thông Tin Nhân Viên</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="groove">
+  <div class="container-fluid table-responsive">
+    <h3 class="text-center text-success mt-3 ">Sửa Thông Tin Nhân Viên</h3>
+    <form [formGroup]="formEdit" (keydown)="keyDownFunction($event)">
+      <div class="row mt-5">
+        <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
+        <div class="col-sm-10 col-xs-10 col-md-10 col-lg-10">
+
+          <div class="form-row">
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Mã nhân viên</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <p style="border-bottom: 1px solid #00000070" class="mt-4">
+                {{formEdit.get('employeeCode').value}}</p>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Tài khoản</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <p style="border-bottom: 1px solid #00000070" class="mt-4">
+                {{formEdit.get('email').value}}</p>
+            </div>
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Họ tên</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <input matInput type="text" formControlName="fullName"/>
+              </mat-form-field>
+
+              <p class="text-danger"
+                 *ngIf="formEdit.get('fullName').hasError('required')
+                                      && (formEdit.controls.fullName?.dirty
+                                      || formEdit.controls.fullName?.touched)">
+                Vui lòng nhập họ tên.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -99%;"
+                 *ngIf="formEdit.get('fullName').hasError('whiteSpace')
+                                      && (formEdit.controls.fullName?.dirty
+                                      || formEdit.controls.fullName?.touched)">
+                Họ tên không được chỉ chứa khoảng trắng.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -82%;"
+                 *ngIf="formEdit.get('fullName').hasError('specialCharacter')
+                                      && (formEdit.controls.fullName?.dirty
+                                      || formEdit.controls.fullName?.touched)">
+                Họ tên không được chứa ký tự đặt biệt.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -26%;"
+                 *ngIf="formEdit.controls.fullName?.invalid
+                                      && !formEdit.get('fullName').hasError('required')
+                                      && !formEdit.get('fullName').hasError('whiteSpace')
+                                      && !formEdit.get('fullName').hasError('specialCharacter')
+                                      && (formEdit.controls.fullName?.dirty
+                                      || formEdit.controls.fullName?.touched)">
+                Họ tên không quá 40 ký tự.
+              </p>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Số điện thoại</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <input matInput type="text" formControlName="phoneNumber"/>
+              </mat-form-field>
+
+              <p class="text-danger" style=" margin-left: -31%;"
+                 *ngIf="formEdit.get('phoneNumber').hasError('required')
+                                      && (formEdit.controls.phoneNumber?.dirty
+                                      || formEdit.controls.phoneNumber?.touched)">
+                Vui lòng nhập số điện thoại.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -97%;"
+                 *ngIf="formEdit.get('phoneNumber').hasError('pattern')
+                                      && (formEdit.controls.phoneNumber?.dirty
+                                      || formEdit.controls.phoneNumber?.touched)">
+                SĐT phải chỉ chứa kí tự số và ít nhất 10 số.
+              </p>
+
+              <p class="text-danger" style=" margin-left: -53%;"
+                 *ngIf="formEdit.controls.phoneNumber?.invalid
+                                      && !formEdit.get('phoneNumber').hasError('required')
+                                      && !formEdit.get('phoneNumber').hasError('pattern')
+                                      && (formEdit.controls.phoneNumber?.dirty
+                                      || formEdit.controls.phoneNumber?.touched)">
+                Số điện thoại không quá 12 kí tự.
+              </p>
+            </div>
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Ngày sinh</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <input matInput [matDatepicker]="birthday" [max]="maxDate" [min]="minDate"
+                       placeholder="Chọn ngày sinh" formControlName="birthday">
+                <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+                <mat-datepicker #birthday></mat-datepicker>
+              </mat-form-field>
+
+              <p class="text-danger" style=" margin-left: -15%;"
+                 *ngIf="formEdit.get('birthday').hasError('required')
+                                      && (formEdit.controls.birthday?.dirty
+                                      || formEdit.controls.birthday?.touched)">
+                Vui lòng nhập ngày sinh.
+              </p>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Phân quyền</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <mat-label>Chọn quyền</mat-label>
+                <mat-select formControlName="role" [value]="roleEdit">
+                  <mat-option value="Admin">Quản trị viên</mat-option>
+                  <mat-option value="Employee">Nhân viên</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <p class="text-danger"
+                 *ngIf="formEdit.get('role').hasError('required')
+                                  && (formEdit.controls.role?.dirty
+                                  || formEdit.controls.role?.touched)">
+                Vui lòng chọn quyền.
+              </p>
+            </div>
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-4">
+              <mat-label>Giới tính</mat-label>
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+              <mat-form-field style="width: 100%">
+                <mat-label>Chọn giới tính</mat-label>
+                <mat-select formControlName="gender" [(ngModel)]="genderEdit">
+                  <mat-option value = "Nam">Nam</mat-option>
+                  <mat-option value = "Nu">Nữ</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <p class="text-danger" style=" margin-left: -5%;"
+                 *ngIf="formEdit.get('gender').hasError('required')
+                                 && (formEdit.controls.gender?.dirty
+                                 || formEdit.controls.gender?.touched)">
+                Vui lòng chọn giới tính.
+              </p>
+            </div>
+            <div class="col-sm-7 col-xs-7 col-md-7 col-lg-7 p-0 m-0"></div>
+          </div>
+
+          <div class="form-row mt-5">
+            <div class="col-sm-5 col-xs-5 col-md-5 col-lg-5 p-0 m-0"></div>
+            <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 p-0 m-0">
+              <button type="button" class="btn btn-primary" value="Quay Lại"
+                      [routerLink]="['/list-employee']">Quay Lại
+              </button>
+              <button type="button" class="btn btn-success ml-2" value="Xóa"
+                      (click)="editEmployee()">Xác Nhận
+              </button>
+            </div>
+            <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 p-0 m-0"></div>
+          </div>
+        </div>
+        <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

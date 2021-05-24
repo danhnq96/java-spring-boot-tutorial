@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
+    <meta name="format-detection" content="telephone=no">
+
+    <title>[[#{title}]]</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/plugin/vendor.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        [[#{group.title}]] <span>[[#{group.description}]]</span>
+                    </div>
+                    <form class="card-body" th:action="@{/admin/group-mng/list}"
+                          method="post" th:object="${search}" id="formBtn">
+                        <div class="table-detail-info overscroll-mobile mb-3">
+                            <!-- Begin info -->
+                            <table class="table custom-table table-bordered w-250">
+                                <tbody>
+                                <tr>
+                                    <td class="font-weight-bold">[[#{group.os}]]</td>
+                                    <td colspan="3">
+                                        <div class="content-button d-flex align-items-center">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-os-radio1" name="os-link"
+                                                       class="custom-control-input" checked value="0">
+                                                <label class="custom-control-label"
+                                                       for="btn-os-radio1">[[#{radio.all}]]</label>
+                                            </div>
+                                            <div
+                                                    class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-os-radio2" name="os-link"
+                                                       class="custom-control-input" value="1">
+                                                <label class="custom-control-label" for="btn-os-radio2">[[#{group.radio.android}]]</label>
+                                            </div>
+                                            <div
+                                                    class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-os-radio3" name="os-link"
+                                                       class="custom-control-input" value="2">
+                                                <label class="custom-control-label" for="btn-os-radio3">[[#{group.radio.ios}]]</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="font-weight-bold">[[#{group.division}]]</td>
+                                    <td colspan="3">
+                                        <div class="content-button d-flex align-items-center">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-group-radio1" name="group-link"
+                                                       class="custom-control-input" checked value="ALL">
+                                                <label class="custom-control-label" for="btn-group-radio1">[[#{radio.all}]]</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-group-radio2" name="group-link"
+                                                       class="custom-control-input" value="prod">
+                                                <label class="custom-control-label" for="btn-group-radio2">[[#{group.radio.open}]]</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="btn-group-radio3" name="group-link"
+                                                       class="custom-control-input" value="dev">
+                                                <label class="custom-control-label" for="btn-group-radio3">[[#{group.radio.verify}]]</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">[[#{group.regist.date}]]</td>
+                                    <td colspan="7">
+                                        <div class="wrap-end-date d-flex align-items-center">
+                                            <input id="startDate12" class="form-control datepicker" size="36"
+                                                   autocomplete="off" th:placeholder="#{calendar.placeholder}">
+                                            <i class="fa fa-calendar ml-2"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!-- End info -->
+                        </div>
+
+                        <div class="group-btn-bottom text-right">
+                            <button class="btn btn-primary" type="submit">[[#{search}]]</button>
+                            <button class="btn btn-primary" type="button"
+                                    th:onclick="|window.location.href='/admin/group-mng/register'|">[[#{register}]]
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript" th:src="@{/lib/jquery/jquery.min.js}"></script>
+<!-- <footer class="app-footer">
+    <th:block th:replace="fragments/footer :: footerFragment"></th:block>
+</footer> -->
+<th:block th:replace="fragments/scripts :: scriptFragment"></th:block>
+</body>
+</html>

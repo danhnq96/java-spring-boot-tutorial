@@ -1,0 +1,139 @@
+<div class="row p-5 ">
+  <h2 style="color: orange;font-weight: bold " > DANH SÁCH HÓA ĐƠN ĐÃ THANH TOÁN</h2>
+<div class="col-md-12 my-3">
+  <table class="table  table-bordered bg-white" *ngIf="listInvoice">
+    <thead class="thead-light ">
+    <tr>
+      <th>Số Thứ Tự</th>
+      <th>Thành Tiền(VND)</th>
+      <th>Mã Số Hóa Đơn</th>
+      <th>Ngày Tạo</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let invoiceA of listInvoice | paginate: { itemsPerPage: 2, currentPage: p } ">
+      <td>{{invoiceA.id}}</td>
+      <td>{{invoiceA.totalMoney}}</td>
+      <td>{{invoiceA.invoiceCode}}</td>
+      <td>{{invoiceA.dateCreated| date:'dd/MM/yyyy'}}</td>
+      <td><input type="checkbox" (click)="getCheckBoxValue($event)" name="IdInvoice" value="{{invoiceA?.id}}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <button  class="ml-auto " id="downloadInvoice" data-toggle="modal" data-target="#download" (click)="preparePdf()">Tải
+      hóa đơn
+    </button>
+  </div>
+
+
+  <div class="col-md-3" id="pg" >
+    <pagination-controls (pageChange)="p = $event"  previousLabel="Quay Lại" responsive="true"  nextLabel="Kế Tiếp"
+                         autoHide="false">
+
+    </pagination-controls>
+  </div>
+</div>
+
+<div class="container-fluid " id="content" style="width: 80%;height: 100%;position: relative;left: -5000px">
+  <kendo-pdf-export #pdf paperSize="A3" margin="1cm">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="navbar-brand" style="font-size: 40px"><span style="font-size: 40px"><i class="fa fa-plane" style="color: orange">
+      </i>C06</span>AIRLINE</p>
+      </div>
+    </div>
+    <div class="row d-flex " style="font-size: 20px;text-align: justify-all">
+      <div class="col-md-9">
+        <p>Đơn Vị Bán:<span style="font-style:italic;font-weight: bold"> CÔNG TY CỖ PHẦN HÀNG KHÔNG C06AIRLINE</span>
+        </p>
+        <p>Mã Số thuế: <span style="font-style:italic;font-weight: bold"> 123567323</span></p>
+        <p>Địa Chỉ: <span style="font-style:italic;font-weight: bold"> 293 Nguyễn Tất Thành, Thành Phố Đà Nẵng</span>
+        </p>
+      </div>
+      <div class="col-md-3 text-right" *ngIf="invoice">
+        <p>Mẫu Số: <span>{{invoice.formCode}}</span></p>
+        <p>Kí Hiệu: <span>{{invoice.invoiceCode}}</span></p>
+        <p>Số: <span style="color: red">0000{{invoice.id}}</span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center" *ngIf="invoice">
+        <br>
+        <br>
+        <h1>HÓA ĐƠN TIỀN CƯỚC VẬN CHUYỂN VÀ PHÍ DỊCH VỤ</h1>
+        <h2>(COMMERCIAL INVOICE)</h2>
+        <h4>Ngày tạo: <span>{{invoice.dateCreated}}</span></h4>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-12" style="font-size: 20px" *ngIf="appUser">
+        <p>Tên Khách Hàng: <span>{{appUser.fullName}}</span></p>
+        <p>Số Điện Thoại: <span>{{appUser.phoneNumber}}</span></p>
+        <p>Địa chỉ: <span>{{appUser.address}}</span></p>
+        <p>Hình Thức Thanh Toán: TMCK</p>
+        <p>Loại Tiền Tệ: VND &nbsp;&nbsp;&nbsp;&nbsp;<span>Tỷ Giá(Exchange rate): 1 </span> &nbsp;&nbsp;&nbsp;&nbsp;
+          <span *ngIf="invoice">Ngày tỷ giá(Date of ex): {{invoice.dateCreated}}</span></p>
+      </div>
+    </div>
+    <div class="row" *ngIf="ticketList">
+      <div class="col-md-12">
+        <table class="table  table-bordered" id="mytable" >
+          <thead class="thead-light ">
+          <tr>
+            <th>Số Thứ Tự</th>
+            <th>Mã Số Vé</th>
+            <th>Chiều Đi</th>
+            <th>Chiều Về</th>
+            <th>Thành Tiền(VND)</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let ticket of ticketList">
+            <td>{{ticket.id}}</td>
+            <td>{{ticket.ticketCode}}</td>
+            <td>{{ticket.flightInformation.departure}}</td>
+            <td>{{ticket.flightInformation.arrival}}</td>
+            <td>{{ticket.invoice.totalMoney}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </kendo-pdf-export>
+</div>
+
+<div class="modal fade" id="download" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" *ngIf="checkboxValues.length">Bạn có muốn tải hóa đơn đã chọn?</h4>
+      </div>
+      <div class="modal-body" *ngIf="checkboxValues.length">
+        <p class="text-danger" ><b>Lưu ý: Các tiền dịch vụ khác không kèm theo hóa đơn này</b></p>
+      </div>
+      <div class="modal-body" *ngIf="checkboxValues.length===0">
+     <p class="text-danger" style="font-size: 25px">
+       Vui Lòng Chọn Hóa Đơn!
+     </p>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-warning" id ="huy" data-dismiss="modal">Hủy</button>
+        <button *ngIf="checkboxValues.length" type="button" class="btn btn-primary" data-dismiss="modal"
+                (click)="printInvoice()">Xác nhận
+        </button>
+
+        <button id="print" type="button" (click)="pdf.saveAs(invoice.formCode)" hidden></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

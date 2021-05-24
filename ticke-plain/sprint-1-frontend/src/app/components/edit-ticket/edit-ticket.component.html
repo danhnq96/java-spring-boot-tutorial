@@ -1,0 +1,120 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <h3>Sửa thông tin vé</h3>
+  </div>
+  <hr>
+  <div class="row justify-content-center">
+    <form [formGroup]="formEdit" (keydown)="keyDownFunction($event)">
+      <div class="row">
+        <div class="col-sm-3">
+          <p>Mã đặt chỗ</p>
+        </div>
+        <div class="col-sm-9">
+          <mat-form-field class="matInputMaterial">
+            <mat-label></mat-label>
+            <input matInput
+                   value="{{bookingCodeDisplay.bookingCode}}" readonly>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p>Chuyến bay</p>
+        </div>
+        <div class="col-sm-9">
+          <mat-form-field class="matInputMaterial">
+            <mat-label></mat-label>
+            <input matInput
+                   value="{{flightInformationDisplay.departure}} - {{flightInformationDisplay.arrival}}" readonly>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p>Ngày đi</p>
+        </div>
+        <div class="col-sm-9">
+          <mat-form-field class="matInputMaterial">
+            <mat-label></mat-label>
+            <input matInput
+                   value="{{flightInformationDisplay.departureDate}}" readonly>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p>Tên người đi<sup class="text-danger"> *</sup></p>
+        </div>
+        <div class="col-sm-9">
+          <mat-form-field class="matInputMaterial">
+            <mat-label></mat-label>
+            <input matInput formControlName="passengerName" type="text">
+          </mat-form-field>
+          <p class="text-danger"
+             *ngIf="formEdit.get('passengerName').hasError('required')
+                    && (formEdit.controls.passengerName?.dirty
+                    || formEdit.controls.passengerName?.touched)">
+            Vui lòng nhập tên người đi!
+          </p>
+          <p class="text-danger"
+             *ngIf="formEdit.get('passengerName').hasError('pattern')
+                    && (formEdit.controls.passengerName?.dirty
+                    || formEdit.controls.passengerName?.touched)">
+            Vui lòng viết không dấu, không nhập kí tự đặc biệt và không có khoảng trắng thừa!
+          </p>
+          <p class="text-danger"
+             *ngIf="formEdit.controls.passengerName?.invalid
+                    && !formEdit.get('passengerName').hasError('required')
+                    && !formEdit.get('passengerName').hasError('pattern')
+                    && (formEdit.controls.passengerName?.dirty
+                    || formEdit.controls.passengerName?.touched)">
+            Tên người đi ít nhất phải 10 kí tự và tối đa chỉ được 50 kí tự.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p>Email thanh toán<sup class="text-danger"> *</sup></p>
+        </div>
+        <div class="col-sm-9">
+          <mat-form-field class="matInputMaterial">
+            <mat-label></mat-label>
+            <input matInput formControlName="appUser">
+          </mat-form-field>
+          <p class="text-danger"
+             *ngIf="formEdit.get('appUser').hasError('required')
+                                  && (formEdit.controls.appUser?.dirty
+                                  || formEdit.controls.appUser?.touched)">
+            Vui lòng nhập email thanh toán!
+          </p>
+          <p class="text-danger"
+             *ngIf="formEdit.get('appUser').hasError('emailUserExists')
+                                  && (formEdit.controls.appUser?.dirty
+                                  || formEdit.controls.appUser?.touched)">
+            Vui lòng nhập email đã đăng ký trong hệ thống!
+          </p>
+          <p class="text-danger"
+             *ngIf="formEdit.get('appUser').hasError('pattern')
+                                  && (formEdit.controls.appUser?.dirty
+                                  || formEdit.controls.appUser?.touched)">
+            Email sai định dạng. Email chuẩn có dạng abc@abc.abc .
+          </p>
+          <p class="text-danger"
+             *ngIf="formEdit.controls.appUser?.invalid
+                    && !formEdit.get('appUser').hasError('required')
+                    && !formEdit.get('appUser').hasError('pattern')
+                    && !formEdit.get('appUser').hasError('emailUserExists')
+                    && (formEdit.controls.appUser?.dirty
+                    || formEdit.controls.appUser?.touched)">
+            Độ dài tối đa của email chỉ được 50 kí tự.
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+  <hr class="hrBottom">
+  <div class="row button">
+    <button mat-dialog-close class="back">Hủy</button>
+    <button class="accept" (click)="edit()">Xác Nhận</button>
+  </div>
+</div>

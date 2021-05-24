@@ -1,0 +1,48 @@
+.date-button {
+  background-color: orange;
+  width: 130px;
+  border-top-right-radius: 80px;
+  text-align: left;
+  border-color: orange;
+  color: white;
+  font-weight: bold;
+}
+
+.date-button:focus {
+  outline: none;
+}
+
+
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  padding-top: 0px;
+}
+
+.mat-button {
+  background-color: orange;
+  border-color: orange;
+  color: white;
+}
+ .mat-button.choose {
+   background-color: blue;
+   border-color: blue;
+   color: white;
+ }
+
+.mat-button.choos:active {
+  background-color: black;
+  border-color: black;
+  color: white;
+}
+
+.border-flight {
+  border-radius: 0.75rem;
+}
+a {
+  pointer-events: none;
+  cursor: default;
+}

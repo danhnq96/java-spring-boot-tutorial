@@ -1,0 +1,58 @@
+
+.btn-orange {
+  background-color: orange;
+  width: 130px;
+  color: white;
+}
+
+.btn-orange-add {
+  margin-top: 30px;
+  text-align: center;
+  background-color: orange;
+  width: 100px;
+  padding: 5px;
+  color: white;
+}
+.btn-orange-add:disabled{
+  background: #dd4b39;
+}
+
+.btn-orange-cancel {
+  margin-bottom: 30px;
+  margin-top: 20px;
+  text-align: center;
+  background-color: orange;
+  width: 100px;
+  padding: 5px;
+  color: white;
+  margin-left: 200px;
+}
+.title-customer h3, h4 {
+  text-align: center;
+  font-weight: bold;
+}
+
+
+label {
+
+}
+
+.mat-radio-label {
+  margin: 20px 15px 0 0;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+div.container{
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvShLdAc3JYrAH6w4wCR7Dm32apRHNNLtpPA&usqp=CAU");
+}
+.title-customer{
+  font-weight: bold;
+  margin-bottom: 15px;
+  margin-top: 8px;
+  color: orange;
+}
+

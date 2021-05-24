@@ -1,0 +1,59 @@
+<div class="container-fluid" id="feedback-page">
+  <div class="row">
+<!--    <span id="announce-success">Bạn đã gửi feedback thành công</span>-->
+    <div class="col-lg-6 col-sm-12 position-map" style="float: left">
+      <iframe id="direct-map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.7517909401404!2d108.20754761477679!3d16.078364943464003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219a486b7f699%3A0xae6269b629a63e82!2zVHJ1bmcgdMOibSDEkcOgbyB04bqhbyBs4bqtcCB0csOsbmggdmnDqm4gQ29kZUd5bSDEkMOgIE7hurVuZw!5e0!3m2!1svi!2s!4v1607562768859!5m2!1svi!2s"
+              width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+              tabindex="0"></iframe>
+    </div>
+    <div class="col-lg-6 col-sm-12 bg-light feedback-form" id="feedback-form">
+      <h1>Phản hồi của khách hàng</h1>
+      <form (ngSubmit)="sendFeedBack()" [formGroup]="formFeedBack">
+        <div class="form-group content-feedback">
+          <label>Tên<span style="color: red">*</span></label>
+          <input type="text" class="form-control focus-input content-textbox" placeholder="Họ và tên"
+                 formControlName="senderName"
+                 required>
+          <small class="error-feedback-required"
+                 *ngIf="formFeedBack.controls.senderName?.touched && formFeedBack.controls.senderName?.errors?.required">
+            Hãy nhập tên của bạn vào đây
+          </small>
+        </div>
+        <div class="form-group content-feedback">
+          <label>Email<span style="color: red">*</span></label>
+          <input type="email" class="form-control content-textbox" placeholder="Email" formControlName="senderEmail"
+                 required>
+          <small class="error-feedback-required"
+                 *ngIf="formFeedBack.controls.senderEmail?.touched && formFeedBack.controls.senderEmail?.errors?.required">
+            Hãy nhập email của bạn vào đây
+          </small>
+          <small class="error-feedback-required"
+                 *ngIf="formFeedBack.controls.senderEmail?.touched && formFeedBack.controls.senderEmail?.errors?.email">
+            Hãy nhập đúng form của email abc@abc.abc
+          </small>
+        </div>
+        <div class="form-group content-feedback">
+          <label>Chủ đề<span style="color: red">*</span></label>
+          <input type="text" class="form-control content-textbox" formControlName="title">
+          <small class="error-feedback-required"
+                 *ngIf="formFeedBack.controls.title?.touched && formFeedBack.controls.title?.errors?.required">
+            Hãy nhập chủ đề mà bạn muốn gửi phản hồi
+          </small>
+        </div>
+        <div class="form-group content-feedback">
+          <label>Nội dung<span style="color: red">*</span></label>
+          <textarea class="form-control content-textbox" placeholder="Nội dung" formControlName="content"></textarea>
+          <small class="error-feedback-required"
+                 *ngIf="formFeedBack.controls.content?.touched && formFeedBack.controls.content?.errors?.required">
+            Hãy nhập nội dung mà bạn muốn phản hồi
+          </small>
+        </div>
+        <div align="center">
+          <button class="btn" id="btn-submit-feedback-form" (click)="openDialog()">Gửi phản hồi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

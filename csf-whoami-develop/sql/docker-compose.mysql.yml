@@ -1,0 +1,15 @@
+version: '3.5'
+services:
+  mysql:
+    container_name: mysql-docker
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: whoami_db
+      MYSQL_DATABASE: whoami_db
+      MYSQL_USER: sqluser
+      MYSQL_PASSWORD: jy4w0zi790
+      # DATABASE_URL: 'postgres://hello:django@data:3306/whoami_db'
+      # CACHE_URL: 'postgres://hello:django@data:3306/default'
+    ports:
+      - 3306:3306
+    restart: always

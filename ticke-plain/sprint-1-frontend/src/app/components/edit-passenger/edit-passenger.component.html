@@ -1,0 +1,355 @@
+<!--&lt;!&ndash;<div class="container card">&ndash;&gt;-->
+<!--&lt;!&ndash;  <div class="title-customer">&ndash;&gt;-->
+<!--&lt;!&ndash;    <h3>QUẢN LÝ KHÁCH HÀNG</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;    <h4>Sửa Thông Tin Khách Hàng</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;    <hr>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  <form [formGroup]="formEdit">&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="form-group d-flex align-items-center form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label class="col-lg-3 col-md-3">Họ Và Tên:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-form-field class="w-50 col-lg-9 col-md-9">&ndash;&gt;-->
+<!--&lt;!&ndash;        <input matInput placeholder="Name" formControlName="fullName">&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <span class="text-danger"&ndash;&gt;-->
+<!--&lt;!&ndash;                                   *ngIf="formEdit.get('fullName').invalid && formEdit.get('fullName').touched">{{ name_msg }}&ndash;&gt;-->
+<!--&lt;!&ndash;                  </span>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="form-group d-flex align-items-center form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label class="col-lg-3">Ngày Sinh:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-form-field class="w-50 col-lg-9 col-md-9">&ndash;&gt;-->
+<!--&lt;!&ndash;        <input [max]="maxDate" [min]="minDate" matInput [matDatepicker]="myDatepicker"&ndash;&gt;-->
+<!--&lt;!&ndash;               formControlName="birthday" placeholder="Chọn ngày sinh" format="yyyy-MM-dd">&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-datepicker #myDatepicker startView="month"></mat-datepicker>&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <span class="text-danger"&ndash;&gt;-->
+<!--&lt;!&ndash;                        *ngIf="formEdit.get('birthday').invalid && formEdit.get('birthday').touched">{{ birthday_msg }}&ndash;&gt;-->
+<!--&lt;!&ndash;                  </span>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="form-group d-flex align-items-center form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label class="col-lg-3">Giới Tính:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-radio-group class="col-lg-9 col-md-9" aria-label="Select an option" formControlName="gender">&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-radio-button [checked]="formEdit.value.gender === true" value="true">Nam</mat-radio-button>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-radio-button [checked]="formEdit.value.gender === false" style="margin-left: 20px" value="false">Nữ&ndash;&gt;-->
+<!--&lt;!&ndash;        </mat-radio-button>&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-radio-group>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;    <div class="d-flex align-items-center form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label class="col-lg-3 col-md-3 ">Email:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-form-field class="w-50 col-lg-9 col-md-9">&ndash;&gt;-->
+<!--&lt;!&ndash;        <input matInput placeholder="Email" formControlName="email">&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <span class="text-danger"&ndash;&gt;-->
+<!--&lt;!&ndash;                        *ngIf="formEdit.get('email').invalid && formEdit.get('email').touched">{{ email_msg }}&ndash;&gt;-->
+<!--&lt;!&ndash;                  </span>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="d-flex align-items-center form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label class="col-lg-3 col-md-3">Số Điện Thoại:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-form-field class="w-50 col-lg-9 col-md-9">&ndash;&gt;-->
+<!--&lt;!&ndash;        <input matInput placeholder="Số Điện Thoại" formControlName="phoneNumber">&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <span class="text-danger"&ndash;&gt;-->
+<!--&lt;!&ndash;                        *ngIf="formEdit.get('phoneNumber').invalid && formEdit.get('phoneNumber').touched">{{ phone_msg }}&ndash;&gt;-->
+<!--&lt;!&ndash;                  </span>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;    <div class="d-flex align-items-center form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label class="col-lg-3 col-md-3 ">Cmnd - Passport:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-form-field class="w-50 col-lg-9 col-md-9">&ndash;&gt;-->
+<!--&lt;!&ndash;        <input matInput placeholder="Cmnd - PassPort" formControlName="identityNumber">&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <span class="text-danger"&ndash;&gt;-->
+<!--&lt;!&ndash;                        *ngIf="formEdit.get('identityNumber').invalid && formEdit.get('identityNumber').touched">{{ idCard_msg }}&ndash;&gt;-->
+<!--&lt;!&ndash;                  </span>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;    <div class="d-flex align-items-center form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label class="col-lg-3 col-md-3">Địa Chỉ:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-form-field class="w-50 col-lg-9 col-md-9">&ndash;&gt;-->
+<!--&lt;!&ndash;        <input matInput placeholder="Địa Chỉ" formControlName="address">&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <span class="text-danger"&ndash;&gt;-->
+<!--&lt;!&ndash;                        *ngIf="formEdit.get('address').invalid && formEdit.get('address').touched">{{ address_msg }}&ndash;&gt;-->
+<!--&lt;!&ndash;                  </span>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="d-flex align-items-center form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label class="col-lg-3 col-md-3">Ký Gửi Hành Lý:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-form-field class="col-lg-9">&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-label>Chọn Gói Hành Lý</mat-label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-select formControlName="luggageId">&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-option [value]="formEdit.value.nameLuggage">{{formEdit.value.nameLuggage}}</mat-option>&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-option *ngFor="let lug of luggageList" [value]="lug.id">&ndash;&gt;-->
+<!--&lt;!&ndash;            {{lug.name}}&ndash;&gt;-->
+<!--&lt;!&ndash;          </mat-option>&ndash;&gt;-->
+<!--&lt;!&ndash;        </mat-select>&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;  </form>&ndash;&gt;-->
+<!--&lt;!&ndash;  <div class="d-flex align-items-center form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="col-lg-3 col-md-3">&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="col-lg-9 col-md-9">&ndash;&gt;-->
+<!--&lt;!&ndash;      <button (click)="callAPi()" class="btn-orange-add" type="submit" [disabled]="formEdit.invalid">Chỉnh Sửa</button>&ndash;&gt;-->
+<!--&lt;!&ndash;      <button (click)="cancel()" class="btn-orange-cancel">Hủy Bỏ</button>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+<!--<div class="container card">-->
+<!--  <div class="title-customer">-->
+<!--    <h3>QUẢN LÝ KHÁCH HÀNG</h3>-->
+<!--    <h4>Sửa Thông Tin Khách Hàng</h4>-->
+<!--    <hr>-->
+<!--  </div>-->
+<!--  <form [formGroup]="formEdit">-->
+
+<!--    <div class="form-group d-flex align-items-center form-group">-->
+<!--      <label class="col-lg-3 col-md-3">Họ Và Tên:</label>-->
+<!--      <mat-form-field class="w-50 col-lg-9 col-md-9">-->
+<!--        <input matInput placeholder="Name" formControlName="fullName">-->
+<!--        <span class="text-danger" style="font-size: 14px;font-family: -apple-system"-->
+<!--              *ngIf="formEdit.get('fullName').invalid && formEdit.get('fullName').touched">{{ name_msg }}-->
+<!--                  </span>-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
+
+<!--    <div class="form-group d-flex align-items-center form-group">-->
+<!--      <label class="col-lg-3">Ngày Sinh:</label>-->
+<!--      <mat-form-field class="w-50 col-lg-9 col-md-9">-->
+<!--        <input [max]="maxDate" [min]="minDate" matInput [matDatepicker]="myDatepicker"-->
+<!--               formControlName="birthday" placeholder="Chọn ngày sinh" format="yyyy-MM-dd">-->
+<!--        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>-->
+<!--        <mat-datepicker #myDatepicker startView="month"></mat-datepicker>-->
+<!--        <span style="font-size: 14px;font-family: -apple-system" class="text-danger"-->
+<!--              *ngIf="formEdit.get('birthday').invalid && formEdit.get('birthday').touched">{{ birthday_msg }}-->
+<!--                  </span>-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
+<!--    <div class="form-group d-flex align-items-center form-group">-->
+<!--      <label class="col-lg-3">Giới Tính:</label>-->
+<!--      <mat-radio-group class="col-lg-9 col-md-9" aria-label="Select an option" formControlName="gender">-->
+<!--        <mat-radio-button [checked]="formEdit.value.gender === true" value="true">Nam</mat-radio-button>-->
+<!--        <mat-radio-button [checked]="formEdit.value.gender === false" style="margin-left: 20px" value="false">Nữ-->
+<!--        </mat-radio-button>-->
+<!--      </mat-radio-group>-->
+<!--    </div>-->
+
+
+<!--    <div class="d-flex align-items-center form-group">-->
+<!--      <label class="col-lg-3 col-md-3 ">Email:</label>-->
+<!--      <mat-form-field class="w-50 col-lg-9 col-md-9">-->
+<!--        <input matInput placeholder="Email" formControlName="email">-->
+<!--        <span style="font-size: 14px;font-family: -apple-system" class="text-danger"-->
+<!--              *ngIf="formEdit.get('email').invalid && formEdit.get('email').touched">{{ email_msg }}-->
+<!--                  </span>-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
+
+<!--    <div class="d-flex align-items-center form-group">-->
+<!--      <label class="col-lg-3 col-md-3">Số Điện Thoại:</label>-->
+<!--      <mat-form-field class="w-50 col-lg-9 col-md-9">-->
+<!--        <input matInput placeholder="Số Điện Thoại" formControlName="phoneNumber">-->
+<!--        <span style="font-size: 14px;font-family: -apple-system" class="text-danger"-->
+<!--              *ngIf="formEdit.get('phoneNumber').invalid && formEdit.get('phoneNumber').touched">{{ phone_msg }}-->
+<!--                  </span>-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
+
+
+<!--    <div class="d-flex align-items-center form-group">-->
+<!--      <label class="col-lg-3 col-md-3 ">Cmnd - Passport:</label>-->
+<!--      <mat-form-field class="w-50 col-lg-9 col-md-9">-->
+<!--        <input matInput placeholder="Cmnd - PassPort" formControlName="identityNumber">-->
+<!--        <span style="font-size: 14px;font-family: -apple-system"  class="text-danger"-->
+<!--              *ngIf="formEdit.get('identityNumber').invalid && formEdit.get('identityNumber').touched">{{ idCard_msg }}-->
+<!--                  </span>-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
+
+
+<!--    <div class="d-flex align-items-center form-group">-->
+<!--      <label class="col-lg-3 col-md-3">Địa Chỉ:</label>-->
+<!--      <mat-form-field class="w-50 col-lg-9 col-md-9">-->
+<!--        <input matInput placeholder="Địa Chỉ" formControlName="address">-->
+<!--        <span class="text-danger" style="font-size: 14px;font-family: -apple-system"-->
+<!--              *ngIf="formEdit.get('address').invalid && formEdit.get('address').touched">{{ address_msg }}-->
+<!--                  </span>-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
+
+
+<!--    <div class="d-flex align-items-center form-group">-->
+<!--      <label class="col-lg-3 col-md-3">Ký Gửi Hành Lý:</label>-->
+<!--      <mat-form-field class="col-lg-9">-->
+<!--        <mat-label>Chọn Gói Hành Lý</mat-label>-->
+<!--        <mat-select formControlName="luggageId">-->
+<!--          <mat-option [value]="formEdit.value.nameLuggage">{{formEdit.value.nameLuggage}}</mat-option>-->
+<!--          <mat-option *ngFor="let lug of luggageList" [value]="lug.id">-->
+<!--            {{lug.name}}-->
+<!--          </mat-option>-->
+<!--        </mat-select>-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
+<!--  </form>-->
+<!--  <div class="d-flex align-items-center form-group">-->
+<!--    <div class="col-lg-3 col-md-3">-->
+<!--    </div>-->
+<!--    <div class="col-lg-9 col-md-9">-->
+<!--      <button (click)="callAPi()" class="btn-orange-add" type="submit" [disabled]="formEdit.invalid">Chỉnh Sửa</button>-->
+<!--      <button (click)="cancel()" class="btn-orange-cancel">Hủy Bỏ</button>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</div>-->
+
+<div class="container card">
+  <div class="title-customer">
+    <h3>QUẢN LÝ KHÁCH HÀNG</h3>
+    <h4>Sửa Thông Tin Khách Hàng</h4>
+    <hr>
+  </div>
+  <form [formGroup]="formEdit">
+
+    <div class="form-group d-flex align-items-center form-group">
+      <label class="col-lg-3 col-md-3">Họ Và Tên:</label>
+      <mat-form-field class="w-50 col-lg-9 col-md-9">
+        <input matInput placeholder="Name" formControlName="fullName">
+        <span class="text-danger" style="font-size: 14px;font-family: -apple-system"
+              *ngIf="formEdit.get('fullName').invalid && formEdit.get('fullName').touched">{{ name_msg }}
+                  </span>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group d-flex align-items-center form-group">
+      <label class="col-lg-3">Ngày Sinh:</label>
+      <mat-form-field class="w-50 col-lg-9 col-md-9">
+        <input [max]="maxDate" [min]="minDate" matInput [matDatepicker]="myDatepicker"
+               formControlName="birthday" placeholder="Chọn ngày sinh" format="yyyy-MM-dd">
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker startView="month"></mat-datepicker>
+        <span style="font-size: 14px;font-family: -apple-system" class="text-danger"
+              *ngIf="formEdit.get('birthday').invalid && formEdit.get('birthday').touched">{{ birthday_msg }}
+                  </span>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group d-flex align-items-center form-group">
+      <label class="col-lg-3">Giới Tính:</label>
+      <mat-radio-group class="col-lg-9 col-md-9" aria-label="Select an option" formControlName="gender">
+        <mat-radio-button [checked]="formEdit.value.gender === true" value="true">Nam</mat-radio-button>
+        <mat-radio-button [checked]="formEdit.value.gender === false" style="margin-left: 20px" value="false">Nữ
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+
+    <div class="d-flex align-items-center form-group">
+      <label class="col-lg-3 col-md-3 ">Email:</label>
+      <mat-form-field class="w-50 col-lg-9 col-md-9">
+        <input matInput placeholder="Email" formControlName="email">
+        <span style="font-size: 14px;font-family: -apple-system" class="text-danger"
+              *ngIf="formEdit.get('email').invalid && formEdit.get('email').touched">{{ email_msg }}
+                  </span>
+      </mat-form-field>
+    </div>
+
+
+    <div class="d-flex align-items-center form-group">
+      <label class="col-lg-3 col-md-3">Số Điện Thoại:</label>
+      <mat-form-field class="w-50 col-lg-9 col-md-9">
+        <input matInput placeholder="Số Điện Thoại" formControlName="phoneNumber">
+        <span style="font-size: 14px;font-family: -apple-system" class="text-danger"
+              *ngIf="formEdit.get('phoneNumber').invalid && formEdit.get('phoneNumber').touched">{{ phone_msg }}
+                  </span>
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="d-flex align-items-center form-group">
+      <label class="col-lg-3 col-md-3 ">Cmnd - Passport:</label>
+      <mat-form-field class="w-50 col-lg-9 col-md-9">
+        <input matInput placeholder="Cmnd - PassPort" formControlName="identityNumber">
+        <span style="font-size: 14px;font-family: -apple-system"  class="text-danger"
+              *ngIf="formEdit.get('identityNumber').invalid && formEdit.get('identityNumber').touched">{{ idCard_msg }}
+                  </span>
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="d-flex align-items-center form-group">
+      <label class="col-lg-3 col-md-3">Địa Chỉ:</label>
+      <mat-form-field class="w-50 col-lg-9 col-md-9">
+        <input matInput placeholder="Địa Chỉ" formControlName="address">
+        <span class="text-danger" style="font-size: 14px;font-family: -apple-system"
+              *ngIf="formEdit.get('address').invalid && formEdit.get('address').touched">{{ address_msg }}
+                  </span>
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="d-flex align-items-center form-group">
+      <label class="col-lg-3 col-md-3">Ký Gửi Hành Lý:</label>
+      <mat-form-field class="col-lg-9">
+        <mat-label>Chọn Gói Hành Lý</mat-label>
+        <mat-select formControlName="luggageId">
+          <mat-option [value]="formEdit.value.nameLuggage">{{formEdit.value.nameLuggage}}</mat-option>
+          <mat-option *ngFor="let lug of luggageList" [value]="lug.id">
+            {{lug.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </form>
+  <div class="d-flex align-items-center form-group">
+    <div class="col-lg-3 col-md-3">
+    </div>
+    <div class="col-lg-9 col-md-9">
+      <button (click)="callAPi()" class="btn-orange-add" type="submit" [disabled]="formEdit.invalid">Chỉnh Sửa</button>
+      <button (click)="cancel()" class="btn-orange-cancel">Hủy Bỏ</button>
+    </div>
+  </div>
+
+</div>
+
+
+

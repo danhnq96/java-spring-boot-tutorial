@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản Lý Nhân Viên</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid table-responsive">
+  <div class="row col-sm-12 col-xl-12 mt-5 d-flex form-inline">
+    <div class="col-sm-3 col-xl-3">
+      <button type="button" class="btn btn-success" routerLink="create-employee" [hidden]="role != 'Admin'">
+        <i class="fas fa-plus-circle"></i>
+        Thêm mới
+      </button>
+    </div>
+    <div class="col-sm-1 col-xl-1"></div>
+    <div class="row col-sm-8 col-xl-8 d-flex justify-content-end">
+      <div class="form-group row col-sm-5 col-xl-5 p-0">
+        <span class="col-sm-6 col-xl-6 justify-content-start"> Tìm kiếm theo </span>
+        <select class="col-sm-6 col-xl-6 form-control form-control-sm rounded" #attribute>
+          <option value="choose">Chọn Giá Trị</option>
+          <option value="fullName">Họ Tên</option>
+          <option value="email">Tài Khoản</option>
+          <option value="phoneNumber">Số Điện Thoại</option>
+        </select>
+      </div>
+      <div class="col-sm-6 col-xl-6 ml-4 d-flex justify-content-center form-inline mx-2 m-0 p-0">
+        <input type="text" class="form-control form-control-sm rounded mx-2 "
+               [(ngModel)]="keywordSearch" placeholder="Nhập từ khóa tìm kiếm">
+        <button type="button" class="search btn btn-success btn-sm mx-2"
+                (click)="searchEmployee(attribute.value)" style="width: 60px">
+          <i class="fas fa-search"></i></button>
+        <button type="button" class="search btn btn-success btn-sm mx-2"
+                (click)="resetSearch()"><i class="fas fa-undo-alt"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class=" col-sm-12 col-xl-12 mt-4">
+    <div *ngIf="checkList === 'true'">
+      <table class="table table-hover">
+        <thead class="btn-light">
+        <tr>
+          <th>Mã NV</th>
+          <th>Họ Tên</th>
+          <th>Ngày Sinh</th>
+          <th>Giới Tính</th>
+          <th>Tài Khoản</th>
+          <th>Số Điện Thoại</th>
+          <th>Phân Quyền</th>
+          <th [hidden]="role != 'Admin'">Thao Tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let employee of list |paginate: { itemsPerPage: 5, currentPage: p}">
+          <td>{{employee.employeeCode}}</td>
+          <td>{{employee.fullName}}</td>
+          <td>{{employee.birthday | date:'dd/MM/yyyy'}}</td>
+          <td>
+            <span *ngIf="employee.gender == 0">Nữ</span>
+            <span *ngIf="employee.gender == 1">Nam</span>
+          </td>
+          <td>{{employee.email}}</td>
+          <td>{{employee.phoneNumber}}</td>
+          <td [hidden]="employee.appAccount.appRole.name !== 'Employee'">Nhân viên</td>
+          <td [hidden]="employee.appAccount.appRole.name !== 'Admin'">Quản trị viên</td>
+          <td [hidden]="role != 'Admin'">
+            <span [hidden]="employee.appAccount.appRole.name == 'Admin'">
+            <i class="fas fa-edit btn btn-warning" [routerLink]="['edit-employee', employee.id]"></i>
+            <i class="fas fa-trash-alt btn btn-dark ml-1" (click)="openDialogDelete(employee.id)"></i>
+          </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="checkList === 'false'">
+      <h1 class="text-danger text-center">Không tìm thấy kết quả</h1>
+      <div align="center">
+        <button class="btn btn-primary mt-3 mb-3" (click)="resetSearch()">Quay Lại</button>
+      </div>
+    </div>
+    <div align="center" *ngIf="this.list.length !== 0">
+      <pagination-controls (pageChange)="p = $event" previousLabel="Trước" nextLabel="Sau"
+                           responsive="true"></pagination-controls>
+    </div>
+  </div>
+</div>
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

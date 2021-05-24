@@ -1,0 +1,70 @@
+<div class="row my-4">
+  <div class="col-9 d-flex justify-content-center" style="font-size: 50px; color: white">Quản lý bán vé</div>
+  <div class="col-3"></div>
+</div>
+<div class="row">
+  <div class="col-7"><a class="btn ml-3"
+                        [routerLink]="'/search-ticket-empty'"
+                        style="background-color: orange; color: white">Tìm vé trống</a></div>
+  <div class="col-2">
+    <div class="row">
+      <div class="col-3">
+      </div>
+      <div class="col-9">
+        <select class="custom-select" #key>
+          <option [selected]="key" value="price">Giá</option>
+          <option value="full name passenger">Tên hành khách</option>
+          <option value="booking code">Mã đặt vé</option>
+        </select></div>
+    </div>
+  </div>
+  <div class="col-3">
+    <form class="form-inline row">
+      <input class="form-control mr-2 col-7" type="search" placeholder="Tìm vé" aria-label="Search" #inputSearch>
+      <button class="btn" type="submit"
+              style="background-color: orange; color: white">Tìm
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="container-fluid my-4">
+  <div class="table-responsive">
+    <div style="background-color:#f7f5f2">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>STT</th>
+          <th>Tên hành khách</th>
+          <th>Mã đặt chỗ</th>
+          <th>Tuyến bay</th>
+          <th>Ngày đi</th>
+          <th>Giá vé</th>
+          <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let element of ticketList">
+          <td>{{element.id}}</td>
+          <td>{{element.passengerName}}</td>
+          <td>{{element.booking.bookingCode}}</td>
+          <td>{{element.flightInformation.departure}} - {{element.flightInformation.arrival}}</td>
+          <td>{{element.flightInformation.departureDate | date : "dd/MM/yyyy"}}</td>
+          <td>{{element.priceDeparture}}</td>
+          <td>
+            <button (click)="openDialogEdit(element.id)" type="button" class="btn btn-warning mr-1"
+                    style="background-color: orange; color: white">Sửa
+            </button>
+            <button (click)="openDialogDelete(element.id)" type="button" class="btn btn-dark mr-1"
+                    style="background-color: grey; color: white">Xóa
+            </button>
+            <button (click)="openWindowPrint(element.id)" type="button" class="btn btn-primary"
+                    style="background-color: green; color: white">In vé
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
