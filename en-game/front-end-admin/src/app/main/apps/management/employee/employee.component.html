@@ -1,0 +1,283 @@
+<div id="employee" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+      <!-- APP TITLE -->
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/apps/management/employees'">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="employee-image mr-8 mr-sm-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          <ng-container *ngIf="pageType === 'edit'">
+            <img [src]="employee.image" (click)="selectFile.click()" style="cursor: pointer;">
+            <input type="file" (change)="getImage($event)" style="display: none" #selectFile>
+          </ng-container>
+          <ng-container *ngIf="pageType === 'new'">
+            <img [src]="employee.image">
+          </ng-container>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          <div class="h2" *ngIf="pageType ==='edit'">
+            {{employee.midName + " " + employee.firstName + " " + employee.lastName + " (" + employee.account.username +
+            ") "}}
+            <mat-icon *ngIf="employee.active" class="active-icon green-600 s-16" style="border-radius: 50%">
+              check
+            </mat-icon>
+            <mat-icon *ngIf="!employee.active" class="active-icon red-500 s-16" style="border-radius: 50%">
+              close
+            </mat-icon>
+          </div>
+          <div class="h2" *ngIf="pageType ==='new'">
+            New Employee
+          </div>
+          <div class="subtitle secondary-text">
+            <span>Employee Detail</span>
+          </div>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+      <button mat-raised-button class="save-product-button" [disabled]="employeeForm.invalid" *ngIf="pageType ==='new'"
+        (click)="addEmployee()">
+        <span>ADD</span>
+      </button>
+
+      <!-- [disabled]="employeeForm.invalid || employeeForm.pristine" -->
+      <button mat-raised-button class="save-product-button btn-custom" *ngIf="pageType ==='edit'"
+        (click)="saveEmployee()" [disabled]="employeeForm.invalid" color="primary">
+        <span>SAVE</span>
+      </button>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+
+      <!-- CONTENT -->
+      <div class="content">
+        <form name="employeeForm" [formGroup]="employeeForm" novalidate class="employee w-100-p" fxLayout="column"
+          fxFlex>
+          <mat-tab-group>
+            <mat-tab label="Basic Info">
+              <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                  <!-- First Name -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="First Name" name="firstName" required [(ngModel)]="employee.firstName"
+                      formControlName="firstName" (keyup.enter)="eventKeyUpEnterSubmitForm()">
+                    <mat-error *ngIf="employeeForm.get('firstName').hasError('required')">
+                      First name is required
+                    </mat-error>
+                    <mat-error *ngIf="employeeForm.get('firstName').hasError('pattern')">
+                      First name is less than 30 characters and no special characters
+                    </mat-error>
+                  </mat-form-field>
+
+                  <!-- Mid Name -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                    <mat-label>Mid Name</mat-label>
+                    <input matInput placeholder="Mid Name" name="midName" (keyup.enter)="eventKeyUpEnterSubmitForm()"
+                      [(ngModel)]="employee.midName" formControlName="midName">
+                    <mat-error *ngIf="employeeForm.get('midName').hasError('pattern')">
+                      Mid name can empty or less than 30 characters and no special characters
+                    </mat-error>
+                  </mat-form-field>
+
+                  <!-- Last Name -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="Last Name" name="lastName" required
+                      (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="employee.lastName"
+                      formControlName="lastName">
+                    <mat-error *ngIf="employeeForm.get('lastName').hasError('required')">
+                      Last name is required
+                    </mat-error>
+                    <mat-error *ngIf="employeeForm.get('lastName').hasError('pattern')">
+                      Last name is less than 30 characters and no special characters
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <br />
+                <!-- Address -->
+                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                  <mat-label>Address</mat-label>
+                  <textarea matInput placeholder="Address" name="address" required
+                    (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="employee.address" formControlName="address"
+                    rows="5">
+                                    </textarea>
+                  <mat-error *ngIf="employeeForm.get('address').hasError('required')">
+                    Address is required
+                  </mat-error>
+                  <mat-error *ngIf="employeeForm.get('address').hasError('pattern')">
+                    The address is less than 190 characters and no special characters
+                  </mat-error>
+                </mat-form-field>
+                <br />
+
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                  <!-- Id Card -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                    <mat-label>Id Card</mat-label>
+                    <input matInput placeholder="Id Card" name="idCard" required
+                      (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="employee.idCard"
+                      formControlName="idCard">
+                    <mat-error *ngIf="employeeForm.get('idCard').hasError('required')">
+                      Id card is required
+                    </mat-error>
+                    <mat-error *ngIf="employeeForm.get('idCard').hasError('pattern')">
+                      Id card is minimum 9 and maximum 20 characters no special characters
+                    </mat-error>
+                  </mat-form-field>
+
+                  <!-- Phone -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                    <mat-label>Phone</mat-label>
+                    <input matInput placeholder="Phone" name="phone" formControlName="phone"
+                      (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="employee.phone">
+                    <mat-error *ngIf="employeeForm.get('phone').hasError('required')">
+                      Phone is required
+                    </mat-error>
+                    <mat-error *ngIf="employeeForm.get('phone').hasError('pattern')">
+                      Phone is starting with 0 or +, minimum 9 and maximum 30 characters
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <br />
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                  <!-- Email -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email" name="email" formControlName="email" required
+                      (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="employee.email">
+                    <mat-error *ngIf="employeeForm.get('email').hasError('required')">
+                      Email is required
+                    </mat-error>
+                    <mat-error *ngIf="employeeForm.get('email').hasError('pattern')">
+                      Email is invalid
+                    </mat-error>
+                  </mat-form-field>
+
+                  <!-- Last Login -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                    <mat-label>Last Login</mat-label>
+                    <input matInput name="lastLogin" formControlName="lastLogin"
+                       [(ngModel)]="employee.account.lastLogin" readonly>
+                  </mat-form-field>
+                </div>
+                <br />
+
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                  <!-- Birthday -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                    <mat-label>Birthday</mat-label>
+                    <input matInput [matDatepickerFilter]="dateFilter" (click)="datepickerRef.open()"
+                      style="cursor: pointer;" [matDatepicker]="datepickerRef" formControlName="birthday"
+                      name="birthday" ngModel required readonly (click)="setDefaultDate('birthday')">
+                    <mat-datepicker-toggle [for]="datepickerRef" matSuffix></mat-datepicker-toggle>
+                    <mat-datepicker #datepickerRef></mat-datepicker>
+                    <mat-error *ngIf="employeeForm.get('birthday').hasError('required')">
+                      Birhtday is required
+                    </mat-error>
+                  </mat-form-field>
+
+                  <!-- Hire Date -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                    <mat-label>Hire Date</mat-label>
+                    <input matInput (click)="datepickerRefHireDate.open()" style="cursor: pointer;"
+                      [matDatepicker]="datepickerRefHireDate" formControlName="startDate" name="startDate" ngModel
+                      required readonly (click)="setDefaultDate('startDate')">
+                    <mat-datepicker-toggle [for]="datepickerRefHireDate" matSuffix>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #datepickerRefHireDate></mat-datepicker>
+                    <mat-error *ngIf="employeeForm.get('startDate').hasError('required')">
+                      Hire Date is required
+                    </mat-error>
+                  </mat-form-field>
+
+                  <!-- Gender -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender" name="gender" required [(ngModel)]="employee.gender">
+                      <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                        {{gender.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-error *ngIf="employeeForm.hasError('required')">
+                    Gender is required
+                  </mat-error>
+                  <!-- <mat-error *ngIf="employeeForm.hasError('required')">
+                    Gender is required
+                  </mat-error> -->
+                </div>
+              </div>
+            </mat-tab>
+
+        
+
+            <!-- Reset Password -->
+            <ng-container *ngIf="!checkCurrentProfile && pageType !=='new'">
+              <mat-tab label="Password">
+                <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                  <div fxLayout="row" fxLayoutAlign="space-between">
+                    <button mat-raised-button class="save-product-button btn-custom" (click)='resetPassword()'
+                      style="background-color: #2196f3">
+                      <span>Reset Password</span>
+                    </button>
+                  </div>
+                </div>
+              </mat-tab>
+            </ng-container>
+
+            <ng-container *ngIf="pageType === 'new'">
+              <mat-tab label="Import Excel">
+                <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                  <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="100">
+
+                      <div class="myfilebrowser">
+
+                        <mat-toolbar style="background-color: rgb(66, 66, 66);">
+
+                          <!-- Readonly Input to show File names -->
+                          <input matInput formControlName="myFileName" [(ngModel)]="myFileName" readonly
+                            name="memberContactNo" />
+
+                          <!-- Browse Button -->
+                          <button mat-flat-button color="primary" style="padding: initial;">
+                            <span>Browse</span>
+                          </button>
+
+                        </mat-toolbar>
+
+                        <!-- Fetch selected filed on change -->
+                        <input type="file" #UploadFileInput id="fileUpload" (change)="fileChangeEvent($event)"
+                          name="fileUpload" accept=".xlsx,.xls" />
+                      </div>
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="space-between">
+                    <button mat-flat-button color="primary" [disabled]="!fileExcelExist"
+                      (click)="addListEmployeeByFile()">
+                      Add New Employees By File
+                    </button>
+                  </div>
+                </div>
+              </mat-tab>
+            </ng-container>
+          </mat-tab-group>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- / CENTER -->
+
+</div>

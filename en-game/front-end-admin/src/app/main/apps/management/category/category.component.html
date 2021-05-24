@@ -1,0 +1,136 @@
+<div id="category" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/apps/management/categories'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <!-- <div class="category-image mr-8 mr-sm-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <ng-container *ngIf="pageType === 'edit'">
+                        <img [src]="category.image" (click)="selectFile.click()" style="cursor: pointer;">
+                        <input type="file" (change)="getImage($event)" style="display: none" #selectFile>
+                    </ng-container>
+                    <ng-container *ngIf="pageType === 'new'">
+                        <img [src]="category.image">
+                    </ng-container>
+                </div> -->
+                <div fxLayout="column" fxLayoutAlign="start start"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2" *ngIf="pageType ==='edit'">
+                        <!-- {{category.midName + " " + category.firstName + " " + category.lastName + " (" + category.account.username +
+              ") "}}
+              <mat-icon *ngIf="category.active" class="active-icon green-600 s-16" style="border-radius: 50%">
+                check
+              </mat-icon>
+              <mat-icon *ngIf="!category.active" class="active-icon red-500 s-16" style="border-radius: 50%">
+                close
+              </mat-icon> -->
+                    </div>
+                    <div class="h2" *ngIf="pageType ==='new'">
+                        New Category
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>Category Detail</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <button mat-raised-button class="save-product-button" [disabled]="categoryForm.invalid"
+                *ngIf="pageType ==='new'" (click)="addCategory()">
+                <span>ADD</span>
+            </button>
+
+            <!-- [disabled]="categoryForm.invalid || categoryForm.pristine" -->
+            <button mat-raised-button class="save-product-button btn-custom" *ngIf="pageType ==='edit'"
+                (click)="saveCategory()" [disabled]="categoryForm.invalid" color="primary">
+                <span>SAVE</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+                <form name="categoryForm" [formGroup]="categoryForm" novalidate class="category w-100-p"
+                    fxLayout="column" fxFlex>
+                    <mat-tab-group>
+                        <mat-tab label="Basic Info">
+                            <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <!-- Name -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="100">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput placeholder="Name" name="name" required
+                                            [(ngModel)]="category.name" formControlName="name"
+                                            (keyup.enter)="eventKeyUpEnterSubmitForm()">
+                                        <mat-error *ngIf="categoryForm.get('name').hasError('required')">
+                                            Name is required
+                                        </mat-error>
+                                        <mat-error *ngIf="categoryForm.get('name').hasError('pattern')">
+                                            Name is less than 30 characters and no special characters
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <br/>
+                                <!-- Parent Id -->
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="100">
+                                        <mat-label>Parent Id</mat-label>
+                                        <input matInput placeholder="Parent Id" name="parentId" required
+                                            (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="category.parentId"
+                                            formControlName="parentId">
+                                        <mat-error *ngIf="categoryForm.get('parentId').hasError('required')">
+                                            Parent id is required
+                                        </mat-error>
+                                        <mat-error *ngIf="categoryForm.get('parentId').hasError('pattern')">
+                                            Parent id is number
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <br/>
+                                <!-- Active -->
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="100">
+                                        <mat-label>Active</mat-label>
+                                        <mat-select formControlName="active" name="active" required
+                                            [(ngModel)]="category.active">
+                                            <mat-option *ngFor="let status of statusCategory" [value]="status.value">
+                                                {{status.viewValue}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <br/>
+                                <!-- Sub Category -->
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="100">
+                                        <mat-label>Sub Category</mat-label>
+                                        <mat-select formControlName="hasSubCategory" name="hasSubCategory" required
+                                            [(ngModel)]="category.hasSubCategory">
+                                            <mat-option *ngFor="let status of statusCategory" [value]="status.value">
+                                                {{status.viewValue}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <br />
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+
+</div>

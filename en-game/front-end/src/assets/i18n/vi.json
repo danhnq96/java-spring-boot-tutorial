@@ -1,0 +1,126 @@
+{
+  "WELCOME": "Chào mừng đến với gian hàng của chúng tôi!",
+  "LOGIN": "Đăng nhập",
+  "LOGOUT": "Đăng xuất",
+  "REGISTER": "Đăng kí",
+  "ACCOUNT": "Tài khoản",
+  "COMPARE": "So sánh",
+  "WISHLIST": "Danh sách ước",
+  "NAV": {
+    "HOME": "Trang chủ",
+    "PAGES": "Trang",
+    "SHOP": "Shop",
+    "ALL_PRODUCTS": "Tất cả sản phẩm",
+    "PRODUCT_DETAIL": "Chi tiết sản phẩm",
+    "CART": "Giỏ hàng",
+    "CHECKOUT": "Mua hàng",
+    "FAQS": "Faqs",
+    "PRICING": "Giá",
+    "TERMS_CONDITIONS": "Điều khoản và Điều kiện",
+    "LANDING": "Landing",
+    "404_PAGE": "404 Page",
+    "OTHERS": "Khác",
+    "EXTERNAL_LINK": "Đường dẫn ngoại",
+    "MENU_ITEM": "Menu Item",
+    "CONTACT": "Liên hệ",
+    "ABOUT_US": "Chúng tôi",
+    "ADMIN": "Bảng điều khiển Admin",
+    "ACCOUNT_SETTINGS": "Cài đặt tài khoản"
+  },
+  "ADMIN_NAV": {
+    "DASHBOARD": "Dashboard",
+    "PRODUCTS": "Sản phẩm",
+    "CATEGORIES": "Danh mục",
+    "PRODUCT_LIST": "Danh sách sản phẩm",
+    "PRODUCT_DETAIL": "Chi tiết sản phẩm",
+    "ADD_PRODUCT": "Thêm sản phẩm",
+    "SALES": "Bán hàng",
+    "ORDERS": "Đơn hàng",
+    "TRANSACTIONS": "Giao dịch",
+    "USERS": "Người dùng",
+    "CUSTOMERS": "Khách hàng",
+    "COUPONS": "Coupons",
+    "WITHDRAWAL": "Withdrawal",
+    "ANALYTICS": "Phân tích",
+    "REFUND": "Hoàn tiền",
+    "FOLLOWERS": "Người theo dõi",
+    "SUPPORT": "Hỗ trợ",
+    "REVIEWS": "Đánh giá",
+    "EXTERNAL_LINK": "Đường dẫn ngoại"
+  },
+  "BTN": {
+    "ADD": "Thêm",
+    "SAVE": "Lưu",
+    "SUBMIT": "Gửi",
+    "CANCEL": "Hủy",
+    "UPLOAD": "Tải lên",
+    "REMOVE": "Bỏ",
+    "YES": "Đồng ý",
+    "NO": "Không",
+    "OK": "OK",
+    "CHANGE": "Change"
+  },
+  "MESSAGE": {
+    "SURE_DELETE": "Bạn có chắc chắn muốn xóa bỏ không?",
+    "FILE_SIZE": "Dung lượng file không được quá {{param}} kb."
+  },
+  "FIELD": {
+    "NAME": "Tên"
+  },
+  "PAGINATION":{
+    "ITEMS_PER_PAGE": "Số món trên trang:",
+    "NEXT_PAGE": "Trang kế",
+    "PREV_PAGE": "Trang trước",
+    "FIRST_PAGE": "Trang đầu",
+    "LAST_PAGE": "Trang cuối"
+  },
+  "SETTINGS": {
+    "DASH_BOARD": {
+      "ACCOUNT_DASH_BOARD": "Bảng điều khiển",
+      "MY_ACCOUNT": "Tài khoản của tôi",
+      "ACCOUNT_INFORMATION": "Thông tin tài khoản",
+      "ADDRESS": "Địa chỉ",
+      "ORDERS": "Đơn hàng",
+      "CHANGE_PASSWORD": "Thay đổi mật khẩu",
+      "BILLING_ADDRESS": "Địa chỉ Thanh toán",
+      "SHIPPING_ADDRESS": "Địa chỉ Giao hàng"
+    },
+    "ACCOUNT": {
+      "ROOT": "Thông tin tài khoản",
+      "ACCOUNT_DETAILS": "Chi tiết tài khoản",
+      "FULL_NAME": "Tên đầy đủ",
+      "EMAIL": "Thư điện tử",
+      "CURRENT_PASSWORD": "Mật khẩu hiện tại",
+      "NEW_PASSWORD": "Mật khẩu mới",
+      "CONFIRM_NEW_PASSWORD": "Xác nhận mật khẩu mới"
+    },
+    "ADDRESSES": {
+      "ROOT": "Thông tin địa chỉ",
+      "FIRST_NAME": "Tên",
+      "LAST_NAME": "Họ",
+      "MIDDLE_NAME": "Tên đệm",
+      "COMPANY": "Công ty",
+      "EMAIL": "Thư điện tử",
+      "PHONE": "Điện thoại",
+      "COUNTRY": "Quốc gia",
+      "CITY": "Thành phố",
+      "STATE": "Bang/Tỉnh",
+      "ZIP": "Mã bưu chính",
+      "ADDRESS": "Địa chỉ(Đường, Tổ dân phố, Xã/Phường, Quận/Huyện, v.v.)"
+    },
+    "ORDER_HISTORY": {
+      "ROOT": "Lịch sử đơn hàng",
+      "ORDER": "Đơn hàng",
+      "DATE": "Ngày đặt",
+      "STATUS": "Trạng thái",
+      "TOTAL": "Tổng"
+    }
+  },
+  "ORDER_STATUS": {
+    "COMPLETED": "Hoàn thành",
+    "PROCESSING": "Đang xử lý",
+    "PENDING": "Dừng",
+    "CHARGED": "Đã thanh toán",
+    "REFUND": "Hoàn tiền"
+  }
+}

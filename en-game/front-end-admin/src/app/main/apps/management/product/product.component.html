@@ -1,0 +1,412 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/apps/management/products'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <div class="product-image mr-8 mr-sm-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <ng-container *ngIf="pageType === 'edit'">
+                        <img [src]="imageMain.small" (click)="selectFile.click()" style="cursor: pointer;">
+                        <input type="file" (change)="getImageMainChange($event)" style="display: none" #selectFile>
+                    </ng-container>
+                    <ng-container *ngIf="pageType === 'new'">
+                        <img [src]="imageMain.small">
+                    </ng-container>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="start start"
+                    [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2" *ngIf="pageType ==='edit'">
+                        <!-- {{product.midName + " " + product.firstName + " " + product.lastName + " (" + product.account.username +
+              ") "}}
+              <mat-icon *ngIf="product.active" class="active-icon green-600 s-16" style="border-radius: 50%">
+                check
+              </mat-icon>
+              <mat-icon *ngIf="!product.active" class="active-icon red-500 s-16" style="border-radius: 50%">
+                close
+              </mat-icon> -->
+                    </div>
+                    <div class="h2" *ngIf="pageType ==='new'">
+                        New Product
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>Product Detail</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <button mat-raised-button class="save-product-button" [disabled]="productForm.invalid"
+                *ngIf="pageType ==='new'" (click)="saveProduct()">
+                <span>ADD</span>
+            </button>
+
+            <!-- [disabled]="productForm.invalid || productForm.pristine" -->
+            <button mat-raised-button class="save-product-button btn-custom" *ngIf="pageType ==='edit'"
+                (click)="saveProduct()" [disabled]="productForm.invalid" color="primary">
+                <span>SAVE</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+                <form name="productForm" [formGroup]="productForm" novalidate class="product w-100-p" fxLayout="column"
+                    fxFlex>
+                    <mat-tab-group>
+                        <mat-tab label="Basic Info">
+                            <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <!-- Name -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="100">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput placeholder="Name" name="name" required
+                                            [(ngModel)]="product.name" formControlName="name"
+                                            (keyup.enter)="eventKeyUpEnterSubmitForm()">
+                                        <mat-error *ngIf="productForm.get('name').hasError('required')">
+                                            Name is required
+                                        </mat-error>
+                                        <mat-error *ngIf="productForm.get('name').hasError('pattern')">
+                                            Name is less than 30 characters and no special characters
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <br />
+
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <!-- Category -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="100">
+                                        <mat-label>Category</mat-label>
+                                        <mat-select formControlName="category" name="category" required
+                                            [(ngModel)]="product.categoryId">
+                                            <mat-option *ngFor="let ca of categories" [value]="ca.value">
+                                                {{ca.viewValue}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <br />
+
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+
+                                    <!-- New Price -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                                        <mat-label>New Price</mat-label>
+                                        <input matInput placeholder="New Price" name="newPrice" required
+                                            (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="product.newPrice"
+                                            formControlName="newPrice">
+                                        <mat-error *ngIf="productForm.get('newPrice').hasError('required')">
+                                            New Price is required
+                                        </mat-error>
+                                        <mat-error *ngIf="productForm.get('newPrice').hasError('pattern')">
+                                            New Price is number
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <!-- Old Price -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                                        <mat-label>Old Price</mat-label>
+                                        <input matInput placeholder="Old Price" name="oldPrice" required readonly
+                                            (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="product.oldPrice"
+                                            readonly formControlName="oldPrice">
+                                        <mat-error *ngIf="productForm.get('oldPrice').hasError('required')">
+                                            Old Price is required
+                                        </mat-error>
+                                        <mat-error *ngIf="productForm.get('oldPrice').hasError('pattern')">
+                                            Old Price is number
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <br />
+
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <!-- Discount -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                                        <mat-label>Discount</mat-label>
+                                        <input matInput placeholder="Discount" name="discount" required
+                                            (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="product.discount"
+                                            formControlName="discount">
+                                        <mat-error *ngIf="productForm.get('discount').hasError('required')">
+                                            Discount is required
+                                        </mat-error>
+                                        <mat-error *ngIf="productForm.get('discount').hasError('pattern')">
+                                            Discount is number
+                                        </mat-error>
+                                        <mat-error *ngIf="productForm.get('discount').hasError('max')">
+                                            Discount is can not larger 99
+                                        </mat-error>
+                                        <mat-error *ngIf="productForm.get('discount').hasError('min')">
+                                            Discount is can not smaller 0
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <!-- Weight -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                                        <mat-label>Weight</mat-label>
+                                        <input matInput placeholder="Weight" name="weight" required
+                                            (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="product.weight"
+                                            formControlName="weight">
+                                        <mat-error *ngIf="productForm.get('weight').hasError('required')">
+                                            Weight is required
+                                        </mat-error>
+                                        <mat-error *ngIf="productForm.get('weight').hasError('pattern')">
+                                            Weight is number
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <br />
+
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+
+                                    <!-- Rating Count -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                                        <mat-label>Rating Count</mat-label>
+                                        <input matInput placeholder="Rating Count" name="ratingCount" required readonly
+                                            (keyup.enter)="eventKeyUpEnterSubmitForm()"
+                                            [(ngModel)]="product.ratingCount" formControlName="ratingCount">
+                                        <mat-error *ngIf="productForm.get('ratingCount').hasError('required')">
+                                            Rating Count is required
+                                        </mat-error>
+                                        <mat-error *ngIf="productForm.get('ratingCount').hasError('pattern')">
+                                            Rating Count is number
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <!-- Rating Value -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                                        <mat-label>Rating Value</mat-label>
+                                        <input matInput placeholder="Rating Value" name="ratingValue" required readonly
+                                            (keyup.enter)="eventKeyUpEnterSubmitForm()"
+                                            [(ngModel)]="product.ratingValue" readonly formControlName="ratingValue">
+                                        <mat-error *ngIf="productForm.get('ratingValue').hasError('required')">
+                                            Rating Value is required
+                                        </mat-error>
+                                        <mat-error *ngIf="productForm.get('ratingValue').hasError('pattern')">
+                                            Rating Value is number
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <br />
+
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+
+                                    <!-- Availability Count -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                                        <mat-label>Availability Count</mat-label>
+                                        <input matInput placeholder="Availability Count" name="availibilityCount"
+                                            required readonly (keyup.enter)="eventKeyUpEnterSubmitForm()"
+                                            [(ngModel)]="product.availibilityCount" formControlName="availibilityCount">
+                                        <mat-error *ngIf="productForm.get('availibilityCount').hasError('required')">
+                                            Availability Count is required
+                                        </mat-error>
+                                        <mat-error *ngIf="productForm.get('availibilityCount').hasError('pattern')">
+                                            Availability Count is number
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <!-- Cart Count -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="48">
+                                        <mat-label>Cart Count</mat-label>
+                                        <input matInput placeholder="Cart Count" name="cartCount" required readonly
+                                            (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="product.cartCount"
+                                            readonly formControlName="cartCount">
+                                        <mat-error *ngIf="productForm.get('cartCount').hasError('required')">
+                                            Cart Count is required
+                                        </mat-error>
+                                        <mat-error *ngIf="productForm.get('cartCount').hasError('pattern')">
+                                            Cart Count is number
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <br />
+
+
+                                <!-- Create Date -->
+                                <!-- <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="100">
+                                        <mat-label>Create Date</mat-label>
+                                        <input matInput (click)="datepickerRefHireDate.open()" style="cursor: pointer;"
+                                            [matDatepicker]="datepickerRefHireDate" formControlName="createdDate"
+                                            name="createdDate" ngModel required readonly
+                                            (click)="setDefaultDate('createdDate')">
+                                        <mat-datepicker-toggle [for]="datepickerRefHireDate" matSuffix>
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #datepickerRefHireDate></mat-datepicker>
+                                        <mat-error *ngIf="productForm.get('createdDate').hasError('required')">
+                                            Create Date is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div> -->
+
+
+                            </div>
+                            <br />
+                        </mat-tab>
+
+                        <mat-tab label="Others">
+                            <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+
+                                    <!-- Color -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="24">
+                                        <mat-label>Color</mat-label>
+                                        <input matInput [(colorPicker)]="colors[0].name"
+                                            [(style.background)]="colors[0].name" readonly style="cursor: pointer;" />
+                                        <mat-icon class="clear-color" (click)="deleteColor(colors[0].id)">clear
+                                        </mat-icon>
+                                    </mat-form-field>
+
+                                    <!-- Color -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="24">
+                                        <mat-label>Color</mat-label>
+                                        <input matInput [(colorPicker)]="colors[1].name"
+                                            [(style.background)]="colors[1].name" readonly style="cursor: pointer;" />
+                                        <mat-icon class="clear-color" (click)="deleteColor(colors[1].id)">clear
+                                        </mat-icon>
+                                    </mat-form-field>
+
+                                    <!-- Color -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="24">
+                                        <mat-label>Color</mat-label>
+                                        <input matInput [(colorPicker)]="colors[2].name"
+                                            [(style.background)]="colors[2].name" readonly style="cursor: pointer;" />
+                                        <mat-icon class="clear-color" (click)="deleteColor(colors[2].id)">clear
+                                        </mat-icon>
+                                    </mat-form-field>
+
+                                    <!-- Color -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="24">
+                                        <mat-label>Color</mat-label>
+                                        <input matInput [(colorPicker)]="colors[3].name"
+                                            [(style.background)]="colors[3].name" readonly style="cursor: pointer;" />
+                                        <mat-icon class="clear-color" (click)="deleteColor(colors[3].id)">clear
+                                        </mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <br>
+
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <!-- Size -->
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="100">
+                                        <mat-label>Size</mat-label>
+                                        <input matInput placeholder="Size" name="size"
+                                            (keyup.enter)="eventKeyUpEnterSubmitForm()" [(ngModel)]="product.size"
+                                            maxlength="10" formControlName="size">
+                                        <mat-error *ngIf="productForm.get('size').hasError('maxLength')">
+                                            Size can not larger 10 characters
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <br />
+
+                                <!-- Active -->
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="100">
+                                        <mat-label>Active</mat-label>
+                                        <mat-select formControlName="active" name="active" required
+                                            [(ngModel)]="product.active">
+                                            <mat-option *ngFor="let status of statusProduct" [value]="status.value">
+                                                {{status.viewValue}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <br />
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab label="Product Images">
+                            <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                                <div style="float: left;">
+                                    <ng-container *ngIf="product.images && product.images.length > 0">
+                                        <span style="float: right; margin-right: 40px; cursor: pointer;"
+                                            (click)=removeAllImageProduct()>
+                                            <mat-icon style="color: red; font-size: 70px; margin-left: 50px;">
+                                                delete_forever
+                                            </mat-icon>
+                                        </span>
+                                    </ng-container>
+                                </div>
+                                <br />
+                                <br />
+                                <div>
+                                    <mat-grid-list cols="5" rowHeight="5:4">
+                                        <mat-grid-tile *ngFor='let image of product.images; let i = index'
+                                            style="margin-right: 10px; margin-bottom: 30px;">
+                                            <button mat-icon-button color="warn" (click)='deleteImageProduct(image.id)'
+                                                aria-label="Example icon button with a delete icon"
+                                                class="img-product-clear">
+                                                <mat-icon>clear</mat-icon>
+                                            </button>
+                                            <img [src]='image.small' class="image-product">
+                                        </mat-grid-tile>
+                                    </mat-grid-list>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab label="Upload Image">
+                            <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                                <div style="float: left;">
+                                    <span
+                                        style="cursor: pointer; float: left; height: 70px; width: 70px; margin-left: 20px;"
+                                        (click)="selectFile.click()">
+                                        <mat-icon style="color: #2B78FE; font-size: 70px; ">cloud_upload</mat-icon>
+                                        <input type="file" multiple="" (change)="getImage($event)" style="display: none"
+                                            #selectFile>
+
+                                    </span>
+                                    <ng-container *ngIf="listNewImage.length > 0">
+                                        <span style="float: right; margin-right: 40px; cursor: pointer;"
+                                            (click)=removeAllImage()>
+                                            <mat-icon style="color: red; font-size: 70px; margin-left: 50px;">
+                                                delete_forever
+                                            </mat-icon>
+                                        </span>
+                                    </ng-container>
+                                </div>
+                                <br />
+                                <br />
+                                <div>
+                                    <mat-grid-list cols="5" rowHeight="5:4">
+                                        <mat-grid-tile *ngFor='let url of listNewImage; let i = index'
+                                            style="margin-right: 10px; margin-bottom: 30px;">
+                                            <button mat-icon-button color="warn" (click)='deleteImage(i)'
+                                                aria-label="Example icon button with a delete icon"
+                                                class="img-product-clear">
+                                                <mat-icon>clear</mat-icon>
+                                            </button>
+                                            <img [src]='url' class="image-product">
+                                        </mat-grid-tile>
+                                    </mat-grid-list>
+                                </div>
+                                <br />
+                            </div>
+                        </mat-tab>
+
+
+                        <mat-tab label="Description">
+                            <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                                <ckeditor style="color:black" [(ngModel)]="product.description" [editor]="Editor"
+                                    id="description" name="description" formControlName="description">
+                                </ckeditor>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / CENTER -->
+
+</div>

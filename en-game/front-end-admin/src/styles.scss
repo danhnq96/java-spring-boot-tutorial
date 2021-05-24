@@ -1,0 +1,51 @@
+// Import Fuse core library
+@import "@fuse/scss/core";
+
+// Import app.theme.scss
+@import "app/app.theme";
+
+custom-paginator-container {
+    justify-content: flex-end;
+}
+
+// css pagination
+.custom-paginator-counter {
+    white-space: nowrap;
+    margin: 0px 4px 0px 10px !important;
+}
+
+.custom-paginator-page {
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    margin: 0.4em;
+    font-size: 14px;
+    min-width: 24px;
+    width: auto;
+    min-height: 24px;
+    max-height: 24px;
+    padding: 1px 6px;
+}
+
+.custom-paginator-page-enabled {
+    color: white;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(123, 164, 192) !important;
+    }
+}
+
+.custom-paginator-page-disabled {
+    background-color: #3c8bb6;
+    color: #fff;
+}
+
+.custom-paginator-arrow-disabled {
+    color: #dfe3e6;
+}
+
+.custom-paginator-arrow-enabled {
+    color: #999999;
+}

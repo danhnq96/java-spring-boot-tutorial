@@ -1,0 +1,70 @@
+create database temp
+create table Employees(
+	id int primary key identity,
+	firstName nvarchar(31) not null,
+	midName nvarchar(31),
+	lastName nvarchar(31) not null,
+	idCard nvarchar(21) unique not null,
+	image nvarchar not null,
+	phone nvarchar(31) unique not null,
+	startDate date not null,
+	gender tinyint not null,
+	email nvarchar(250) unique not null,
+	address nvarchar(500) not null,
+	birthday date not null,
+	active bit default 1,
+)
+
+create table Accounts(
+	employeeId int primary key,
+	username varchar(150) unique not null,
+	password nvarchar(255) not null,
+	lastLogin datetime,
+	active bit default 1 not null,
+	FOREIGN KEY (employeeId) REFERENCES Employees(id)
+)
+
+create table Levels(
+	id int primary key identity,
+	levelName nvarchar(50) unique
+)
+
+create table LevelPermissions(
+	id int primary key identity,
+	levelId int,
+	tableName nvarchar(50),
+	displayName nvarchar(100),
+	role bigint default 0,
+	FOREIGN KEY (levelId) REFERENCES Levels(id)
+)
+
+create table memberTypes(
+	id int primary key identity,
+	levelId int default 0,
+	memberType nvarchar(50),
+	price decimal(18,2),
+	description nvarchar(300),
+	active bit default 1
+)
+
+create table members(
+	id int primary key identity,
+	memberTypeId int,
+	firstName nvarchar(31) not null,
+	midName nvarchar(31),
+	lastName nvarchar(31) not null,
+	image nvarchar not null,
+	phone nvarchar(31) unique not null,
+	gender tinyint not null,
+	email nvarchar(250) unique not null,
+	address nvarchar(500) not null,
+	birthday date not null,
+	lastLogin datetime,
+	password nvarchar(255),
+	activationCode varchar(64),
+	registerDate datetime,
+	secretQuestion nvarchar(255),
+	secretAnswer nvarchar(255),
+	active bit default 1,
+	FOREIGN KEY (memberTypeId) REFERENCES memberTypes(id)
+)

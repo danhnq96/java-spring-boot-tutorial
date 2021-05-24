@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: order-service
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://end-game-db.cpnkwwkb4ws6.ap-southeast-1.rds.amazonaws.com:1433;databaseName=order-service;
+    username: admin
+    password: Abc123!!
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        jdbc:
+          time_zone: UTC
+
+server:
+  port: 8765
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+
+stripe:
+  publicKey: pk_test_51IMxbkJJOKYcec8xJMiXKHGoFtJKtTPCChakQeDAIWtx6n8tcu7FUutCehP0BKxwYEEVKQnGkknZcl9ICGA6d4ao00WxPY3UIR
+  secretKey: sk_test_51IMxbkJJOKYcec8xTctqW2Sm4HY0AxGEwdjfEbHZMLYWts5oLysix1fz50InUeVb0W0GcgGt4WkuYTcwAD6XagOr00pKBvwOAA
+  webHookSecret: whsec_Gl1SE7S1TGJJCqE7ns6hCqrM1Z8RpSCH

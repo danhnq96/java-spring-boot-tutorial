@@ -1,0 +1,126 @@
+{   
+  "WELCOME": "Welcome to our market!", 
+  "LOGIN": "Sign In", 
+  "LOGOUT": "Logout", 
+  "REGISTER": "Register",
+  "ACCOUNT": "Account", 
+  "COMPARE": "Compare",
+  "WISHLIST": "Wishlist", 
+  "NAV": {  
+    "HOME": "Home",  
+    "PAGES": "Pages", 
+    "SHOP": "Shop",
+    "ALL_PRODUCTS": "All products",
+    "PRODUCT_DETAIL": "Product detail",
+    "CART": "Cart",
+    "CHECKOUT": "Checkout",
+    "FAQS": "Faqs",
+    "PRICING": "Pricing",
+    "TERMS_CONDITIONS": "Terms & Conditions",
+    "LANDING": "Landing", 
+    "404_PAGE": "404 Page",
+    "OTHERS": "Others",
+    "EXTERNAL_LINK": "External Link",
+    "MENU_ITEM": "Menu Item",
+    "CONTACT": "Contact",
+    "ABOUT_US": "About Us",
+    "ADMIN": "Admin Panel",
+    "ACCOUNT_SETTINGS": "Account settings"
+  },
+  "ADMIN_NAV": {  
+    "DASHBOARD": "Dashboard",  
+    "PRODUCTS": "Products", 
+    "CATEGORIES": "Categories",
+    "PRODUCT_LIST": "Products List", 
+    "PRODUCT_DETAIL": "Product Detail",
+    "ADD_PRODUCT": "Add Product",
+    "SALES": "Sales",
+    "ORDERS": "Orders",
+    "TRANSACTIONS": "Transactions",
+    "USERS": "Users", 
+    "CUSTOMERS": "Customers", 
+    "COUPONS": "Coupons",
+    "WITHDRAWAL": "Withdrawal",
+    "ANALYTICS": "Analytics",
+    "REFUND": "Refund",
+    "FOLLOWERS": "Followers",
+    "SUPPORT": "Support",
+    "REVIEWS": "Reviews", 
+    "EXTERNAL_LINK": "External Link" 
+  },
+  "BTN": {
+    "ADD": "Add",
+    "SAVE": "Save",
+    "SUBMIT": "Submit",
+    "CANCEL": "Cancel",
+    "UPLOAD": "Upload",
+    "REMOVE": "Remove",
+    "YES": "Yes",
+    "NO": "No",
+    "OK": "OK",
+    "CHANGE": "Change"
+  },
+  "MESSAGE": {
+    "SURE_DELETE": "Are you sure you want to delete?",
+    "FILE_SIZE": "The file size cannot exceed {{param}} kb."
+  },
+  "FIELD": { 
+    "NAME": "Name" 
+  }, 
+  "PAGINATION":{
+    "ITEMS_PER_PAGE": "Items per page:",
+    "NEXT_PAGE": "Next page",
+    "PREV_PAGE": "Previous page",
+    "FIRST_PAGE": "First page",
+    "LAST_PAGE": "Last page"
+  },
+  "SETTINGS": {
+    "DASH_BOARD": {
+      "ACCOUNT_DASH_BOARD": "Account Dashboard",
+      "MY_ACCOUNT": "My account",
+      "ACCOUNT_INFORMATION": "Account Information",
+      "ADDRESS": "Address",
+      "ORDERS": "Orders",
+      "CHANGE_PASSWORD": "Change password",
+      "BILLING_ADDRESS": "Billing address",
+      "SHIPPING_ADDRESS": "Shipping address"
+    },
+    "ACCOUNT": {
+      "ROOT": "Account Information",
+      "ACCOUNT_DETAILS": "Account details",
+      "FULL_NAME": "Full name",
+      "EMAIL": "Email",
+      "CURRENT_PASSWORD": "Current password",
+      "NEW_PASSWORD": "New password",
+      "CONFIRM_NEW_PASSWORD": "Confirm new password"
+    },
+    "ADDRESSES": {
+      "ROOT": "Addresses",
+      "FIRST_NAME": "First name",
+      "LAST_NAME": "Last name",
+      "MIDDLE_NAME": "Middle Name/Initial",
+      "COMPANY": "Company",
+      "EMAIL": "Email",
+      "PHONE": "Phone",
+      "COUNTRY": "Country",
+      "CITY": "City",
+      "STATE": "State/Province",
+      "ZIP": "Zip/Postal Code",
+      "ADDRESS": "Address(street, apartment, suite, unit etc.)"
+    },
+    "ORDER_HISTORY": {
+      "ROOT": "Order History",
+      "ORDER": "Order",
+      "DATE": "Date",
+      "STATUS": "Status",
+      "TOTAL": "Total"
+    }
+  },
+  "ORDER_STATUS": {
+    "COMPLETED": "Completed",
+    "PROCESSING": "Processing",
+    "PENDING": "Pending",
+    "CHARGED": "Charged",
+    "REFUND": "Refund"
+  }
+}

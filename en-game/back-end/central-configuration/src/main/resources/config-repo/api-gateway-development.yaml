@@ -1,0 +1,133 @@
+spring:
+  application:
+    name: api-gateway
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: addressService
+#          uri: lb://ADDRESS-SERVICE
+#          predicates:
+#            - Path=/api/address/**
+#        - id: orderService
+#          uri: lb://ORDER-SERVICE
+#          predicates:
+#            - Path=/consumer/**
+#        - id: productService
+#          uri: lb://PRODUCT-SERVICE
+#          predicates:
+#            - Path=/api/product/**
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://end-game-db.cpnkwwkb4ws6.ap-southeast-1.rds.amazonaws.com:1433;databaseName=auth-service;
+    username: admin
+    password: Abc123!!
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        jdbc:
+          time_zone: UTC
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 434560785314-js2dnn1f2mm3h540je5fe6tgss2gu4iq.apps.googleusercontent.com
+            clientSecret: UIhRDPhq939MuRAhwhH9p7kK
+            redirectUri: "{baseUrl}/api/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: 413861746346531
+            clientSecret: 31efe1b43bcf883e80fc478b020534d0
+            redirectUri: "{baseUrl}/api/oauth2/callback/{registrationId}"
+            # Note that facebook now mandates the use of
+            # https redirect URIs, so make sure your app supports https in production
+            scope:
+              - email
+              - public_profile
+          github:
+            clientId: ea3b33b00553461f4149
+            clientSecret: 094787b69a824bdd51b287f56b515ac626598d8b
+            redirectUri: "{baseUrl}/api/oauth2/callback/{registrationId}"
+            scope:
+              - user:email
+              - read:user
+        provider:
+          facebook:
+            authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+            tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+            userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+server:
+  port: 8762
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 70000
+ribbon:
+  ReadTimeout: 30000
+  connection-timeout: 30000
+  eureka:
+    enabled: true
+zuul:
+  host:
+    time-to-live: -1
+    connect-timeout-millis: 5000
+    max-per-route-connections: 10000
+    max-total-connections: 5000
+    socket-timeout-millis: 60000
+  #  Important
+#  ignored-services: *
+#  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+  # Routes for services
+  routes:
+    admin-service:
+      path: /api/admin/**
+      service-id: admin-service
+      strip-prefix: false
+    address-service:
+      path: /api/address/**
+      service-id: address-service
+      strip-prefix: false
+    order-service:
+      path: /api/order/**
+      service-id: order-service
+      strip-prefix: false
+    product-service:
+      path: /api/product/**
+      service-id: product-service
+      strip-prefix: false
+
+app:
+  auth:
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+    tokenExpirationMsec: 864000000
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the frontend client in the /oauth2/authorize request.
+    # We're not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
+      - http://localhost:4200
+      - http://localhost:8762/oath2/callback/login
+      - http://localhost:8762/api/auth/activate
+      - http://localhost:3000/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
+google:
+  recaptcha:
+    secretKey: 6LdHqlYaAAAAAK5Q_m57mfpwBjAbvjEnxdEWtxLy
+    verifyURL: https://www.google.com/recaptcha/api/siteverify

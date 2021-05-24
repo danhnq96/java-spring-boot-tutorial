@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: product-service
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://end-game-db.cpnkwwkb4ws6.ap-southeast-1.rds.amazonaws.com:1433;databaseName=product-service;
+    username: admin
+    password: Abc123!!
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        jdbc:
+          time_zone: UTC
+
+server:
+  port: 8764
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/

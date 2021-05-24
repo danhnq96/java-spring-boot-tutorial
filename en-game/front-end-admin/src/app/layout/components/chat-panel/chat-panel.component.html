@@ -1,0 +1,222 @@
+<div class="header mat-elevation-z4 primary" fxLayout="row" fxLayoutAlign="space-between center">
+
+    <ng-container *ngIf="selectedContact === null">
+
+        <div class="title ml-16" fxLayout="row" fxLayoutAlign="start center" (click)="unfoldSidebarTemporarily()">
+            <mat-icon class="s-32 fuse-white-fg">chat</mat-icon>
+            <h3 class="ml-12" style="width: 80px;">Team Chat</h3>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="selectedContact !== null">
+
+        <div class="title" fxLayout="row" fxLayoutAlign="start center">
+            <img [src]="selectedContact.avatar" class="avatar mx-16">
+            <h3 class="text-truncate">{{selectedContact.name}} ({{selectedContact.id}})</h3>
+        </div>
+
+    </ng-container>
+    <ng-container *ngIf="!selectedContact">
+        <ng-container *ngIf="checkShowSearch">
+            <button mat-icon-button class="toggle-sidebar-folded mr-8" fxHide fxShow.gt-md
+                style="margin-left: 120px !important" (click)="changeShowSearch()">
+                <mat-icon class="secondary-text s-20">arrow_downward</mat-icon>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="!checkShowSearch">
+            <button mat-icon-button class="toggle-sidebar-folded mr-8" fxHide fxShow.gt-md
+                style="margin-left: 120px !important" (click)="changeShowSearch()">
+                <mat-icon class="secondary-text s-20">arrow_upward</mat-icon>
+            </button>
+        </ng-container>
+
+        <button mat-icon-button class="toggle-sidebar-folded mr-8"
+            (click)="foldSidebarTemporarily();resetChat();setAllFalseActiveChat()" fxHide fxShow.gt-md>
+            <mat-icon class="secondary-text s-20">close</mat-icon>
+        </button>
+    </ng-container>
+
+
+    <ng-container *ngIf="selectedContact">
+        <button mat-icon-button class="toggle-sidebar-folded mr-8" fxHide fxShow.gt-md style="width: auto; "
+            (click)="deleteAll(selectedContact.id)">
+            <mat-icon class="secondary-text s-20" style="transform: none !important; color: rgb(180, 5, 5) !important;">delete_forever</mat-icon>
+        </button>
+
+        <button mat-icon-button class="toggle-sidebar-folded mr-8" style="margin-left: auto;"
+            (click)="backChat();resetChat();setAllFalseActiveChat()" fxHide fxShow.gt-md>
+            <mat-icon class="secondary-text s-20" style="transform: none !important;">arrow_back</mat-icon>
+        </button>
+    </ng-container>
+
+    <!-- <button mat-icon-button class="toggle-sidebar-open mr-8"
+        (click)="toggleSidebarOpen();resetChat();setAllFalseActiveChat()" fxHide.gt-md>
+        <mat-icon class="secondary-text">close</mat-icon>
+    </button> -->
+
+</div>
+
+<!-- search -->
+<ng-container *ngIf="checkShowSearch">
+
+    <div class="header mat-elevation-z4 primary" style="background-color: #212121 !important" fxLayout="row"
+        fxLayoutAlign="space-between center">
+
+        <div class="title ml-16" fxLayout="row" fxLayoutAlign="start center" (click)="unfoldSidebarTemporarily()">
+            <input type="text" [(ngModel)]="txtSearch" (keyup)="searchingContact()" class="search-input"
+                placeholder="Typing search" />
+            <ng-container *ngIf="txtSearch===''">
+                <mat-icon class="secondary-text" style="position: absolute;">search</mat-icon>
+            </ng-container>
+            <ng-container *ngIf="txtSearch!==''">
+                <mat-icon class="secondary-text" style="position: absolute;" (click)="clearText()">close</mat-icon>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>
+
+<div class="content">
+    <!-- Contacts -->
+    <div id="contacts-list" fusePerfectScrollbar [fusePerfectScrollbarOptions]="{suppressScrollX: true}">
+        <div *ngFor="let contact of contacts" class="contacts-list-item" [ngClass]="contact.status"
+            [class.active]="contact.id === selectedContact?.id" (click)="toggleChat(contact)">
+
+            <img class="avatar" [src]="contact.avatar" [matTooltip]="contact.name" matTooltipPosition="left">
+            <div class="unread-count" style="background-color: #039be5;" *ngIf="contact.unread !==0">{{contact.unread}}
+            </div>
+            <!-- [ngClass]="{'active':menu.active}" -->
+            <div class="status-icon" [ngClass]="contact.status"></div>
+        </div>
+
+    </div>
+    <!-- / Contacts -->
+
+    <!-- Chat -->
+    <div id="chat" fxLayout="column" fxFlex="1 1 auto">
+
+        <div id="messages" class="messages" fxFlex="1 1 auto" fusePerfectScrollbar>
+
+            <ng-container *ngIf="chat && chat.dialog && chat.dialog.length > 0">
+
+                <div *ngFor="let message of chat.dialog;let i = index;" class="message-row" [ngClass]="{
+                            'me': message.who === user.id,
+                            'contact': message.who !== user.id,
+                            'first-of-group': isFirstMessageOfGroup(message, i),
+                            'last-of-group': isLastMessageOfGroup(message, i)
+                            }">
+
+                    <img *ngIf="shouldShowContactAvatar(message, i)" src="{{selectedContact.avatar}}" class="avatar"
+                        style="bottom: 20px;">
+
+                    <div class="bubble" style="cursor: pointer;" (click)="i !== chat.dialog.length-1 && showTime(i)"
+                        id='content-{{i}}'>
+                        <ng-container *ngIf="message.status==='active'">
+                            <div class="message">
+                                {{message.message}}</div>
+                        </ng-container>
+                        <ng-container *ngIf="message.status ==='retrieval'">
+                            <div class="message" style="font-style: italic">
+                                Message has been retrieved</div>
+                        </ng-container>
+
+                    </div>
+                    <ng-container *ngIf="message.who === user.id">
+                        <ng-container *ngIf="i===chat.dialog.length-1">
+                            <ng-container *ngFor="let seen of seens">
+                                <ng-container *ngIf="seen.id === chat.id">
+                                    <ng-container *ngIf="seen.seen">
+                                        <div class="time secondary-text time-chat-last" style="margin-left: auto;">Seen
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="!seen.seen">
+                                        <div class="time secondary-text time-chat-last" style="margin-left: auto;">Sent
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+
+                        </ng-container>
+                        <div class="time secondary-text" style="margin-left: auto;"
+                            [ngClass]="(i===chat.dialog.length-1)?'time-chat-last':'time-chat'" id="time-{{i}}">
+                            <span class="material-icons" style="cursor: pointer;" [matMenuTriggerFor]="menu">
+                                more_vert
+                            </span>
+                            <mat-menu #menu="matMenu">
+                                <ng-container *ngIf="message.status !=='retrieval'">
+                                    <button mat-menu-item (click)="retrievalMessage(message)">Retrieval</button>
+                                </ng-container>
+                                <button mat-menu-item (click)="deleteMessage(message)">Delete</button>
+                            </mat-menu>
+                            {{message.time |
+                            date: 'dd/MM/yy, hh:mm a'}}
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="message.who !== user.id">
+                        <div class="time secondary-text time-chat" style="margin-right: auto;"
+                            [ngClass]="(i===chat.dialog.length-1)?'time-chat-last':'time-chat'" id="time-{{i}}">
+                            <span class="material-icons" style="cursor: pointer;" [matMenuTriggerFor]="menu">
+                                more_vert
+                            </span>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="deleteMessage(message)">Delete</button>
+                            </mat-menu>
+                            {{message.time |
+                            date: 'dd/MM/yy, hh:mm a'}}
+                        </div>
+                    </ng-container>
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="selectedContact && chat && chat.dialog && chat.dialog.length === 0">
+
+                <div class="no-messages-icon">
+                    <mat-icon class="s-128 fade-text">chat</mat-icon>
+                </div>
+
+                <div class="no-messages secondary-text">
+                    Start a conversation by typing your message below.
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="!selectedContact">
+
+                <div class="no-contact-selected">
+
+                    <div class="no-contact-icon">
+                        <mat-icon class="s-128 fade-text">chat</mat-icon>
+                    </div>
+
+                    <div class="no-contact secondary-text">
+                        Select a contact to start a conversation.
+                    </div>
+
+                </div>
+
+            </ng-container>
+
+        </div>
+        <div id="typingText" style="text-align: center;  visibility: hidden;">{{contactIdLast}} is typing...</div>
+
+        <div class="reply-form" fxFlex="0 0 auto" fxLayout="row" fxLayoutAlign="center center" *ngIf="selectedContact">
+
+            <form #replyForm="ngForm" (ngSubmit)="reply($event)" (keydown.enter)="reply($event)" fxFlex fxLayout="row"
+                fxLayoutAlign="start center">
+                <mat-form-field class="message-text" fxFlex floatLabel="never" appearance="standard">
+                    <textarea matInput #replyInput ngModel name="message" placeholder="Type your message" [rows]="1"
+                        [matTextareaAutosize]="true" (keyup)="typing($event.target.value)"
+                        [(ngModel)]="tempMess"></textarea>
+                </mat-form-field>
+
+                <button class="send-message-button" mat-icon-button type="submit" aria-label="Send message">
+                    <mat-icon class="secondary-text">send</mat-icon>
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Chat -->
+
+</div>

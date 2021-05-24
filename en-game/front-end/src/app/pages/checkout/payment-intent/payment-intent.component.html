@@ -1,0 +1,32 @@
+<mat-card>
+  <div fxLayout="row wrap">
+    <div fxFlex="100" fxFlex.gt-sm="50" class="p-2">
+      <h2>Collection Payment Intent</h2>
+      <div [formGroup]="stripeTest">
+        <div class="w-100 mt-1">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput required placeholder="Input name here" />
+            <mat-error *ngIf="stripeTest.controls.name.errors?.required">Name is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="w-100 mt-1">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Amount</mat-label>
+            <input formControlName="amount" matInput required placeholder="Input amount" />
+            <mat-error *ngIf="stripeTest.controls.amount.errors?.required">Amount is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="w-100 mt-1">
+          <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+        </div>
+
+        <div class="text-center mt-2">
+          <button type="submit" mat-fab (click)="pay()" class="mat-elevation-z6" color="primary">
+            <mat-icon>paid</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>
