@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm mới dự án</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container-fluid p-0">
+    <!--Begin header-->
+    <div class="header-top w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"><img src="/image/logo-project.png" height="50"
+                                                  width="152"/></a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" style="font-weight: bolder; color: #EA5252" href="#"><i
+                                class="fa fa-home"></i> Trang chủ <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" style=" font-weight: bolder; color: #EA5252">
+                            Nội dung
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--End header-->
+
+    <!--Begin project content-->
+    <div class="header p-4">
+        <form action="" th:object="${project}" style="margin-left: 150px" method="post" id="projectForm">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Begin add project -->
+
+
+                    <div class="modal-content p-3" style="width: 1000px">
+                        <div class="modal-header mb-4">
+                            <h5 class="modal-title">Dự án</h5>
+                            <button type="button" id="add-project-btn" class="close" data-dismiss="modal"
+                                    aria-hidden="true">
+                                <a href="/projects/list-project">&times;</a>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <input id="id" name="id" type="hidden" th:field="*{id}">
+                            <div class="col-10">
+                                <div class="form-group">
+                                    <h6>Tên dự án</h6>
+                                    <input id="nameProject" name="nameProject" type="text" class="form-control"
+                                           th:field="*{nameProject}">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="form-group">
+                                    <h6>Nội dung</h6>
+                                    <input id="content" name="content" type="text" class="form-control"
+                                           th:field="*{content}">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="form-group">
+                                    <h6>Người quản lý</h6>
+                                    <input id="manager" name="manager" type="text" class="form-control"
+                                           th:field="*{manager}">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="form-group">
+                                    <h6>Cấu trúc</h6>
+                                    <input id="structure" name="structure" type="text" class="form-control"
+                                           th:field="*{structure}">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer mt-4 mb-2">
+
+                            <div class="p-2" style="width: 1000px">
+                                <div class="modal-header mb-4">
+                                    <h5 class="modal-title">Công nghệ</h5>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="col-10">
+                                        <div class="form-group">
+                                            <h6>Tên công nghệ</h6>
+                                            <div>
+                                                <!--Begin technology-->
+                                                <div class="parent mt-4" style="background-color: #b7c2cf">
+                                                    <div class="technology-list"
+                                                         th:each="technology, i : ${technologyList}">
+                                                        <input class="technology mb-4" name="technologyName"
+                                                               th:id="${technology.id}"
+                                                               th:value="${technology.technologyName}">Technology
+
+                                                        <div class="children"
+                                                             th:each="planContent, istar : ${technology.technologyPlanContentList}"
+                                                             style="margin-left: 100px; margin-bottom: 20px">
+                                                            <input name="content"
+                                                                   th:class=" 'technologyPlan'+ ${i.count} "
+                                                                   th:id="${planContent.id}"
+                                                                   th:value="${planContent.content}">TechnologyPlan<br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--End technology-->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer mt-4 mb-2">
+                        <button style="width: 100px" type="submit" class="btn btn-primary" id="update-project-btn"
+                                value="update">Cập nhật
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <!--End project content-->
+
+    <!--Begin footer-->
+    <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-facebook-f"></i
+                ></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-twitter"></i
+                ></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-google"></i
+                ></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-instagram"></i
+                ></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-linkedin-in"></i
+                ></a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-github"></i
+                ></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright:
+            <a class="text-white">Nguyen Quang Danh</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--End footer-->
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+    $("#update-project-btn").click(function (event) {
+        event.preventDefault();
+        ajaxPost();
+    })
+
+    function ajaxPost() {
+
+        /*       var technologyList = [];
+
+               var technologyPlanContentList = [];
+
+               // get data technology plan content
+               $('.technologyPlan').each(function () {
+                   technologyPlanContentList.push(
+                       {
+                           id: $(".idTechnologyPlan").val(),
+                           content: ($(this).val())
+                       }
+                   );
+               })
+
+               var technology = {};
+               // get data technology
+               $(".technology-list").each(function () {
+                   technology = {
+                       id: $(".idTechnology").val(),
+                       technologyName: $(".technology").val(),
+                       technologyPlanContentList: technologyPlanContentList
+                   }
+               })
+
+               technologyList.push(technology);*/
+
+        let data = [];
+        let counter = 0;
+        $('.technology').each(function (k, item) {
+            counter++;
+            let inputData = {};
+            inputData.id = $(item).attr('id');
+            inputData.technologyName = $(item).val();
+            inputData.technologyPlanContentList = [];
+            $('.technologyPlan' + counter).each(function (ck, citem) {
+                inputData.technologyPlanContentList.push({
+                    id: $(citem).attr('id'),
+                    content: $(citem).val()
+                })
+            })
+            data.push(inputData);
+        })
+        console.log(data);
+
+        // object project
+        let project = {
+            id: $("#id").val(),
+            nameProject: $("#nameProject").val(),
+            content: $("#content").val(),
+            manager: $("#manager").val(),
+            structure: $("#structure").val()
+        }
+
+
+        // list technology
+        let formData = {
+            project: project,
+            technologyList: data
+        }
+
+        console.log(formData);
+
+        // DO POST
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/api/projects/update-project",
+            data: JSON.stringify(formData),
+            success: function (result) {
+                if (result.status === "OK") {
+                    console.log("Successfully")
+                } else {
+                    console.log("Fail")
+                }
+                console.log(result);
+                window.location.href = "/projects/list-project";
+            },
+            error: function (e) {
+                debugger;
+                console.log("ERROR: ", e);
+            }
+        });
+
+    }
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

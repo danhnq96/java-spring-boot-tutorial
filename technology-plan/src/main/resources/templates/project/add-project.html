@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Thêm mới dự án</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container-fluid p-0">
+    <!--Begin header-->
+    <div class="header-top w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"><img src="/image/logo-project.png" height="50" width="152"/></a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" style="font-weight: bolder; color: #EA5252" href="#"><i
+                                class="fa fa-home"></i> Trang chủ <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" style=" font-weight: bolder; color: #EA5252">
+                            Nội dung
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--End header-->
+
+    <!--Begin project content-->
+    <div class="header p-4">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Begin add project -->
+                <div style="margin-left: 150px" method="post" id="projectForm">
+
+                    <div class="modal-content p-3" style="width: 1000px">
+                        <div class="modal-header mb-4">
+                            <h5 class="modal-title">Dự án</h5>
+                            <button type="button" id="add-project-btn" class="close" data-dismiss="modal"
+                                    aria-hidden="true">
+                                <a href="/projects/list-project">&times;</a>
+                            </button>
+                        </div>
+
+                        <!-- Begin add project content-->
+                        <div class="modal-body">
+                            <div class="col-10">
+                                <div class="form-group">
+                                    <h6>Tên dự án</h6>
+                                    <input id="nameProject" name="nameProject" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="form-group">
+                                    <h6>Nội dung</h6>
+                                    <input id="content" name="content" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="form-group">
+                                    <h6>Người quản lý</h6>
+                                    <input id="manager" name="manager" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="form-group">
+                                    <h6>Cấu trúc</h6>
+                                    <input id="structure" name="structure" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="form-group">
+                                    <h6>Hình ảnh</h6>
+                                    <div class="custom-file text-left banner-thumbnail">
+                                        <input type="file" id="uploadThumbnailImage"
+                                               name="filename" accept="image/jpg, image/jpeg, image/png, image/gif"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="col-10">
+                                    <img src="" alt="Logo" id="thumbnail" style="width: 400px; height: 300px">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End add project content-->
+
+                        <!-- Begin add technology -->
+                        <div class="modal-header mb-4">
+                            <h5 class="modal-title">Công nghệ</h5>
+                        </div>
+                        <button id="addRow">ADD ROW</button>
+                        <div id="contentTech">
+                        </div>
+                        <!--                        <button id="btn1"> Add row technology</button>-->
+                        <!--                        <button id="btn2"> Add row technology plan</button>-->
+
+                        <!--                        <div class="parent mt-4" style="background-color: #b7c2cf">-->
+                        <!--                            <div class="technology-list">-->
+                        <!--                                <input class="technology mb-4" name="technologyName">Technology</input>-->
+                        <!--                                <div class="children"-->
+                        <!--                                     style="margin-left: 100px; margin-bottom: 20px">-->
+                        <!--                                    <input name="content" class="technologyPlan">TechnologyPlan<br>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <!-- End add technology -->
+                        <div class="modal-footer mt-4 mb-2">
+                            <button style="width: 100px" type="submit" class="btn btn-primary"
+                                    id="save-project-btn"
+                                    value="Lưu">Lưu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--End project content-->
+    <!--Begin footer-->
+    <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-facebook-f"></i
+                ></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-twitter"></i
+                ></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-google"></i
+                ></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-instagram"></i
+                ></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-linkedin-in"></i
+                ></a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-github"></i
+                ></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright:
+            <a class="text-white">Nguyen Quang Danh</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--End footer-->
+
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#uploadThumbnailImage').change(function () {
+            showImageThumbnail(this);
+        });
+    })
+
+    function showImageThumbnail(fileInput) {
+        file = fileInput.files[0];
+        reader = new FileReader();
+        reader.onload = function (e) {
+            $('#thumbnail').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    let rowTech = 0;
+    let planTech = 0;
+    let rowTechTemplate = `
+    <div class="rowTech" id="row-{ID}">
+        <input type="text" class="techRow" id="techRow-{ID}" data-id="{ID}"/>
+        <button class="addTechPlan" onclick="addPlan({ID})">ADD TECHPLAN</button>
+    </div>`;
+    let planTechTemplate = `<div class="rowTechPlan">
+            <input type="text" class="techPlan rowTech-{ID}" id="techPlan-{NO}"/>
+        </div>`;
+
+    $('#addRow').click(function () {
+        let html = rowTechTemplate;
+        html = html.replace(/{ID}/g, rowTech++)
+        $('#contentTech').append(html)
+    })
+
+    function addPlan(id) {
+        let html = planTechTemplate;
+        html = html.replace(/{NO}/g, planTech++);
+        html = html.replace(/{ID}/g, id);
+        $('#row-' + id).append(html);
+    }
+
+    $("#save-project-btn").click(function (event) {
+        // Prevent the form from submitting via the browser.
+        event.preventDefault();
+        ajaxPost();
+    })
+
+    function ajaxPost() {
+        let data = [];
+        $('.techRow').each(function (k, item) {
+            let inputData = {};
+            inputData.technologyName = $(item).val();
+            inputData.technologyPlanContentList = [];
+            $('.rowTech-' + $(item).data('id')).each(function (ck, citem) {
+                inputData.technologyPlanContentList.push({content: $(citem).val()})
+            })
+            data.push(inputData)
+        })
+
+        // declare object project
+        let project = {
+            nameProject: $("#nameProject").val(),
+            content: $("#content").val(),
+            manager: $("#manager").val(),
+            structure: $("#structure").val()
+        }
+
+        // prepare form data
+        let projectInfo = {
+            project: project,
+            technologyList: data
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/api/projects/add-project",
+            contentType: 'application/json',
+            async: false,
+            data: JSON.stringify(projectInfo),
+            success: function (result) {
+                console.log(result);
+                window.location.href = "/projects/list-project";
+            },
+            error: function (xhr) {
+                debugger;
+                console.log("Error");
+            }
+        });
+
+        // send data image
+        /*let thumbnail = $("#uploadThumbnailImage")[0].files[0];
+
+        console.log(thumbnail);
+
+        let materialParams = {
+            "thumbnail_url": thumbnail == null ? $("#uploadThumbnailImage + label", ".banner-thumbnail").text() : null,
+        };
+
+        console.log(materialParams);
+
+        let formData = new FormData();
+        if ($("#uploadThumbnailImage")[0].files.length != 0) {
+            formData.append("thumbnail", thumbnail);
+        }
+
+        formData.append("projectInfo",
+            new Blob(
+                [JSON.stringify(materialParams)],
+                { type: "application/json" }
+            )
+        );
+        console.log(formData)
+
+        $.ajax({
+            type: "POST",
+            url: "/api/projects/add-project",
+            contentType: false,
+            async: false,
+            processData: false,
+            data: formData,
+            success: function(data) {
+                console.log("Success");
+                console.log(data);
+            },
+            error: function(xhr) {
+               console.log(xhr);
+            }
+        });*/
+
+
+    }
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

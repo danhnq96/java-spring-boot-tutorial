@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách dự án</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        .modal-confirm {
+            color: #636363;
+            width: 400px;
+        }
+
+        .modal-confirm .modal-content {
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .modal-confirm .modal-header {
+            border-bottom: none;
+            position: relative;
+        }
+
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 -10px;
+        }
+
+        .modal-confirm .close {
+            position: absolute;
+            top: -5px;
+            right: -2px;
+        }
+
+        .modal-confirm .modal-body {
+            color: #999;
+        }
+
+        .modal-confirm .modal-footer {
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 13px;
+            padding: 10px 15px 25px;
+        }
+
+        .modal-confirm .modal-footer a {
+            color: #999;
+        }
+
+        .modal-confirm .icon-box {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            border-radius: 50%;
+            z-index: 9;
+            text-align: center;
+            border: 3px solid #f15e5e;
+        }
+
+        .modal-confirm .icon-box i {
+            color: #f15e5e;
+            font-size: 46px;
+            display: inline-block;
+            margin-top: 13px;
+        }
+
+        .modal-confirm .btn, .modal-confirm .btn:active {
+            color: #fff;
+            border-radius: 4px;
+            background: #60c7c1;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            min-width: 120px;
+            border: none;
+            min-height: 40px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+
+        .modal-confirm .btn-secondary {
+            background: #c1c1c1;
+        }
+
+        .modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+            background: #a8a8a8;
+        }
+
+        .modal-confirm .btn-danger {
+            background: #f15e5e;
+        }
+
+        .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+            background: #ee3535;
+        }
+
+        .trigger-btn {
+            display: inline-block;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid p-0">
+
+    <!--Begin header-->
+    <form action="" th:object="${search}" id="formBtn">
+        <div class="header-top w-100">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#"><img th:src="@{/image/logo-project.png}" height="50"
+                                                      width="152"/></a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" style="font-weight: bolder; color: #EA5252" href="#"><i
+                                    class="fa fa-home"></i> Trang chủ <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" style=" font-weight: bolder; color: #EA5252">
+                                Nội dung
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="form-inline my-2 my-lg-0 mr-5">
+                        <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Nhập từ tìm kiếm"
+                               aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+                    </div>
+                    <button class="btn btn-outline-primary my-2 my-sm-0 mr-2">Đăng nhập</button>
+                </div>
+            </nav>
+        </div>
+    </form>
+    <!--End header-->
+
+    <!--Button add new project-->
+    <div class="mt-4 ml-2">
+        <form action="/projects/add-project" method="get">
+            <input class="btn btn-success ml-3" type="submit" value="Thêm mới dự án">
+        </form>
+    </div>
+
+    <!--Begin project content-->
+    <div class="header p-4">
+
+        <div class="row" style="color: #ffffff">
+            <div class="col-lg-12">
+                <!-- Begin Content -->
+                <th:block th:if="${projectList != null}">
+                    <th:block th:if="${totalCount > 0}">
+                        <div class=" border-0">
+                            <table class="table table-striped table-hover text-center w-250">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>Stt</th>
+                                    <th>Name</th>
+                                    <th>Content</th>
+                                    <th>Manager</th>
+                                    <th>Structure</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="table-row" th:each="data, stage : ${projectList}">
+                                    <td th:text="${stage.count} "></td>
+                                    <td th:text="${data.nameProject}"></td>
+                                    <td th:text="${data.content}"></td>
+                                    <td th:text="${data.manager}"></td>
+                                    <td th:text="${data.structure}"></td>
+                                    <td>
+                                        <a th:href="@{/projects/detail/{id}(id=${data.id})}">
+                                            <button class="btn btn-success">Detail</button>
+                                        </a>
+                                        <a th:href="@{/projects/update-project/{id}(id=${data.id})}">
+                                            <button class="btn btn-primary">Update</button>
+                                        </a>
+                                        <a href="#" class="delete" th:onclick="setId([[${data.id}]])"
+                                           data-toggle="modal" data-target="#deleteModal">
+                                            <button class="btn btn-secondary">Delete</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Begin pagination -->
+                        <ul class="pagination justify-content-center"
+                            th:with="startNumber=${T(Math).floor(projectList.number/10)}*5+1,endNumber=(${projectList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${projectList.totalPages}">
+                            <li class="page-item" th:classappend="${projectList.number}"><span
+                                    class="page-link submit_btn" th:value="1"><i
+                                    class="fa fa-angle-double-left"></i></span></li>
+                            <li class="page-item" th:style="${projectList.first} ? 'display:none'">
+													<span class="page-link submit_btn" th:value="${projectList.number}"><i
+                                                            class="fa fa-angle-left"></i></span>
+                            </li>
+                            <li class="page-item"
+                                th:each="page :${#numbers.sequence(startNumber, endNumber)}"
+                                th:class="(${page} == ${projectList.number}+1) ? 'page-item active' : 'page-item'">
+													<span class="page-link submit_btn" th:value="${page}"
+                                                          th:text="${page}"></span>
+                            </li>
+                            <li class="page-item" th:style="${projectList.last} ? 'display:none'">
+													<span class="page-link submit_btn"
+                                                          th:value="${projectList.number}+2"><i
+                                                            class="fa fa-angle-right"></i></span>
+                            </li>
+                            <li class="page-item" th:classappend="${projectList.number}"><span
+                                    class="page-link submit_btn" th:value="${projectList.totalPages}"><i
+                                    class="fa fa fa-angle-double-right"></i></span></li>
+                        </ul>
+                    </th:block>
+                    <th:block th:unless="${totalCount > 0}">
+                        <div>Null</div>
+                    </th:block>
+                </th:block>
+            </div>
+        </div>
+
+    </div>
+
+    <!--End project content-->
+
+    <!--Begin footer-->
+    <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-facebook-f"></i
+                ></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-twitter"></i
+                ></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-google"></i
+                ></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-instagram"></i
+                ></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-linkedin-in"></i
+                ></a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-github"></i
+                ></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright:
+            <a class="text-white">Nguyen Quang Danh</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--End footer-->
+
+</div>
+
+
+<!-- Modal Delete -->
+<form th:action="@{/projects/delete-project}" method="post">
+    <!-- Delete Modal HTML -->
+    <div id="deleteModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <input type="hidden" id="idProject" name="idProject"/>
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Product</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa dự án này không?</p>
+                    <p class="text-warning"><small>Quá trình sẽ không thể phục hồi.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Hủy">
+                    <input type="submit" class="btn btn-danger" value="Xóa">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    function setId(id) {
+        document.getElementById("idProject").value = id;
+    }
+</script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="/js/paging/paging.js"></script>
+</body>
+</html>

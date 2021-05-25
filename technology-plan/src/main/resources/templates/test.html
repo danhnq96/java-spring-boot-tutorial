@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $("#btn3").click(function () {
+
+                $("div.children:last").append("   <input id=\"technologyPlan\" class=\"technologyPlan\">Technology plan</input><br>")
+
+            })
+
+            // $("#btn2").click(function () {
+            //     $("table.total").append(
+            //         "     <div class=\"total\" style=\"background-color: #b7c2cf\">\n" +
+            //         "    <input class=\"technology mb-4\">Technology</input>\n" +
+            //         "    <div class=\"children\" style=\"margin-left: 100px; margin-bottom: 20px\">\n" +
+            //         "        <input class=\"technologyPlan\">Technology plan</input><br>\n" +
+            //         "    </div>\n" +
+            //         "</div> "
+            //     )
+            // })
+            $("#btn2").click(function () {
+
+                $("div.total").append(
+                    "  <div class=\"technology-list\">\n" +
+                    "        <input class=\"technology mb-4\">Technology</input>\n" +
+                    "\n" +
+                    "        <div class=\"children\" style=\"margin-left: 100px; margin-bottom: 20px\">\n" +
+                    "            <input id=\"technologyPlan\" class=\"technologyPlan\">Technology plan</input><br>\n" +
+                    "        </div>\n" +
+                    "    </div> "
+                )
+
+            })
+
+            $("#btn1").click(function () {
+
+                console.log("abc");
+
+                var arrayTechnology = [];
+
+                $('.technology').each(function () {
+                    arrayTechnology.push($(this).val());
+                })
+
+                var arrayTechnologyPlan = [];
+
+                $('.technologyPlan').each(function () {
+                    arrayTechnologyPlan.push($(this).val());
+                })
+                arrayTechnology.push(arrayTechnologyPlan);
+
+                var array = [];
+                $('.technology-list').each(function () {
+                    array.push(arrayTechnology);
+                })
+                console.log(array);
+
+            })
+
+        });
+
+    </script>
+</head>
+<body>
+
+<div class="total" style="background-color: #b7c2cf">
+    <div class="technology-list">
+
+            <input class="technology mb-4">Technology</input>
+
+            <div class="children" style="margin-left: 100px; margin-bottom: 20px">
+                <input id="technologyPlan" class="technologyPlan">Technology plan</input><br>
+            </div>
+
+    </div>
+</div>
+
+<button id="btn1"> Get value</button>
+<button id="btn2"> Add row technology</button>
+<button id="btn3"> Add row technology plan</button>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chi tiết dự án</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+<div class="container-fluid p-0" th:object="${project}">
+    <!--Begin header-->
+    <div class="header-top w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"><img src="/image/logo-project.png" height="50"
+                                                  width="152"/></a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" style="font-weight: bolder; color: #EA5252" href="#"><i
+                                class="fa fa-home"></i> Trang chủ <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" style=" font-weight: bolder; color: #EA5252">
+                            Nội dung
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0 mr-5">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Nhập từ tìm kiếm"
+                           aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+                </form>
+                <button class="btn btn-outline-primary my-2 my-sm-0 mr-2">Đăng nhập</button>
+            </div>
+        </nav>
+    </div>
+    <!--End header-->
+
+    <!--Begin project content-->
+    <div class="header p-4" style="background-color: #1C1D1F">
+        <div class="row" style="color: #ffffff">
+            <div class="col-lg-12">
+                <h5>Dự án</h5>
+            </div>
+            <div class="col-lg-12">
+                <h2 th:text="*{nameProject}"></h2>
+            </div>
+            <div class="col-lg-12">
+                <ul class="mt-2">
+                    <li>
+                        <b>Nội dung : </b>
+                        <span th:text="*{content}"></span>
+                    </li>
+                    <li class="mt-2">
+                        <b>Quản lý : </b>
+                        <span th:text="*{manager}"></span>
+                    </li>
+                    <li class="mt-2">
+                        <b>Cấu trúc : </b>
+                        <span th:text="*{structure}"></span>
+                    </li>
+                    <li class="mt-2">
+                        <b>Công nghệ : </b>
+                        <span th:each="technology: ${technologyList}"
+                              th:text="${technology.technologyName} + '. '"></span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!--End project content-->
+
+    <!--Begin project plan content-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mt-4">
+
+                <!--Begin technology content-->
+                <div class="p-4" style="border: 1px solid #acb2b7; border-radius: 25px; background-color: #F7F9FA">
+                    <div class="mb-3">
+                        <h4 style="color: #B4690E">Danh sách công nghệ</h4>
+                    </div>
+                    <div class="d-flex" style="list-style-type:circle ">
+                        <ul class="">
+                            <li th:each="technology : ${technologyList}"
+                                th:value="${technology.id}"
+                                th:text="${technology.technologyName}"></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--End technology content-->
+
+                <!--Begin display list detail technology plan content-->
+                <div class="p-4">
+                    <h4 style="color: #B4690E">Nội dung kế hoạch</h4>
+                </div>
+
+                <!-- Collapsable Card -->
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+
+                    <div class="list" th:each="technology : ${technologyList}">
+                        <a href="#collapseCard" class="d-block card-header py-3" data-toggle="collapse"
+                           role="button" aria-expanded="true" aria-controls="collapseCard">
+                            <h6 class="m-0 font-weight-bold" th:text="${technology.technologyName}"></h6>
+                            <p class="text-right" style="font-weight: normal; color: black" id="result"></p>
+                        </a>
+                        <!-- Card Content - Collapse -->
+                        <div class="collapse show" id="collapseCard">
+                            <div class="#">
+                                <ul class="list-group"
+                                    th:each="technologyPlanContent : ${technology.technologyPlanContentList}">
+                                    <li class="list-group-item" data-content="tutorial">
+                                        <a th:text="${technologyPlanContent.content}"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Begin hashtag-->
+                <div class="hashtag">
+                    <h5 class="mt-3 ml-4" style="color: #B4690E">#Hashtag</h5>
+                    <div class="card-body d-flex p-3">
+                        <div class="card col-2 text-center mr-2" th:each="hashtagName: ${hashtagNameList}">
+                            <a th:text="${hashtagName}"></a>
+                        </div>
+                    </div>
+                </div>
+                <!--End hashtag-->
+
+                <!--End display list detail technology plan content-->
+            </div>
+
+            <!--Begin menu refer-->
+            <div class="col-lg-4 p-4">
+                <div class="p-4">
+                    <div class="mb-1">
+                        <h4 style="color: #B4690E">Dự án khác</h4>
+                        <hr>
+                    </div>
+                    <div class="d-flex" style="list-style-type:circle ">
+                        <ul class="">
+                            <li th:each="item : ${projectList}">
+                                <a th:if="project.id != item.id" th:href="@{/projects/detail/{id}(id=${item.id})}"
+                                   target="_blank" th:text="${item.nameProject}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--End menu refer-->
+        </div>
+    </div>
+    <!--End project plan content-->
+    <!-- Scroll to Top Button-->
+
+
+    <button onclick="topFunction()" id="btnScrollTop" title="Go to top"><i class="fas fa-angle-up"></i></button>
+
+    <!--Begin footer-->
+    <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-facebook-f"></i
+                ></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-twitter"></i
+                ></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-google"></i
+                ></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-instagram"></i
+                ></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-linkedin-in"></i
+                ></a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-github"></i
+                ></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright:
+            <a class="text-white">Nguyen Quang Danh</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--End footer-->
+
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="/js/detail-technology-plan.js"></script>
+</body>
+</html>
